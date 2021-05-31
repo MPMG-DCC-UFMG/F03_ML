@@ -1,0 +1,151 @@
+id; palavras_original; palavras_novo; unidades_medida_original; unidades_medida_novo; números_original; números_novo; cores_original; cores_novo; materiais_original; materiais_novo; tamanho_original; tamanho_novo; quantidade_original; quantidade_novo; descricao_original
+1;giz, cera, maximo, resistencia;#;;#;24;#;;#;;#;;#;caixa, unidade;#;Giz de cera, maxima resistencia, caixa com 24 unidades.
+2;especialidade, medico, ginecologia, obstetricio;#;;#;;#;;#;;#;;#;;#;ESPECIALIDADE MEDICA - GINECOLOGIA E OBSTETRICIA
+3;broca, baixo, rotacao, haste, longo;#;;#;4;#;;#;aco;#;;#;;#;Broca de aço para baixa rotação de haste longa, n  04
+4;plantao, medico, final, semana, entrada, sexto, saida, segundo, feira, manha;#;;#;19, 00, 7;#;;#;;#;;#;;#;PLANTÕES MÉDICOS  FINAL DE SEMANA ENTRADA SEXTA 19:00 SAIDA SEGUNDA - FEIRA 7:00:00 DA MANHÃ
+5;caneta, retro, projetor, ponta, fino;#;;#;1, 0;#;preto, verde, vermelho, azul;#;;#;;#;;#;Caneta para Retro Projetor cores Preta, Verde, Vermelha e Azul - Ponta Fina 1,0
+6;cone, guta, percha, bastao, validade, minimo, mes;#;;#;40, 24;#;branco;#;;#;;#;caixa, unidade;#;CONE DE GUTA PERCHA - BASTAO CAIXA C/ 40 UNIDADES- COR: BRANCA - VALIDADE MINIMA DE 24 MESES
+7;lencol, algodao, poliester, elastico, cama;#;cm;#;2, 30, 1, 75;#;;#;;#;;#;;#;lençol de algodao e poliester com elastico para cama 2,30cm x 1,75cm
+8;torneira, pia, lavatorio, acabamento, cromado, liso;#;;#;1, 2;#;;#;;#;;#;;#;Torneira, p/ pia lavatório de 1/2 acabamento cromado liso
+9;mesa, exame, clinico, maca;#;;#;;#;;#;;#;;#;;#;MESA DE EXAME CLINICO ( MACA)
+10;feijao, resistente, transparente;#;kg;#;1;#;preto;#;plastico;#;;#;embalagem, pacote;#;Feijão Preto: Embalagem pacote plástico, resistente, transparente, com capacidade de 1 KG
+11;porta, prancheta, sucupira, pintura;#;cm;#;0, 70, 2, 10;#;;#;madeira;#;;#;;#;Porta de madeira prancheta sucupira 0,70x2,10cm pintura
+12;estilete, estreito;#;;#;;#;;#;;#;;#;;#;ESTILETE ESTREITO
+13;tomado, pia, parede, bica, movel;#;;#;;#;;#;inox;#;;#;;#;TOMADA PARA PIA PAREDE BICA MÓVEL INOX
+14;janela, quatro, bandeira, colonial, angelim;#;m;#;1, 00, 20;#;;#;;#;;#;;#;JANELA  QUATRO BANDEIRAS  COM  COLONIAL   EM  ANGELIM  DE  1 00M  X 1 20M
+15;jogo, dama, ludo, dimensao, composicao, estojo, peca;#;cm;#;31, 0, 4;#;;#;madeira, plastico;#;;#;;#;JOGO DE DAMA/LUDO, DIMENSÕES: 31,0 X  4,0 X 31,0 CM. COMPOSIÇÃO ESTOJO DE MADEIRA E PEÇAS DE PLASTICO.
+16;papel, cartao;#;;#;;#;azul, vermelho, preto, branco, amarelo, verde;#;;#;;#;;#;Papel Cartão, nas cores: azul, vermelho, preto, branco, amarelo e verde
+17;pasta, classificador, cartao, duplo, grampo;#;;#;;#;verde;#;plastico;#;;#;;#;PASTA CLASSIFICADOR VERDE PASTA CLASSIFICADOR CARTAO DUPLO COM GRAMPO PLASTICO COR VERDE
+18;mangueira, jardim, trancado;#;m;#;20;#;;#;;#;;#;;#;Mangueira para jardim trançada, 20m
+19;luva, limpeza;#;;#;;#;;#;plastico;#;;#;;#;LUVA PLÁSTICA PARA LIMPEZA
+20;porta, matriz, modelo, otto;#;;#;;#;;#;metal;#;;#;;#;PORTA MATRIZ DE METAL MODELO OTTO
+21;salgado, bola, recheio, creme, milhar, festa, frito;#;;#;;#;;#;;#;;#;;#;SALGADO TIPO BOLINHA, RECHEIO CREME DE MILHO - P/FESTA FRITO
+22;rolo, pintura, poliester;#;cm;#;23;#;;#;;#;;#;;#;Rolo de Pintura Poliéster / 23 cm.
+23;pasta, aba, elastico, oficio, terminacao;#;;#;;#;;#;plastico;#;;#;;#;PASTA ABA ELASTICO OFICIO COM TERMINACAO EM PLASTICO
+24;notebook;#;;#;;#;;#;;#;;#;;#;Notebook
+25;cama, beliche, solteiro, macico, escada, compativel, colchao;#;cm;#;78, 188;#;;#;madeira;#;;#;;#;CAMA BELICHE SOLTEIRO EM MADEIRA MACICA COM ESCADA COMPATIVEL PARA COLCHAO 78 X 188CM
+26;ripa;#;;#;;#;;#;;#;;#;;#;RIPA.
+27;tela;#;;#;;#;;#;;#;;#;;#;Tela
+28;barra, cereal, integral, sabor, banana, morango;#;grama;#;25;#;;#;;#;;#;;#;Barra de cereal integral sabor banana ou morango - Barra de 25 gramas
+29;giz, escolar, toxico, escrito, quadro, negro, comprimento, barra;#;mm;#;68, 73, 64;#;branco;#;papelao;#;;#;embalagem, caixa;#;Giz branco, tipo escolar, não tóxico, para escrita em quadro negro, comprimento 68 a 73mm, embalagem em caixa de papelão com 64 barras.
+30;rolamento, roda, traseiro;#;;#;;#;;#;;#;;#;;#;Rolamento roda traseira 9311142
+31;noretisterona, enantato, valerato, estradiol, injetavel, mesigyna;#;mg, ml;#;50, 5;#;;#;;#;;#;;#;Noretisterona, (Enantato) 50mg/ml + Valerato de Estradiol 5mg/ml, injetável. Mesigyna.
+32;digoxina;#;mg;#;0, 25;#;;#;;#;;#;;#;DIGOXINA 0,25MG
+33;acetato, betametasona, fosfato, dissodico, suspensao, injetavel;#;mg, ml;#;3;#;;#;;#;;#;;#;ACETATO DE BETAMETASONA + FOSFATO DISSÓDICO DE BETAMETASONA 3+3 MG/ML SUSPENSAO INJETAVEL
+34;oxido, zinco, palmitato, retinol, colecalciferol, pomada;#;mg, g, ui;#;150, 5, 000, 900;#;;#;;#;;#;;#;Oxido de zinco, 150mg/g + Palmitato de retinol 5.000 UI/g + colecalciferol 900UI/g  pomada
+35;anestesico, cloridrato, mepivacaina, epinefrina, mepiadre;#;;#;2, 1, 100, 000;#;;#;;#;;#;;#;ANESTESICO CLORIDRATO DE MEPIVACAINA 2% COM EPINEFRINA 1:100.000 (MEPIADRE)
+36;topiramato;#;mg;#;5499, 100;#;;#;;#;;#;;#;005499 Topiramato 100mg
+37;cetoconazol, dip, betametasona, sulfato, neomicina, pomada;#;;#;;#;;#;;#;;#;;#;CETOCONAZOL + DIP. BETAMETASONA + SULFATO DE NEOMICINA POMADA
+38;hidroxido, magnesio, suspensao, oral;#;mg, ml;#;35, 6, 37, 150;#;;#;aluminio;#;;#;;#;HIDROXIDO DE MAGNESIO + HIDROXIDO DE ALUMINIO SUSPENSAO ORAL 35 6 MG + 37 MG ML 150 ML
+39;amoxicilina, clavulanato, potassio, comprimido;#;mg;#;500, 125;#;;#;;#;;#;;#;AMOXICILINA + CLAVULANATO DE POTASSIO (COMPRIMIDO) 500MG + 125MG
+40;acido, valproico, suspensao;#;;#;;#;;#;;#;;#;;#;ACIDO VALPROICO SUSPENSAO
+41;colecalciferol, vitamina, d3, fosfato, calcio, tribasico;#;;#;;#;;#;;#;;#;;#;Colecalciferol Vitamina D3 e fosfato de calcio tribasico
+42;solucao, cloreto, sodio, soro, fisiologico;#;ml;#;0, 9, 500;#;;#;;#;;#;;#;SOLUCAO DE CLORETO DE SODIO A 0,9% - 500ml-(SORO FISIOLOGICO)
+43;captopril, comprimido;#;mg;#;25;#;;#;;#;;#;;#;CAPTOPRIL 25MG/COMPRIMIDO
+44;valproato, sodio;#;mg, ml;#;250, 5;#;;#;;#;;#;;#;VALPROATO DE SODIO 250MG/5ML
+45;tramal, comprimido;#;mg;#;100;#;;#;;#;;#;;#;TRAMAL 100 MG COMPRIMIDO
+46;oleo, soja;#;;#;;#;;#;;#;;#;;#;ÓLEO DE SOJA
+47;acido, ascorbico, vitamina, solucao, injetavel;#;mg, ml;#;100, 5;#;;#;;#;;#;;#;Acido Ascórbico (vitamina C), 100 MG/ML, 5 ML, Solução Injetavel
+48;sulfametoxazol, trimetoprima, comprimido;#;mg;#;400, 80;#;;#;;#;;#;;#;SULFAMETOXAZOL 400 MG+TRIMETOPRIMA 80MG COMPRIMIDO
+49;dobutamina, cloridrato, solucao, injetavel;#;mg, ml;#;12, 5;#;;#;;#;;#;;#;48901 - DOBUTAMINA CLORIDRATO 12,5 MG/ ML SOLUCAO INJETAVEL
+50;dipirona, sodico, brometo, butilescopolamina;#;ml;#;5;#;;#;;#;;#;;#;Dipirona sódica + Brometo de N-butilescopolamina, 5 ml
+51;ibuprofeno;#;;#;;#;;#;;#;;#;;#;Ibuprofeno
+52;paracetamol, diclofenaco, sodico, cafeina, carisoprodol;#;;#;;#;;#;;#;;#;;#;PARACETAMOL + DICLOFENACO SODICO + CAFEINA + CARISOPRODOL
+53;frutose, vit, b6, injetavel;#;ml;#;2, 10;#;;#;;#;;#;;#;FRUTOSE, VIT.C,B2E B6 INJETAVEL 10ML
+54;tetracaina, fenilefrina, acido, borico, colirio, anestesico;#;mg;#;100, 15;#;;#;;#;;#;;#;TETRACAINA + FENILEFRINA + ACIDO BORICO COLIRIO ANESTESICO 100MG+15MG
+55;tartarato, brimonidina, colirio;#;mg, ml;#;2, 5;#;;#;;#;;#;;#;tartarato de brimonidina  2 mg/ml colirio 5 ml.
+56;lidocaina, pomada;#;mg, g;#;5;#;;#;;#;;#;;#;LIDOCAINA 5 MG/G POMADA
+57;butilbrometo, escopolamina, dipirona, sodico;#;mg;#;10, 250;#;;#;;#;;#;;#;BUTILBROMETO DE ESCOPOLAMINA + DIPIRONA SODICA 10MG + 250MG
+58;betametasona, acetato, fosfato, dissodico, suspensao, injetavel;#;mg, ml;#;3;#;;#;;#;;#;;#;Betametasona Acetato, + Fosfato Dissódico de Betametasona 3+3 MG/ML Suspensão Injetável
+59;vertizine;#;;#;30;#;;#;;#;;#;;#;VERTIZINE D C/30
+60;exodus, oxalato, escitalopram;#;mg;#;10;#;;#;;#;;#;;#;Exodus, 10 mg oxalato de escitalopram.
+61;alavanca, macico;#;;#;7, 8;#;;#;ferro;#;;#;;#;ALAVANCA MACICA DE FERRO 7/8
+62;prontuario, medico, papel, ap, frente, verso, ver;#;;#;30, 1;#;;#;;#;;#;;#;PRONTUARIO MEDICO PAPEL AP 30 FRENTE E VERSO 1 VIA
+63;permanganato, potassio;#;mg;#;100;#;;#;;#;;#;;#;PERMANGANATO DE POTÁSSIO 100MG
+64;caderno, capa, duro, folha, celulose, vegetal, apresentacao, brochura, comprimento;#;;#;96, 280;#;;#;papelao;#;;#;;#;CADERNO CAPA DURA 96 FOLHAS: CADERNO, MATERIAL CELULOSE VEGETAL, MATERIAL CAPA PAPELAO, APRESENTACAO BROCHURA, QUANTIDADE FOLHAS 96, COMPRIMENTO 280,
+65;cabo, vela, fiat, mille, total, flex;#;;#;7846, 2009;#;;#;;#;;#;;#;007846 CABO DE VELA fiat mille 2009total flex p
+66;sulfametoxazol, trimetoprima, apresentacao, suspensao, dosagem;#;mg, ml;#;400, 5, 80;#;;#;;#;;#;;#;SULFAMETOXAZOL + TRIMETOPRIMA - APRESENTACAO: SUSPENSAO, DOSAGENS: 400 MG/5 ML + 80 MG/5 ML
+67;haloperidol, apresentacao, solucao, oral, gota, dosagem, frasco;#;mg, ml;#;2, 20;#;;#;;#;;#;;#;18579 - HALOPERIDOL - APRESENTACAO: SOLUCAO ORAL GOTAS, DOSAGEM: 2 MG/ML, FRASCO COM 20 ML
+68;fornecimento, refeicao, bebida, agua, refrigerante, balanca, motorista, servidor, prefeitura, municipal, mesquita, viagem, trabalho, regiao, vale;#;ml;#;500, 350;#;;#;aco;#;;#;;#;FORNECIMENTO DE REFEICAO, COM UMA BEBIDA ( AGUA DE 500 ML, OU REFRIGERANTE 350 ML) SEM BALANCA PARA MOTORISTA E SERVIDORES DA PREFEITURA MUNICIPAL DE MESQUITA QUANDO EM VIAGENS A TRABALHO NA REGIAO DO VALE DO ACO.
+69;escova, sanitario, limpeza, vaso, sanitario, cerda, nylon, apresentacao, corpo, cabo;#;;#;;#;;#;;#;;#;;#;Escova para sanitário, Escova para limpeza de vasos sanitários, cerdas de nylon, apresentação com corpo, cabo e cerdas de nylon.
+70;chassi, raio, uso, medico, materia, primo, leve, janela, identificacao;#;cm;#;30, 40;#;;#;aluminio;#;;#;;#;CHASSIS PARA RAIO-X USO MEDICO - MATERIA-PRIMA: ALUMINIO, TIPO LEVE, MEDIDAS: 30 X 40CM, JANELA: SEM JANELA PARA IDENTIFICACAO
+71;asa, coxa, frango;#;;#;;#;;#;;#;;#;;#;ASA E COXA DE FRANGO
+72;cimento, fosfato, zinco, kit, po, liquido;#;gr, ml;#;28, 10;#;;#;;#;;#;;#;CIMENTO FOSFATO DE ZINCO  -  KIT COM PÓ 28 GR E LIQUIDO 10ML
+73;cadeira, pintado, assento, encosto, polipropileno;#;;#;;#;;#;aco, ferro;#;;#;;#;CADEIRA, AÇO, FERRO PINTADO, ASSENTO/ENCOSTO: POLIPROPILENO
+74;laranja, pera;#;;#;;#;;#;;#;;#;;#;LARANJA  PERA
+75;ca;#;mm;#;60, 6, 0;#;;#;aco;#;;#;;#;ACO CA 60 DE 6,0MM
+76;metoclopramida, gota;#;ml;#;10;#;;#;;#;;#;;#;METOCLOPRAMIDA GOTAS 10ML
+77;cartao, vacina, adulto, papel, escrito;#;;#;8, 21, 5;#;preto;#;;#;;#;;#;Cartão de "Vacina do Adulto", em papel cartão, 8 x 21,5, em escrita preta.
+78;pavio, lamparina, reposicao, alcool, algodao, forma, corda;#;;#;100, 12;#;;#;;#;;#;pacote, unidade;#;PAVIO PARA LAMPARINA Pavio de reposicao para lamparina a alcool, 100% em algodao, em forma de corda. Pacote com 12 unidades. Pacote.
+79;ibuprofeno, principio, ativo, concentracao, dosagem, forma, farmaceutico, comprimido;#;mg;#;600;#;;#;;#;;#;;#;Ibuprofeno 600 mg, principio ativo: ibuprofeno, concentracao/dosagem: 600 mg, forma farmaceutica: comprimido,
+80;kit, papa, nicolau, par, luva, espelho, espatula, ayres, escova, cervical, lamina, porta;#;;#;1;#;;#;vidro;#;pequeno;#;;#;KIT PAPA NICOLAU  PEQUENO Kit papa Nicolau com 1 par de luvas, 1 espelho, 1 espátula ayres, 1 escova cervical, 1 lâmina de vidro, 1 porta lâmina. Tamanho pequeno
+81;fita, adesivo, crepe, transparente, rolo, proprio, colar, papel, etiqueta, leve, bom, fixacao;#;mm, m;#;12, 30;#;;#;;#;;#;;#;FITA ADESIVA CREPE TRANSPARENTE, 12mmx30m, EM ROLO PRÓPRIO PARA COLAR PAPEL E ETIQUETAS LEVES, MATERIAL DE BOA QUALIDADE QUE TENHA BOA FIXAÇÃO
+82;diaria, hospedagem, completo, quarto, duplo, cidade, monte, paciente, tratamento, saude;#;mg;#;;#;claro;#;;#;;#;;#;DIÁRIA DE HOSPEDAGEM COMPLETA EM QUARTO DUPLO NA CIDADE DE MONTES CLAROS ? MG, PARA PACIENTES EM TRATAMENTO DE SAÚDE
+83;haloperidol, principio, ativo, concentracao, dosagem, forma, farmaceutico, solucao, injetavel, apresentacao, ampola, componente;#;mg, ml;#;50, 1;#;;#;;#;;#;;#;Haloperidol, Principio ativo: Haloperidol, Concentração/Dosagem: 50 mg/ml, Forma farmacêutica: Solução Injetável, Apresentação: Ampola 1ml, Componente:.
+84;tinta, guache;#;ml;#;250;#;rosa;#;;#;;#;;#;TINTA GUACHE 250 ML COR ROSA
+85;confeccao, adesivo;#;;#;;#;;#;;#;;#;;#;Confecção de adesivos
+86;pulseira, classificacao, risco, parte, adesivo, extremidade;#;cm;#;25, 2, 3;#;verde;#;;#;;#;;#;PULSEIRA CLASSIFICACAO DE RISCO 25X2 COR: VERDE - PULSEIRA CLASSIFICACAO DE RISCO - MEDIDA: 25X2, COM PARTE ADESIVA DE 3 CM EM UMA DAS EXTREMIDADES, COR: VERDE
+87;limpo;#;;#;;#;;#;aluminio;#;;#;;#;LIMPA ALUMINIO
+88;acido, gel, fosforico, seringa, ponta, aplicacao;#;grama;#;37, 3;#;;#;;#;;#;pacote;#;ACIDO GEL FOSFORICO 37% PACOTE COM 3 SERINGAS COM 3 GRAMAS PONTA PARA APLICACAO
+89;cartao, controle, medicamento, cart, palha, vinco, frente, verso;#;g;#;8, 180;#;;#;;#;;#;;#;Cartão controle de medicamentos, F-8 - cart. Palha. 180g c/vinco (Frente e Verso).
+90;coador, nylon, pesca, larva, cabo, revestido, larva, diametro;#;cm;#;108, 10;#;;#;aluminio;#;;#;;#;108 - COADOR EM NYLON PESCA LARVAS Cabo de aluminio revestido. Pesca larva- diametro 10 cm.
+91;mascara, respirador, descartavel, pff, n95, caracteristico, forro, sim, cinta, elastico, algodao, unico, tira, metalico, parte, superior, ajuste, nasal, dimensao, altura, largura, profundidade, pesar;#;cm, mm, g;#;2, 100, 18, 00, 13, 50;#;azul, branco;#;;#;;#;;#;Máscara Respirador, descartável, PFF-2 - N95, azul e Branco. Característica:  Forro: Sim, Material: Cinta Elástica 100% Algodão, Tamanho: Único, Tira Metálica na Parte Superior Para Ajuste Nasal. Dimensões: Altura:18,00 cm, Largura:13,00 cm, Profundidade: 2,00 mm, Peso: 50,00 g.
+92;macarrao, espaguete, contender, farinha, trigo, comum, enriquecer, acido, folico, empacotar, eletronicamente, contato, manual, quilo;#;;#;;#;;#;ferro;#;;#;;#;Macarrão espaguete, contendo farinha de trigo comum enriquecida com ferro e acido fólico: empacotado eletronicamente sem contato manual (um quilo).
+93;oculo, protecao, incolor, indicado, olho, usuario, contra, impacto, particula, volante, multidirecionais, luminosidade, intensar, constituido, arco, visor, policarbonato, possuir, borda, superior, meio, parte, frontal, borda, filtrar, todo, raio, ultravioleta, vlt, indice, transmissao, luz, visivel, tratamento, anti, risco, apoio, nasal, lateral, injetado, haste, confeccionadas, composto, dois, peca, ajuste;#;;#;99, 9, 90;#;preto;#;plastico;#;;#;;#;OCULOS DE PROTECAO INCOLOR - Indicado para protecao dos olhos do usuario contra impactos de particulas volantes multidirecionais e luminosidade intensa. Constituidos de um arco de material plastico preto e um visor de policarbonato incolor. O arco possui borda superior com meia-protecao na parte frontal e protecao nas bordas. O visor incolor filtra 99,9 % todos raios ultravioleta. VLT (Indice da transmissao de Luz Visivel) 90%, com tratamento Anti-Risco,Possui apoio nasal e protecao lateral injetada do mesmo material,As hastes sao confeccionadas do mesmo material do arco e sao compostas de duas pecas para ajuste do tamanho.
+94;banco, banco, angelim, seguinte, altura, assento, formico, canto, arredondar;#;cm;#;48, 30;#;branco;#;madeira;#;;#;;#;BANCOS BANCO DE MADEIRA EM ANGELIM COM AS SEGUINTES MEDIDAS: - ALTURA: 48CM  - ASSENTO EM FORMICA 30CM X 30CM - COR BRANCA COM CANTOS ARREDONDADOS -
+95;lustrar, movel;#;;#;;#;;#;;#;;#;;#;LUSTRA MOVEIS
+96;cadeira, banho, materia, primo, tubo, diametro, aproximado, pol, encosto, assento, vasado, chapa, apoiar, braco, suporte, antebraco, base, sobre, rodizio, giratorio, aproximadamente, soro, pe, freio, bilateral, indicado, aproximado, altura;#;kg, m;#;2, 4, 6, 90, 0, 51, 49, 1, 10;#;;#;aco, inox;#;;#;;#;CADEIRA PARA BANHO - MATERIA-PRIMA: TUBO DE ACO INOX COM DIAMETRO APROXIMADO DE 2/4POL TIPO: COM ENCOSTO E ASSENTO VASADO EM CHAPA DE ACO INOX APOIA-BRACOS: COM SUPORTE PARA ANTEBRACOS COM BASE SOBRE RODIZIOS GIRATORIOS DE APROXIMADAMENTE 6 POL DE DIAMETRO, SUPORTE PARA SORO, SUPORTE PARA OS PES EM ACO INOX, FREIO  BILATERAL, INDICADA ATE 90KG. MEDIDAS APROXIMADAS DE 0,51 X 0,49 X 1,10M DE ALTURA.
+97;ar, condicionar, btua, split, hi, wall, quente, frio, ciclo, reverso, controle, remoto, total, baixo, nivel, ruido, selo, procel, compressor, rotativo, instalacao, equipamento, incluir, todo, sefi, zerem, necessario, bem, todo, mao, obra, garantia, minimo, ano, partir;#;volt;#;12, 000, 220, 1;#;;#;;#;;#;;#;AR CONDICIONADO 12.000 BTUA, TIPO SPLIT HI-WALL, 220 VOLTS, QUENTE E FRIO, CICLO REVERSO, CONTROLE REMOTO TOTAL, BAIXO NIVEL DE RUIDO, NIVEL A, SELO PROCEL, COMPRESSOR TIPO ROTATIVO. COM INSTALACAO DO EQUIPAMENTO, INCLUINDO TODOS OS MATERIAIS QUE SEFI ZEREM NECESSARIOS, BEM COMO TODA A MAO DE OBRA. GARANTIA MINIMA DE 1(UM) ANO A PARTIR DA INSTALACAO.
+98;pneu, novo, minimo, lona, carcaca, lona, poliester, banda, rodagem, borracha, alto, resistenacia, flanco, flexibilidade, estrutura, radical, camara, remoldado, recuachutado, reciclar, dever, ainda, atender, norma, abnd, selo, inmetro, impresso, garantia, minimo, sessenta, mes, fabricante, padrao, pirelli, goodyer, firestone, michelin, superior;#;;#;175, 70, 14, 5, 5531, 60;#;;#;;#;;#;;#;PNEU 175/70 R-14 PNEU NOVO, NO MÍNIMO 05 LONAS, MATERIAL DE CARCAÇA EM LONA POLIESTER, BANDA RODAGEM COM BORRACHA DE ALTA RESISTÊNACIA, FLANCOS COM BORRACHA DE ALTA FLEXIBILIDADE, TIPO DA ESTRUTURA: CARCAÇA RADICAL, SEM CÂMARA, NÃO REMOLDADO, NÃO RECUACHUTADO, NÃO RECICLADO. DEVERA AINDA ATENDER AS NORMAS DA ABND 5531, COM SELO DO INMETRO IMPRESSO GARANTIA MINIMA DE 60 (SESSENTA) MESES DO FABRICANTE. PADRÃO DE QUALIDADE PIRELLI, GOODYER, FIRESTONE, MICHELIN OU DE QUALIDADE SUPERIOR
+99;massa;#;;#;;#;;#;pvc;#;;#;caixa;#;CAIXA PVC PARA MASSA
+100;eugenol, liquido, mesmo, marca, po, fenol, obtido, atraves, oleo, cravo, escurecer, torna, espessar, exposicao, ar, aroma;#;ml;#;10;#;amarelo, claro;#;;#;;#;;#;EUGENOL LÍQUIDO 10ML ( MESMA MARCA QUE O PÓ) O Eugenol é um fenol obtido através do Óleo de Cravo.   Cor do líquido: Amarelo Claro  - Escurece e torna-se espesso com a exposição ao ar. * Aroma de Cravo.
+101;scalp, cateter, infusao, venoso, agulha, agucado, bisel, curtir, trifacetado, asa, leve, tubo, vinicolo, flexivel, transpar;#;g;#;25;#;;#;plastico;#;;#;;#;SCALP 25G. CATETER PARA INFUSAO VENOSA COM AGULHA AGUCADA DE BISEL CURTO TRIFACETADO COM ASAS DE PLASTICO LEVE, TUBO VINICOLO LEVE, FLEXIVEL, TRANSPAR
+102;atadura, crepe, largura, comprimento, natural, fio, borda, devidamente, acabado, elasticidade, adequado, uniformente, enrolado, isentar, qualquer, defeito, repouso, embalado, individualmente, maqui;#;cm, m;#;20, 4, 50, 13, 1, 80;#;;#;;#;;#;;#;ATADURA DE CREPE 20 CM DE LARGURA X 4,50 M DE COMPRIMENTO,COR NATURAL, COM 13 FIOS,BORDAS DEVIDAMENTE ACABADAS, ELASTICIDADE ADEQUADA UNIFORMENTE ENROLADAS, ISENTA DE QUAISQUER DEFEITOS.COMPRIMENTO EM REPOUSO 1,80 M EMBALADA INDIVIDUALMENTE POR MAQUI
+103;solucao, glicosado, cloreto, glicose, sistema, fechado, eletrolitico, injetavel, ver, admnistracao, requerer, elemento, externo, adicional, par;#;ml;#;5, 500;#;;#;;#;;#;;#;SOLUÇÃO GLICOSADA,CLORETO GLICOSE A 5% 500 ML SOLUÇÃO GLICOSADA, CLORETO GLICOSE A 5% 500 ML SISTEMA FECHADO. Solução eletrolítica injetável.Via de admnistração injetável.Um Sistema Fechado é aquele que não requer de elementos externos adicionais par
+104;caneta, esferografica, corpo, cristal, transparente, carga, tampo, inferior, superir, tinta, ponta, latao, esfera, tungstenio, superior, ventilado, furo, menor, evitar, vazamento;#;mm;#;1, 0, 50;#;preto;#;;#;medio;#;caixa, unidade;#;Caneta Esferográfica, Preta, com corpo cristal transparente, carga preta, com tampa inferior e superir na cor da tinta, ponta média de latão de 1.0 mm com esfera de tungstênio, tampa superior ventilada, sem furo na tampa menor inferior para evitar vazamento da carga - caixa com 50 unidades
+105;ficha, procedimento, a4, offset, frente, tinta, centralizar, cola, cima;#;g;#;56, 100, 1;#;preto;#;;#;;#;;#;FICHA DE PROCEDIMENTOS, A4, offset 56g, frente, tinta preta, centralizado, cola em cima, 100x1
+106;nebulizador, ultrassonico, portatil, saida, simultaneo, motor, hp, compressor, pistao, oscilante, lubrificacao, isentar, oleo, vazao, ar, livre, min, particula, menor, micron, pressao, maximo, psi, copo, dosador, facilitar, colocacao, medicamento, derrama, suporte, desconectar, mangueira, total, aproveitamento, mascara, macias, anatomico, atoxicar, leve, facil, manuseio, design, inovador, baixo, consumo, energia, garantia, minimo, mes;#;litro;#;1, 10, 5, 33, 12;#;;#;;#;;#;;#;NEBULIZADOR TIPO ULTRASSÔNICO - NEBULIZADOR TIPO ULTRASSÔNICO  Portátil, tipo ultrassônico,  Com 01 saída simultânea,  Motor 1/10 hp,  Compressor tipo pistão oscilante,  Lubrificação isenta de óleo, vazão de ar livre 10 litros/min, tamanho das partículas menor que 5 microns,  Pressão máxima 33 psi,   Copo dosador que facilita a colocação do medicamento (não derrama),  Suporte para copo dosador sem desconectar a mangueira,  Total aproveitamento do medicamento,  Máscaras macias, anatômicas e atóxicas,   Leve,   Fácil manuseio,   Design inovador,   Baixo consumo de energia  Garantia mínima de 12 meses
+107;afastador, cirurgico, uso, odonto, materia, primo, minesota, aspirador, padrao;#;;#;;#;;#;aco, inox;#;;#;;#;27336 - AFASTADOR CIRURGICO USO ODONTO - MATERIA PRIMA: ACO INOX, TIPO: MINESOTA COM ASPIRADOR, MEDIDA: PADRAO
+108;filtro, diesel, trator, massey, ferguson, ano;#;;#;265, 2, 1999;#;;#;;#;;#;;#;FILTRO DIESEL PARA TRATOR MASSEY FERGUSON 265/2 ANO 1999
+109;luva, desc, sensitex, cirurgico, esteril, confeccionada, composto, especial, natural, caracteristico, alto, sensibilidade, tatil, flexibilidade, resistencia, formato, anatomico, punho, alongar, reforcado;#;;#;8, 0;#;;#;latex;#;;#;;#;LUVA DESC. N. 8,0 SENSITEX - LUVA CIRURGICA ESTERIL CONFECCIONADA EM COMPOSTO ESPECIAL DE LATEX NATURAL, O QUE LHE DA AS CARACTERISTICAS DE ALTA SENSIBILIDADE TATIL, FLEXIBILIDADE E RESISTENCIA, COM FORMATO ANATOMICO, COM PUNHO ALONGADO E REFORCADO C
+110;iodopovina, pvpi, degermante, pvp, solucao, tender, ativo, determante, eum, antisseptico, base, iodopolividona, contender, agente, umectante, responsavel, anti, sepsia, mao, antebraco, equipe, cirurgico, descontamincao, campo, operatorio, uso, adulto, pediatrico, conformar, orientacaomedica, composicao, iodopolivina, excipiente, qsp, fosfato, dissodico, laurealeter, sulfato, sodio, glicerina, acido, citrico, iodato, potassio, agua, deionizado, descricao, frasco, isopolividona, tensoativos, registro, anvisa;#;ml;#;10, 1000, 1, 3, 382, 8;#;;#;;#;;#;;#;IODOPOVINA 10%(PVPI DEGERMANTE) PVP-I, SOLUCAO COM TENSO ATIVOS OU DETERMANTE EUM ANTISSEPTICO A BASE DE IODOPOLIVIDONA CONTENDO TENSO ATIVOS E AGENTES UMECTANTES, RESPONSAVEIS PELA ANTI-SEPSIA DAS MAOS E ANTEBRACOS DA EQUIPE CIRURGICA E DESCONTAMINCAO DO CAMPO OPERATORIO. uSO  ADULTO E PEDIATRICO CONFORME ORIENTACAOMEDICA.COMPOSICAO: IODOPOLIVINA 10%, EXCIPIENTES QSP:( FOSFATO DISSODICO, LAUREALETER, SULFATO DE SODIO, GLICERINA, ACIDO CITRICO, IODATO DE POTASSIO E AGUA DEIONIZADA).DESCRICAO: FRASCO DE 1000ML, SOLUCAO DE ISOPOLIVIDONA A 10% COM TENSOATIVOS, REGISTRO NA ANVISA: 1.03.382-8
+111;margarina, cremoso, sal, minimo, lipideo, oleo, vegetal, liquido, interesterificados, agua, leite, desnatar, reconstituir, vitamina, estabilizante, lecitina, soja, ester, poliglicerol, acido, graxo, pote;#;;#;1, 65;#;;#;;#;;#;;#;MARGARINA CREMOSA COM SAL (1K): Com no minimo 65 % de lipideos, oleos vegetais liquidos e interesterificados, agua, sal, leite desnatado reconstituido, vitamina A, estabilizantes, lecitina de soja e esteres de poliglicerol de acidos graxos. Pote de 1k.
+112;filtro, separador, agua, racor, micro, onibus, volare, v8, ano;#;l;#;2008;#;;#;;#;;#;;#;FILTRO  SEPARADOR DE AGUA RACOR PARA MICRO ÔNIBUS VOLARE V8 L./ ANO 2008
+113;sonda, nasogastrica, longo, tubo, atoxicar, flexivel, modelo, furacao, especificar, conector, tampo;#;;#;6;#;;#;pvc;#;;#;;#;Sonda, nasogástrica no 06 longa., em tubo pvc atoxico flexivel com modelo de furação especifica e conector com tampa.
+114;refeicao, buffet, servido, local, determinado, prefeitura, cardapio, cada, carne, assado, bovino, suino, frango, linguica, porco, arrozfeijao, tropeiro, vinagrete, sal;#;g;#;200, 100;#;;#;;#;;#;unidade;#;REFEIÇÃO TIPO BUFFET I - Servido em local determinado pela Prefeitura. Cardápio para cada unidade de refeição:200g de Carne assada (bovina, suína e/ou frango) e100g de linguiça assada (de porco e/ou de frango)ArrozFeijão Tropeiro e vinagrete ou sal
+115;macro, modelo, confeccionado, resina, emborrachar, gigante, demonstracao, higiene, bucal, composto, articulacao, haste, cromado, dente, molar, pre, incisivo, canino, lingua, escova, comprimentoxlargura, altura;#;cm;#;20, 15;#;;#;plastico;#;;#;;#;Macro Modelo Modelo confeccionado em resina plastica emborrachada. Modelo gigante para demonstracao da higiene bucal. Composto por articulacao (haste cromada),dentes (molares, pre-molares, incisivos, caninos), lingua e escova. ComprimentoxLargura x Altura: Macro Modelo 20 cm x 15 cm x 15 cm
+116;hollembach, ss, ref;#;;#;3;#;;#;aco, inox;#;;#;;#;HOLLEMBACH Nº 03ss (AÇO INOX) REF.: 11349
+117;bicicleta, ergometrico, monitor, carbono, pintura, eletrostatico, display, multi, funcao, informar, velocidade, distancia, caloria, batimen;#;v;#;127;#;;#;aco;#;;#;;#;BICICLETA ERGOMETRICA MONITOR, 127 V ,EM ACO CARBONO COM PINTURA ELETROSTATICA, DISPLAY MULTI FUNCAO, INFORMA VELOCIDADE, DISTANCIA, CALORIAS, BATIMEN
+118;biscoito, maizena, individual, base, farinha, trigo, fortificar, acido, folico, acucar, gordura, vegetal, creme, milhar, invertido, amido, sal, estabilizante, lecitina, soja, fermento, quimico;#;gr;#;2, 3, 400;#;;#;ferro;#;;#;pct;#;BISCOITO DE MAIZENA PCT COM 2 OU 3 PCT INDIVIDUAIS DE 400GR, A BASE DE FARINHA DE TRIGO FORTIFICADA COM FERRO E ACIDO FOLICO, ACUCAR, GORDURA VEGETAL, CREME DE MILHO, ACUCAR INVERTIDO, AMIDO, SAL, ESTABILIZANTE LECITINA DE SOJA, FERMENTOS QUIMICOS
+119;camiseta, manga, curtir, agente, comunitario, saude, adulto, malha, poliviscose, composicao, poliester, viscose, modelo, basico, decote, ribana, gola, serigrafia, bordado, ilustrativo, abaixar, frente, logomarca, familia, original, lado, esquerdar, altura, bolso, costa, dizer, direito, atencao, primario, saogotardo, secretaria, municipal, arco, xg, definir, amostra, posteriormente, incluir, elaboracao, arte, confeccao, individual;#;v, m, g;#;67, 33;#;branco, azul, claro;#;;#;;#;embalagem;#;Camiseta manga curta para Agente Comunitario de Saude   adulto em malha de poliviscose (composicao 67% poliester e 33% viscose)  na cor branca  modelo basico, decote em  V , com ribana em manga e gola na cor azul claro. Serigrafias bordadas: (modelo ilustrativo abaixo)-Frente: logomarca da Saude da Familia na cores originais, lado esquerdo altura do  bolso  . -Costas: os dizeres  AGENTE COMUNITARIO DE SAUDE  na cor azul claro. - Manga direita: os dizeres  Atencao Primaria SaoGotardo, SECRETARIA MUNICIPAL DE SAUDE  em arco na cor azul claro. Tamanhos (P,M, G E XG) a definir tamanhos com amostras pela Secretaria Municipal de Saude posteriormente, incluso elaboracao da arte para confeccao. Embalagem individual
+120;resina, fotopolimerizavel, a2, receber, forma, substitutivo, ea1, composto, universal, nanoparticula, matriz, organico, bisgma, bisema, udma, particula, inorganico, zirconiasilica, nm, nanoaglomerados, carga, volume, pesar, indicacao, restauracao, direto, indireto, dente, anterior, posterior, classe, ii, iii, iv, incluir, superficie, oclusal;#;m, v;#;100, 5, 20, 6, 14, 595, 785;#;;#;;#;;#;;#;RESINA FOTOPOLIMERIZAVEL A2 NAO RECEBEREMOS DE FORMA SUBSTITUTIVA EA1 RESINA COMPOSTA FOTOPOLIMERIZAVEL UNIVERSAL COM 100 DE NANOPARTICULA MATRIZ ORGANICA DE BISGMA BISEMA UDMA E PARTICULAS INORGANICAS DE ZIRCONIASILICA COM TAMANHO DE 5 A 20 NM E NANOAGLOMERADOS DE 06 A 14 M E 595 DE CARGA EM VOLUME 785 EM PESO INDICACOES RESTAURACOES DIRETAS E INDIRETAS EM DENTES ANTERIORES E POSTERIORES CLASSES I II III IV E V INCLUINDO SUPERFICIES OCLUSAIS
+121;condulete;#;;#;3, 4;#;;#;;#;;#;;#;CONDULETE 3/4
+122;toner;#;;#;2612;#;;#;;#;;#;;#;TONER Q-2612A
+123;prestobarba, descartavel;#;;#;9;#;;#;;#;;#;;#;PRESTOBARBA DESCARTÁVEL - 090022027
+124;toner, imp, oki, b410;#;;#;;#;;#;;#;;#;;#;TONER P/ IMP OKI B410
+125;conduite, eletrico, flexivel, corrugar;#;;#;3, 4;#;;#;pvc;#;;#;;#;Conduíte elétrico flexível em PVC corrugado 3/4
+126;conduite;#;;#;1, 2;#;;#;;#;;#;;#;CONDUITE 1/2
+127;hidrocortizona;#;mg;#;100;#;;#;;#;;#;;#;HIDROCORTIZONA 100MG
+128;ige, especificar, acarus, siro, d70;#;;#;;#;;#;;#;;#;;#;IGE ESPECIFICO ACARUS SIRO D70..
+129;enxaguatorio, bucalsolucao, gluconato, clorhexidina, bochechosembalagem, dispenser;#;litro;#;12;#;;#;;#;;#;;#;ENXAGUATORIO BUCALSOLUcAO DE GLUCONATO DE CLORHEXIDINA A 012% PARA BOCHECHOSEMBALAGEM DE UM LITRO COM DISPENSER-13963
+130;hd, externar, tb;#;;#;1;#;;#;;#;;#;;#;HD EXTERNO DE 1 TB
+131;scalp, n25, und;#;;#;100;#;;#;;#;;#;;#;SCALP N25 C 100 UND 107102
+132;coletor, perfurar, cortante;#;;#;10;#;;#;;#;;#;cx;#;COLETOR PERFURO-CORTANTE CX 10
+133;rec, toner, impres, cop, mfc, dn;#;;#;8085;#;;#;;#;;#;;#;REC.TONER IMPRES/COP.MFC8085DN
+134;keystone, rj45;#;;#;;#;;#;;#;;#;;#;KEYSTONE RJ45
+135;dvd, rom, gravavel, min, gb;#;;#;120, 4, 7;#;;#;;#;;#;cx;#;DVD - ROM GRAVAVEL 120 MIN / 4.7 GB S/ CX
+136;item1059;#;;#;;#;;#;;#;;#;;#;ITEM1059
+137;bl, comiss, cont, inf, hospitalar;#;;#;;#;;#;;#;;#;;#;BL.COMISS.CONT.INF.HOSPITALAR
+138;captropil;#;mg;#;25;#;;#;;#;;#;;#;CAPTROPIL 25 MG
+139;bomda, dagua, veic, renaul, kangoo;#;;#;14, 15;#;;#;;#;;#;;#;BOMDA DAGUA VEIC. RENAUL KANGOO 14/15
+140;equipar, macrogotas, und;#;;#;30;#;;#;;#;;#;cx;#;EQUIPO MACROGOTAS CX C/30UND
+141;mononylon, ag, cortante, cir, isoprop, deietiletanolanina;#;cm;#;3, 0, 2, 8, 89, 5, 1;#;;#;;#;;#;;#;MONONYLON 3.0AG CORTANTE 2CM 3/8 CIR C/ 89.5% ISOPROP 1,0% DEIETILETANOLANINA
+142;escalimetro;#;cm;#;15;#;;#;;#;;#;;#;ESCALIMETRO DE 15 CM
+143;clips, galvanizar, grs;#;;#;8, 0, 500;#;;#;;#;;#;;#;CLIPS GALVANIZADO 8/0 500 GRS
+144;proteinuria;#;;#;;#;;#;;#;;#;;#;PROTEINURIA
+145;remanufatura, toner, impress, samsung, scx;#;;#;4600;#;;#;;#;;#;;#;REMANUFATURA DE TONER PARA IMPRESS. SAMSUNG SCX 4600,
+146;desinfetante, lt;#;;#;2;#;;#;;#;;#;;#;DESINFETANTE 2 LT
+147;otoscopio;#;;#;;#;;#;;#;;#;;#;OTOSCOPIO
+148;coletor, mat, perfurar, cort, lts;#;;#;20;#;;#;;#;;#;;#;COLETOR MAT PERFURO CORT 20LTS
+149;rebomassa;#;;#;;#;;#;;#;;#;;#;REBOMASSA
+150;especular, vag, descartavel;#;m;#;;#;;#;;#;;#;;#;ESPECULO VAG DESCARTAVEL M 106581

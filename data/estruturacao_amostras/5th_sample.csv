@@ -1,0 +1,151 @@
+id; palavras_original; palavras_novo; unidades_medida_original; unidades_medida_novo; números_original; números_novo; cores_original; cores_novo; materiais_original; materiais_novo; tamanho_original; tamanho_novo; quantidade_original; quantidade_novo; descricao_original
+1;faca, churrasco, fio, liso, cabo;#;;#;;#;;#;inox, plastico;#;grande;#;;#;Faca, de Churrasco Grande, com fio liso, em inox, cabo plástico.
+2;pa, lixo, cabo, longo;#;;#;;#;;#;;#;;#;;#;PA P/LIXO COM CABO LONGO
+3;pimentao, primeiro, proprio, bom, condicao, consumo;#;;#;;#;;#;;#;;#;embalagem;#;PIMENTÃO - DE PRIMEIRA QUALIDADE, EMBALAGENS  PRÓPRIAS, EM BOAS CONDIÇÕES PARA O CONSUMO.
+4;armario, vitrine, porta, prateleira, lateral, chapa, aberto, colocacao, suporte;#;mm;#;1, 3;#;;#;vidro;#;;#;;#;ARMARIO VITRINE 01 PORTA COM 03 PRATELEIRAS LATERAIS DE CHAPA, LATERAIS DE CHAPA E PORTA ABERTA PARA COLOCACAO DE VIDRO 3 MM, PRATELEIRAS COM SUPORTE
+5;filtro, linha;#;;#;;#;;#;;#;;#;;#;FILTRO DE LINHA.
+6;forceps;#;;#;1;#;;#;;#;;#;;#;FORCEPS 1
+7;escova, sanitario, estrutura, resistente, cerda, polipropileno, minimo, comprimento;#;cm;#;30;#;;#;madeira, plastico;#;;#;;#;Escova Sanitária, Estrutura de Madeira ou Plástico Resistente, Com Cerdas de Polipropileno, Medindo no mínimo 30 cm de Comprimento
+8;bastao, silicone, grosso, diametro, refil, pistola, cola, quente;#;cm, mm;#;30, 11;#;;#;;#;;#;;#;Bastao de silicone de 30 cm grossa, 11mm de diametro (refil para pistola de cola quente)
+9;coador, cafe, pano, cabo;#;;#;;#;;#;madeira;#;;#;;#;COADOR P/ CAFÉ DE PANO E CABO DE MADEIRA
+10;computador, portatil, notebook;#;;#;;#;;#;;#;;#;;#;Computador portátil (notebook)
+11;extensao;#;m;#;10;#;;#;;#;;#;;#;Extensao 10m
+12;envelope, pardo, dimensao, minimo;#;;#;25, 34;#;;#;;#;;#;;#;ENVELOPE PARDO DIMENSÕES MÍNIMAS 25X34
+13;vasilha, redondo, resistente, tampo;#;;#;;#;;#;plastico;#;;#;;#;VASILHA PLASTICA REDONDA RESISTENTE COM TAMPA
+14;tapete, fibra, cocar;#;;#;;#;;#;;#;;#;;#;TAPETE EM FIBRA DE COCO
+15;sonho;#;;#;;#;;#;;#;;#;;#;SONHO
+16;cal, pintura;#;kg;#;8;#;;#;;#;;#;;#;CAL P/PINTURA 8KG
+17;etanol;#;;#;;#;;#;;#;;#;;#;ETANOL
+18;papel, toalha, rolo, toalha;#;cm;#;2, 60, 22, 20;#;branco;#;;#;;#;embalagem;#;Papel Toalha / Branco / Embalagem com 2 Rolos 60 Toalhas / Tamanho de 22x20cm
+19;tabela, linha, fiat, leve;#;;#;;#;;#;;#;;#;;#;TABELA DA LINHA FIAT (LEVE)
+20;salsicha, congelado;#;;#;;#;;#;;#;;#;;#;SALSICHA CONGELADA
+21;kit, extensor, elastico, corpo;#;;#;;#;;#;;#;;#;;#;KIT EXTENSOR ELASTICO P/CORPO
+22;lamina, fosco, preventivo, espessura, parte, identificacao, paciente;#;cm, mm;#;2, 5, 7, 1;#;;#;vidro;#;;#;;#;LÂMINA FOSCA PARA PREVENTIVO Lâmina de vidro, 2,5 x 7,5 cm, 1mm de espessura, com parte fosca para identificação do paciente.
+23;esparadrapo;#;cm;#;10, 4, 5;#;;#;;#;;#;;#;ESPARADRAPO 10CM X 4,5CM
+24;cartao, controle, diabete, ficha, frente, papel, cartolina, formato, tinta;#;grama;#;200, 16, 1;#;verde;#;;#;;#;;#;CARTAO DE CONTROLE DE DIABETES: FICHAS-FRENTE PAPEL CARTOLINA VERDE 200 GRAMAS FORMATO 16-TINTA 1 COR.
+25;detergente, limpo, piso, cozinha, banheiro, calcada;#;l;#;2;#;;#;;#;;#;;#;DETERGENTE LIMPA PISOS PARA COZINHA BANHEIROS E CALÇADAS 2 L
+26;calca;#;;#;4548, 36;#;;#;;#;;#;;#;004548 Calca n.  36,
+27;veiculo, zero, passeio, modelo, sedan, fabricacao, nacional, porta, passageiro;#;km;#;4, 5;#;;#;;#;;#;;#;VEICULO ZERO KM TIPO PASSEIO MODELO SEDAN FABRICACAO NACIONAL  DE 4 PORTAS E CAPACIDADE DE 5 PASSAGEIROS.
+28;tinta, tecido, musgo;#;;#;;#;verde;#;;#;;#;;#;TINTA PARA TECIDO VERDE MUSGO
+29;pica, auxiliar, porta, agulha, cirurgia, materia, primo, ponta, dente, rato;#;cm;#;14;#;;#;aco, inox;#;;#;;#;PICA AUXILIAR PARA PORTA AGULHA - PARA CIRURGIA - MATERIA-PRIMA: ACO INOX, TIPO/PONTA: DENTE DE RATO, TAMANHO: 14 CM.
+30;construcao, casa, fornecimento, mao, obra, ferramenta, equipamento, finalidade, edificacao, morada, padrao;#;;#;;#;;#;;#;;#;;#;CONSTRUCAO DE CASA, FORNECIMENTO DE MAO DE OBRA, MATERIAIS, FERRAMENTAS E EQUIPAMENTOS COM A FINALIDADE DE EDIFICACAO DE UMA CASA DE MORADA NO PADRAO
+31;cefalotina, sodico, keflin;#;g;#;1;#;;#;;#;;#;;#;CEFALOTINA SODICA 1G(KEFLIN)
+32;soro, ringer, lactato, sodio;#;ml;#;499, 250;#;;#;;#;;#;;#;000499 SORO RINGER C/LACTATO SODIO 250ML
+33;ceftriaxona, po, sol, injetavel, iv, im;#;g;#;1;#;;#;;#;;#;;#;CEFTRIAXONA 1G PÓ SOL. INJETAVEL IV/IM
+34;ringer, lactato, sodio, solucao, injetavel;#;ml;#;500;#;;#;;#;;#;;#;RINGER + LACTATO DE SODIO SOLUÇÃO INJETAVEL 500 ML
+35;levodopa, benserazida, prolopa;#;;#;250;#;;#;;#;;#;;#;Levodopa + Benserazida, 250 (prolopa)
+36;ca;#;;#;125;#;;#;;#;;#;;#;CA 125
+37;carbonato, calcio, vit, d3;#;mg, ui;#;500, 200;#;;#;;#;;#;;#;CARBONATO DE CALCIO 500 MG + VIT D3 200UI
+38;diclofenaco, sodico, solucao, injetavel, im;#;mg, ml;#;25;#;;#;;#;;#;;#;Diclofenaco SOdico, 25mg/ml - soluCAo injetAvel IM - 6407201168
+39;sulfametoxazol, trimetoprima, suspensao, oral;#;mg, ml;#;40, 8;#;;#;;#;;#;;#;SULFAMETOXAZOL+TRIMETOPRIMA 40+8 MG/ML SUSPENSAO ORAL
+40;cloreto, potassio, solucao, oral;#;g, ml;#;6, 100;#;;#;;#;;#;;#;CLORETO DE POTASSIO SOLUCAO ORAL 6G/100ML
+41;fentanila, sal, citrato, solucao, injetavel;#;mg, ml;#;0, 5;#;;#;;#;;#;;#;Fentanila, Sal Citrato, 0,05mg/ml, Solução Injetável
+42;acido, ascorbico, iv;#;mg, ml;#;100, 50;#;;#;;#;;#;;#;ÁCIDO ASCÓRBICO 100MG/ML 50ML IV
+43;colirio, anestesico, cloridrato, tetracaina, fenilefrina, acido, borico;#;mg;#;100, 1, 15;#;;#;;#;;#;;#;Colírio Anestésico, (Cloridrato de Tetracaína 100 MG + Cloridrato de Fenilefrina 1MG + Àcido Bórico 15 MG
+44;claritromicina, comprimido;#;;#;;#;;#;;#;;#;;#;CLARITROMICINA COMPRIMIDO
+45;lidocaina, cloridrato, epinefrina, solucao, injetavel;#;ml;#;2, 1, 200, 000, 20;#;;#;;#;;#;;#;Lidocaina cloridrato + epinefrina 2% + 1: 200.000 solução injetável com 20ml
+46;enalapril;#;mg;#;10;#;;#;;#;;#;;#;ENALAPRIL 10MG
+47;ciprofloxacino, cloridrato, solucao, injetavel;#;mg, ml;#;2;#;;#;;#;;#;;#;Ciprofloxacino cloridrato 2mg/ml, solução injetável
+48;cloreto, suxametonio;#;mg;#;100;#;;#;;#;;#;;#;CLORETO DE SUXAMETONIO 100 MG.
+49;metoclopramida, cloridrato, solucao, oral;#;mg, ml;#;4;#;;#;;#;;#;;#;Metoclopramida cloridrato 4mg/ml solucao oral
+50;ciprofloxacino, cloridrato, comprimido;#;mg;#;500;#;;#;;#;;#;;#;Ciprofloxacino Cloridrato, 500 MG, Comprimido
+51;lidocaina, cloridrato, epinefrina, esteril, pack;#;v, ml;#;2, 1, 200, 000, 20;#;;#;;#;;#;;#;LIDOCAINA (CLORIDRATO DE) 2% +EPINEFRINA 1.200.000 C/V 20ML ESTERIL PACK
+52;enoxaparina, sodico, injetavel;#;mg;#;20;#;;#;;#;;#;;#;ENOXAPARINA SODICA 20MG INJETAVEL - 1010010045
+53;norepinefrina, hemitartarato;#;m;#;8;#;;#;;#;;#;;#;NOREPINEFRINA HEMITARTARATO 8M
+54;nistatina;#;ui;#;;#;;#;;#;;#;;#;NISTATINA 25000 UI
+55;carvedilol;#;mg;#;12, 5;#;;#;;#;;#;;#;CARVEDILOL 12,5MG
+56;albumina;#;;#;;#;;#;;#;;#;;#;ALBUMINA
+57;propiltiouracila, comprimido;#;mg;#;100;#;;#;;#;;#;;#;Propiltiouracila 100 mg comprimido
+58;amitriptilina, codeina, ranitidina, sertralina;#;mg;#;25, 7, 5, 150, 100;#;;#;;#;;#;;#;AMITRIPTILINA 25 MG+ CODEINA 7,5 MG+RANITIDINA 150MG+ SERTRALINA 100MG
+59;levotiroxina, sodico, puran, t4, comprimido;#;mg;#;100;#;;#;;#;;#;;#;LEVOTIROXINA SODICA (PURAN T4) 100 MG .   COMPRIMIDO
+60;quetiapina;#;mg;#;200;#;;#;;#;;#;;#;QUETIAPINA 200 MG
+61;termo, coleta, amostra, dois, ver, campo, largura, comprimento, bloco, folha;#;cm;#;51, 18, 27, 5, 100;#;branco, verde;#;;#;;#;;#;TERMO DE COLETA  DE AMOSTRAS DUAS VIAS (BRANCA E VERDE) 51 CAMPOS MEDINDO 18 CM DE LARGURA E 27,5 DE COMPRIMENTO.BLOCO COM 100 FOLHAS.
+62;escova, limpeza, utilidade, vaso, sanitario, cerda, nylon, apresentacao, corpo, estojo;#;;#;;#;;#;plastico;#;;#;;#;ESCOVA PARA LIMPEZA, UTILIDADE: VASO SANITARIO, CERDAS NYLON, APRESENTAÇÃO: COM CORPO E ESTOJO EM PLASTICO.
+63;diovan, amlo, fix, comprimido, principio, ativo, valsartana, besilato, anlodipino;#;mg;#;320, 5, 28;#;;#;;#;;#;caixa;#;DIOVAN AMLO FIX 320 + 5mg - CAIXA C/ 28 COMPRIMIDOS Principio ativo: valsartana + besilato de anlodipino
+64;soja, grao;#;;#;;#;;#;;#;;#;;#;SOJA EM GRAO
+65;grampeador, folha, apoio, base, polietileno, dimensao;#;;#;100;#;;#;aco;#;grande;#;;#;GRAMPEADOR GRANDE P/ 100 FOLHAS - GRAMPEADOR GRANDE PARA 100 FOLHAS, GRAMPEADOR DE GRANDE CAPACIDADE EM ACO APOIO DA BASE EM POLIETILENO DIMENSOES:
+66;pasta, az, tigrado, lombo, grosso;#;;#;;#;;#;;#;pequeno;#;;#;PASTA AZ, PEQUENA, TIGRADA, LOMBO GROSSO Pasta Az, pequena, tigrada, lombo grosso.
+67;confeccao, bloco, prontuario, saude, familia, acompanhamento, pre, natal;#;;#;;#;;#;;#;;#;;#;CONFECCAO DE BLOCO PRONTUARIO SAUDE DA FAMILIA ACOMPANHAMENTO PRE NATAL 304238
+68;pao, sal, preparado, dia;#;g;#;50;#;;#;;#;;#;;#;PAO DE SAL 50G PREPARADO NO DIA
+69;corante, liquido, tinta;#;ml;#;50;#;;#;;#;;#;;#;CORANTE LIQUIDO PARA TINTA 50ML
+70;naloxona, cloridrato, apresentacao, injetavel, dosagem, ampola;#;mg, ml;#;0, 4, 10;#;;#;;#;;#;caixa;#;48348 - NALOXONA CLORIDRATO - APRESENTAÇÃO: INJETAVEL, DOSAGEM: 0,4 MG/ ML CAIXA COM 10 AMPOLAS
+71;cloreto, sodio, soro, fisiologico, apresentacao, frasco, dosagem, cento;#;ml;#;0, 9, 1000;#;;#;;#;;#;embalagem;#;72485 - CLORETO DE SODIO(SORO FISIOLOGICO) - APRESENTACAO: FRASCO, DOSAGEM: 0,9 POR CENTO EMBALAGEM COM 1000ML
+72;ficha, referencia, contra, caps, tinta, papel, frente, verso, bloco;#;grama;#;9, 75, 100;#;preto;#;;#;;#;unidade;#;FICHA DE REFERENCIA E CONTRA REFERENCIA ?CAPS TINTA PRETA ,F-9 PAPEL 75 GRAMAS  FRENTE E VERSO BLOCO COM 100 UNIDADES
+73;campanha, vacinacao, anti, rabica, papel, ap, formato, bloco, folha;#;cm;#;75, 22, 32, 8, 100;#;;#;;#;;#;;#;Campanha de vacinação Anti Rábica, papel AP 75, tamanho 22cm x 32cm, formato 8, bloco com 100 folhas
+74;rolamento, contra, angulo;#;;#;;#;;#;;#;;#;;#;ROLAMENTO PARA CONTRA ANGULO
+75;propranolol, cloridrato, apresentacao, comprimido, dosagem, capsula;#;mg;#;40, 600;#;;#;;#;;#;caixa;#;18058 - PROPRANOLOL, CLORIDRATO - APRESENTACAO: COMPRIMIDO, DOSAGEM: 40 MG, CAIXA COM 600 CAPSULAS
+76;fita, cetim, poliamida, purpuro, peca, largura, face, simples;#;metro, mm;#;100, 12, 10, 50;#;;#;;#;;#;;#;FITA EM CETIM 100 % POLIAMIDA N 12 COR PURPURA peca com 10 metros e 50 mm de largura, face simples*****
+77;soro, fisiologico, solucao, fisiologico, cloreto, sodio, sistema, fechado, bolsa;#;ml, mg;#;0, 9, 500;#;;#;;#;;#;;#;Soro fisiológico 0,9% de 500ml - solução fisiológica de cloreto de sódio, 0,9% - 9mg/ml - sistema fechado bolsa com 500ml.
+78;suco, concentrado, liquido, refresco, fruta, sabor, caju, uva, goiaba, pessego;#;litro;#;1;#;;#;;#;;#;embalagem;#;SUCO CONCENTRADO LIQUIDO PARA REFRESCO DE FRUTA SABOR CAJU UVA GOIABA PESSEGO EMBALAGEM COM 1 LITRO
+79;cloreto, sodio, principio, ativo, concentracao, dosagem, forma, farmaceutico, solucao, injetavel, apresentacao, ampola;#;ml;#;20, 10;#;;#;;#;;#;;#;Cloreto de sodio, principio ativo: cloreto de sodio, concentracao/dosagem: 20%, forma farmaceutica: solucao injetavel, apresentacao: ampola 10 ml
+80;maca, transferencia, estrutura, leito, grade, lateral, suporte, soro, colchonete;#;;#;;#;;#;aco, inox;#;;#;;#;MACA DE TRANSFERENCIA, ESTRUTURA /LEITO AÇO INOX GRADES LATERAIS, SUPORTE DE SORO, COLCHONETE
+81;identificacao, banana;#;;#;;#;;#;prata;#;;#;;#;136281 - IDENTIFICACAO: BANANA PRATA
+82;forro, pinus;#;l, cm;#;10, 1, 0;#;;#;;#;;#;;#;FORRO DE PINUS L=10 CM - E=1,0 CM
+83;reservatorio, agua, micro, onibus, ano, marca;#;v;#;2001;#;;#;;#;;#;;#;RESERVATORIO DE AGUA DO MICRO ONIBUS ANO 2001/2001 MARCA V W
+84;cabo, duplex;#;mm;#;16;#;;#;aluminio;#;;#;;#;CABO DUPLEX 16MM ALUMINIO
+85;diosmina, hesperidina, principio, ativo, associado, concentracao, dosagem, forma, farmaceutico, comprimido, apresentacao, componente;#;mg;#;450, 50;#;;#;;#;;#;;#;Diosmina + Hesperidina, Principio ativo: Diosmina associado com hesperidina, Concentração/Dosagem: 450 mg + 50 mg, Forma farmacêutica: comprimido, Apresentação: ., Componente:.
+86;cesta, fruta, verdura;#;;#;;#;;#;;#;;#;;#;CESTA DE FRUTAS, VERDURAS
+87;fenobarbital, sodico, suspensao, solucao, oral, frasco;#;mg, ml;#;40, 20;#;;#;;#;;#;;#;FENOBARBITAL SÓDICO 40MG/ML - SUSPENSÃO/SOLUÇÃO ORAL, FRASCO 20ML
+88;confeccao, ficha, bloco, folha;#;;#;100, 28, 22;#;;#;;#;;#;;#;CONFECCAO DE FICHA D,BLOCO COM 100 FOLHAS 28 X 22  - 800010063
+89;leite, po, integral, instantaneo, lata;#;gr;#;400;#;;#;;#;;#;;#;LEITE EM PÓ INTEGRAL INSTANTÂNEO LATA 400 GR
+90;hemifumarato, quetiapina, apresentacao, comprimido, revestido, dosagem;#;mg;#;100;#;;#;;#;;#;;#;107013 - HEMIFUMARATO DE QUETIAPINA - APRESENTACAO: COMPRIMIDO REVESTIDO, DOSAGEM: 100 MG
+91;cateter, nasal, inalacao, oxigenio, oculo, extensao, cristal, atoxicar, apirogenico, esteril, descartavel, embalado, individualmente, esterilizado;#;;#;;#;;#;pvc, plastico;#;;#;embalagem;#;Catéter nasal para inalação de oxigênio, tipo óculos, extensão em PVC cristal, atóxico, apirogênico, estéril, descartável. Embalado individualmente em embalagem plástica esterilizada.
+92;suco, garrafa, cada, sabor, manga;#;ml;#;500;#;;#;;#;;#;;#;SUCO EM GARRAFA C/ 500ML cada sabor manga
+93;dipirona, sodico, solucao, injetavel, ver, endovenoso, intramuscular;#;mg, ml;#;500;#;;#;;#;;#;;#;Dipirona Sódica, 500 mg/ml solução injetável (via endovenosa ou intramuscular)
+94;nitroprussiato, sodio, diluente, dosagem, apresentacao, injetavel, ampola, dever, constar, data, fabricacao, validade, numero, lote;#;mg, ml;#;50, 2;#;;#;;#;;#;embalagem;#;103853 - NITROPRUSSIATO DE SODIO + DILUENTE - DOSAGEM: 50 MG/2ML APRESENTACAO: INJETAVEL, AMPOLA COM 2 ML NA EMBALAGEM DEVERA CONSTAR A DATA DA FABRICACAO, VALIDADE E NUMERO DO LOTE
+95;contratacao, profissional, fisioterapeuta, registro, crefito, conselho, regional, fisioterapia, terapia, ocupacional, regiao, formacao, pelometodo, pilates, atuacao, projeto, escola, coluna, feira, horario, totalizar, hora, semanal, naregiao, norte;#;mg;#;4, 2, 6, 7, 9, 17, 19, 20;#;;#;;#;;#;;#;CONTRATACAO DE PROFISSIONAL FISIOTERAPEUTA COM REGISTRO NO CREFITO-4/MG (CONSELHO REGIONAL DE FISIOTERAPIA E TERAPIA OCUPACIONAL DA 4  REGIAO) COM FORMACAO PELOMETODO PILATES, PARA ATUACAO NO PROJETO ESCOLA DA COLUNA DE 2  A 6  FEIRA NOS HORARIOS DE 7:00H AS 9:00H E 17:00H AS 19:00 H, TOTALIZANDO 20 HORAS SEMANAIS - NAREGIAO NORTE.
+96;panotico, rapido, conjunto, coloracao, rapido, hematologia, kit, composto, tres, corante, agente, fixador, solucao, corante;#;;#;1, 2;#;;#;;#;;#;;#;Panotico rapido, Conjunto para coloracao rapida em hematologia. O kit e composto por tres corantes: Rapido 1:agente fixador, Rapido 2: solucao corante
+97;luva, procedimento, extra, cirurgico, natural, integro, uniforme;#;;#;100;#;;#;latex;#;pequeno;#;caixa, unidade;#;LUVA LATEX P/ PROCEDIMENTO. Tamanho Extra Pequeno caixa com 100 unidades, para procedimento nao cirurgico, material latex natural integro e uniforme,
+98;dexametasona, sulfato, neomicina, polimixina, hipromelose, colirio, apresentacao, frasco, conta, gota, contender;#;g, ui, ml;#;0, 1, 5, 6000;#;;#;plastico;#;;#;;#;DEXAMETASONA 0,001 G/SULFATO DE NEOMICINA 0,005 G/SULFATO DE POLIMIXINA B 6000 UI HIPROMELOSE 0,005 G. COLIRIO Apresentacao: Frascos plasticos conta-gotas contendo 5 ml
+99;arroz, longo, fino, polido, glutem, contender, minimo, grao, inteiro, maximo, umidade, valor, nutricional;#;;#;1, 90, 14;#;;#;;#;;#;;#;ARROZ  LONGO FINO POLIDO TIPO 1, SEM GLÚTEM , CONTENDO NO MÍNIMO DE 90% DE GRÃOS INTEIROS COM NO MÁXIMO DE 14% DE UMIDADE E COM VALOR NUTRICIONAL NA P
+100;lidocaina, cloridrato, epinefrina, primario, frasco, ampola, ambar, secundario, colmeia, hospitalar, frasco;#;mg, ml;#;2, 20, 0, 5, 25;#;;#;vidro, papelao;#;;#;embalagem, caixa;#;Lidocaína cloridrato 2% (20mg/mL) + epinefrina 0,005mg/mL, embalagem primária frasco-ampola de vidro âmbar, embalagem secundária caixa de papelão com colméia, embalagem hospitalar. Caixa com 25 frascos.
+101;solucao, aquoso, digluconato, clorexidina, limpeza, preparo, cavitarios, frasco, srp;#;ml;#;2, 100, 29, 2013;#;;#;;#;;#;;#;Solucao aquosa de digluconato de clorexidina a 2% para limpeza e preparos cavitarios - frasco com 100 ml  -  SRP - 29/2013-54165
+102;oleo, lubrificante, mineral, multiviscoso, apicg4, sjapeae2, b2, super, high, performance, diesel, oil, shpdo, balde;#;l, litro;#;20, 98;#;;#;;#;;#;;#;ÓLEO LUBRIFICANTE MINERAL MULTIVISCOSO - 20 L APICG4/SJAPEAE2-98/B2-98 Tipo Super HIGH Performance  Diesel OIL "SHPDO". Balde com 20 litros.
+103;minar, sanduiche, natural, pao, doce, redondo, alface, pate, grs, entregar, povoado, campo, dar, municipio;#;;#;90;#;verde;#;;#;;#;;#;MINE-SANDUÍCHE NATURAL (PAO DE DOCE REDONDO, ALFACE, PATÊ) 90 GRS - ENTREGUE NO POVOADO DE CAMPO VERDE, DESTE MUNICIPIO
+104;almotolia, translucidar, confeccionado, polietileno, graduado, alto, relevo, cap, natural, bico, reto;#;ml;#;250;#;;#;;#;;#;;#;ALMOTOLIA TRANSLUCIDA, CONFECCIONADO EM POLIETILENO E GRADUADO EM ALTO RELEVO . CAP: 250 ML . COR NATURAL. BICO RETO
+105;pano, prato, algodao, embanhado, lateral, estampa, alto, absorcao, facil, enxaguar, resistencia, dimensao, aproximado;#;cm;#;100, 70, 42;#;branco;#;;#;;#;;#;Pano de prato, 100% algodão, na cor branca, embanhado nas laterais, com estampa, alta absorção, fácil enxague, alta resistência, dimensões aproximadas: 70x42cm
+106;cimento, ionomero, liquido, restauracao, composto, acido, tartarico, agua, destilado, frasco, compativel, marca, kit, ofertar;#;ml;#;8;#;;#;vidro;#;;#;;#;CIMENTO IONÔMERO DE VIDRO LÍQUIDO PARA RESTAURAÇÃO: IONÔMERO DE VIDRO LÍQUIDO COMPOSTO POR ÁCIDO TARTÁRICO, ÁGUA DESTILADA. FRASCO C/ 8 ML. COMPATÍVEL COM A MARCA DO KIT OFERTADO.
+107;bone, tactel, confeccionado, tecido, rip, stop, poliester, algodao, gomo, pala, nylon, regulagem, velcro, acabamento, cadarco, bordado, parte, lateral, reto, agente, comunitariode, saude, endemia, frontal, brasao, sus, pmi, apresentar, amostra, analise, coordenacao, enfermagem;#;cm;#;94, 6, 5, 18, 25, 1;#;preto, amarelo;#;ouro;#;;#;;#;BONE EM TACTEL confeccionado em tecido rip stop tactel (94% de poliester e 6% algodao), de cor preto , 5 gomos, pala de nylon medindo 18x6cm, regulagem com velcro. acabamento com cadarco 25 x 1,5  bordado na parte lateral em reto (agente comunitariode saude, agente de endemias) de cor amarelo ouro e parte frontal do bone o brasao (SUS, PMI) . Apresentar amostra para analise Coordenacao de enfermagem.
+108;recarga, cartucho, toner, ciano, compativel, impressor, hp, laserjet, cp1025;#;;#;;#;;#;;#;;#;;#;RECARGA DE CARTUCHO DE TONER CIANO COMPATIVEL COM A IMPRESSORA: HP LASERJET CP1025.
+109;resina, microhibrida, matriz, monomerico, contender, bis, gma, ema, tegdma, dente, anterior, posterior;#;;#;2;#;;#;;#;;#;;#;Resina microhibrida, com matriz monomerica contendo BIS (GMA) BIS (EMA) e TEGDMA para dentes anteriores e posteriores, A 2
+110;laranja, pera, fruto, caracteristico, integro, primeiro, fresco, limpo, vez, amadurecer, coloracao, uniforme, apresentar, grau, maturacao, tal, permitir, suportar, manipulacao, transporte, conservacao, condicao, adequado, consumo, isentar, sujidade, inseto, parasito, larva, corpo, estranho, aderir, superficie, externar, origem, organico, dever, apresentar, qualquer, lesao, fisica, mecanico, biologico;#;kg;#;;#;;#;;#;medio;#;;#;LARANJA PERA:   FRUTO DE TAMANHO MÉDIO, COM CARACTERÍSTICAS ÍNTEGRAS E DE PRIMEIRA QUALIDADE, FRESCO, LIMPO, DE VEZ (POR AMADURECER) E COLORAÇÃO UNIFORME APRESENTANDO GRAU DE MATURAÇÃO TAL QUE LHE PERMITA SUPORTAR A MANIPULAÇÃO, O TRANSPORTE E A CONSERVAÇÃO EM CONDIÇÕES ADEQUADAS PARA O CONSUMO, ISENTO DE SUJIDADES, INSETOS, PARASITAS, LARVAS E CORPOS ESTRANHOS ADERIDOS À SUPERFÍCIE EXTERNA, E DE ORIGEM ORGÂNICA. NÃO DEVE APRESENTAR QUAISQUER LESÕES DE ORIGEM FÍSICA, MECÂNICA OU BIOLÓGICA. KG
+111;massa, modelar, atoxixa, pesar, liquido, selo, inmetro, esfarelar, composicao, agua, carboidrato, cereal, gluten, cloreto, sodio, conservante, aroma, aditivo, pigmento, prazer, validade, impresso, marca, referencia, equivalente, superior, acrilex;#;gr;#;180;#;;#;;#;;#;embalagem;#;Massa para Modelar atóxixa peso liquído 180 gr. selo INMETRO, não esfarela, Composição: água, carboidrato de cereais, glúten, cloreto de sódio, conservante, aroma, aditivos e pigmentos. prazo de validade impressa na embalagem., Marca de Referência - qualidade equivalente ou superior a ACRILEX
+112;jogo, canula, guedel, peca, confeccionada, atoxicar, transparente, inodoro, colorido, base, acordo;#;mm;#;6, 0, 5, 50, 1, 60, 2, 70, 3, 80, 4, 90, 5100;#;azul, preto, branco, verde, amarelo, vermelho;#;plastico, pvc;#;;#;;#;JOGO DE CANULA DE GUEDEL PLASTICA COM 06 PECAS Confeccionada Em Pvc Atoxico Transparente E Inodora, Coloridas Na Base De Acordo Com Os Tamanhos De 0 A 5 (N 0 50mm Azul)  ( N 1 60mm Preta)  (N 2 70mm Branca)  (N 3 80mm Verde)  (N 4 90mm Amarela)  (N 5100mm Vermelha).
+113;tatame, especialmente, desenvolver, etil, vinil, acetato, composicao, extra, produto, proporcionar, encaixe, perfeito, excelente, efeito, memoria, resposta, impacto, receber, pelicula, texturizada, siliconizada, queima, corte, espessura, royal, acompanhar, borda, acabamento, densidade, eva, garantia, sobre, defeito, fabricacao;#;v, m, cm, kg;#;90, 1, 00, 2, 110;#;azul;#;;#;;#;;#;TATAME " TATAME: ESPECIALMENTE DESENVOLVIDO EM E.V.A. ( ETIL VINIL ACETATO ), COM COMPOSICAO EXTRA DO PRODUTO, PROPORCIONANDO ENCAIXE PERFEITO E EXCELENTE EFEITO MEMORIA ( RESPOSTA AO IMPACTO RECEBIDO ).PELICULA TEXTURIZADA E SILICONIZADA "NAO QUEIMA". CORTE PERFEITO EM 90. MEDIDAS: 1,00X1,00M E 2CM DE ESPESSURA. COR AZUL ROYAL.ACOMPANHA BORDAS DE ACABAMENTO. DENSIDADE DO EVA: 110KG/M . GARANTIA SOBRE DEFEITO DE FABRICACAO.
+114;fralda, geriatrico, adulto, eg, cintura, pesar, acima, descartavel, uso, formato, anatomico, indicado, caso, incontinencia, urinario, fecal, moderado, po, parto, operatorio, composicao, camada, interno, tecido, fibra, celulose, gel, absorvente, externar, polietileno, fita, adesivo, lateral, fixacao, dermatologicamente, testar, validade, ano, apo, data, fabricacao, impresso, registro, ministerio, saude;#;cm, kg;#;120, 160, 80, 3;#;;#;;#;;#;embalagem;#;FRALDA GERIATRICA ADULTO TAM. EG Cintura 120 a 160cm e peso acima de 80 Kg. Fralda descartavel de uso adulto, formato anatomico, indicado para casos de incontinencia urinaria/fecal moderada/pos-parto e pos-operatorio. Composicao: Camada interna de nao tecido, fibras de celulose, gel absorvente, camada externa de polietileno e fitas adesivas laterais para fixacao. Dermatologicamente testado. Validade de 03 anos apos a data de fabricacao impressa na embalagem. Registro no Ministerio da Saude.
+115;calcador, holemback, duplo, produzir, dentro, norma, bpf, bom, pratica, fabricacao, garantia, ano, marca, gravado, instrumental, condicionar, individual, constar, dado, identificacao, procedencia;#;;#;1, 2;#;;#;aco, inoxidavel;#;;#;embalagem;#;CALCADOR HOLEMBACK DUPLO N 1 EM ACO INOXIDAVEL , PRODUZIDA DENTRO DAS NORMAS BPF (BOAS PRATICAS DE FABRICACAO), GARANTIA DE 2 ANOS, MARCA GRAVADA NO INSTRUMENTAL, CONDICIONADO EM EMBALAGEM INDIVIDUAL , CONSTANDO DADOS DE IDENTIFICACAO E PROCEDENCIA.
+116;computador, desktop, basico, processador, minimo, intel, corar, i3, amd, a10, memoria, ram, gb, ddr3, mhz, disco, rigido, monitor, mouse, usb, dp, botao, scrool, fio, fonte, compativel, item, sistema, operacional, windows, pro, bfts, garantia, mes, teclado, abnt2, interface, rede, wifi, video, integrar, otico, cd, dvd, rom;#;;#;4, 1600, 500, 18, 5, 1366, 768, 2, 7, 64, 12, 10, 100, 1000;#;;#;;#;;#;unidade;#;Computador, (desktop-básico), processador no mínimo intel core i3 ou AMD A10, memória RAM, 4GB//DDR3, 1600MHZ, disco rígido mínimo de 500GB, tipo de monitor 18/5(1366x768), mouse USB/500 DP, 2 botões, scrool (com fio) fonte compatível com o item, sistema operacional Windows 7 PRO/(64 BFTS) garantia mínimo de 12 meses, teclado USB, ABNT2, 10/teclado(com fio), interfaces de rede 10/100/1000 e WIFI, interfaces de video integrada, unidade de disco ótico CD/DVD ROM
+117;lenco, umedecer;#;;#;;#;;#;;#;;#;;#;LENCOS UMEDECIDOS
+118;papel, higienico, fardo, rolo, rolosde, folha, dupla, classe, alvura, iso, indice, maciez, igual, maior, nm, resistencia, tracao, ponderar, pinta, tempo, absorcao, agua, materia, primo, fibra, vegetal, comprimento, dorolo, tolerancia, largura, diametro, maximo, tubete, interno, acabamento, gofrar, picotar, neutro;#;m, g, mm2, m2, cm;#;6, 4, 60, 2, 70, 80, 5, 90, 20, 100, 10, 11, 7;#;branco;#;;#;;#;;#;PAPEL HIGIENICO(FARDO C/6 4 ROLOS). PAPEL HIGIENICO (FARDO C/6 4 ROLOSDE 60 M)-folha dupla  classe 02  na cor branca  alvura iso entre 70 - 80%  indice de maciez igual ou maior que 5,5 nm/g  resistencia a tracao ponderada igual ou maior que 90 n/m  quantidade de pintas igual ou maior que 20 mm2/m2  tempo de absorcao de agua igual ou maior que 5 s  materia prima 100% fibra vegetal  comprimento dorolo 60 m - com tolerancia de 2%  com largura de 10 cm - com tolerancia de 2%  diametro no maximo 11,7 cm  largura do tubete 10 cm - com tolerancia de 2%  diametro interno do tubete maior que 4 cm  acabamento gofrado  picotado  neutra.
+119;camiseta, cemab;#;;#;12;#;;#;;#;;#;;#;CAMISETA CEMAB - TAMANHO 12
+120;confeccao, camiseta, camisa, gola, olimpico, manga, curtir, marinho, tecido, malha, pv, poliviscose, ramado, poliester, viscose, gramatura, bordado, frente, altura, peito, esquerdar, logotipo, samu, bordado, ponto, diametro, letra, descrever, parte, imediatamente, abaixar, circunferencia, laranja, conformar, padrao, estabelecer, ms, etiqueta, obrigatorio, maisetiquetas, criterio, fabricante, contender, minimo, seguinte, informacao, identificacao, nome, cnpj, composicao, instrucao, uso, lavar, secar, passar, etc, gg, haver, algum, funcionario, padrao, necessario, tirado, mesmo, antar;#;g, m, mm;#;67, 33, 145, 155, 70, 10, 192;#;azul, vermelho;#;;#;;#;;#;CONFECCAO DE CAMISETAS - Camisa de gola olimpica, manga curta, na cor azul marinho - Tecido em malha PV (Poliviscose), ramado, 67% poliester + 33%viscose, gramatura 145 a 155g/m . - Bordados: na frente na altura do peito esquerdo e na manga o logotipo do SAMU Bordado com 17500 pontos, com diametro de 70mm, e as letras descritas na parte imediatamente abaixo da circunferencia SAMU em laranja com 10mm e 192 em vermelho (conforme padrao estabelecidos pelo MS). - Etiqueta: E obrigatorio uma ou maisetiquetas (a criterio do fabricante) contendo no minimo as seguintes informacoes: Identificacao do fabricante (minimo: nome e CNPJ)  Composicao do tecido  Identificacao do tamanho da camisa e Instrucoes de Uso (lavar, secar e passar etc...). Tamanhos: GG. Por haver alguns funcionarios com tamanhos muito fora dos padroes e necessario que sejam tiradas medidas dos mesmos antes da confeccao.
+121;rec, toner, impres, m2885, fw;#;;#;;#;;#;;#;;#;;#;REC. TONER IMPRES. M2885 FW
+122;coletor, perfurar, cortante, lts;#;;#;7;#;;#;;#;;#;;#;COLETOR DE PERFURO CORTANTE 7 LTS 106501
+123;coletor, perfurar, cortante, lt;#;;#;7, 10;#;;#;;#;;#;un;#;COLETOR DE MATERIAL PERFURO-CORTANTE 7 LT (10 UN)  - 730010027
+124;refletor, led, ip65, biv;#;;#;20;#;;#;;#;;#;;#;REFLETOR LED 20W IP65 BIV
+125;ige, especificar, rhizopus, nigricans, m11;#;;#;;#;;#;;#;;#;;#;IGE ESPECIFICO PARA RHIZOPUS NIGRICANS- M11
+126;blc, acompahamento, hiperdia;#;;#;;#;;#;;#;;#;;#;BLC. ACOMPAHAMENTO HIPERDIA
+127;medroxiprog, acet, amp;#;mg, ml;#;150;#;;#;;#;;#;;#;MEDROXIPROG.ACET.150MG/ML/AMP
+128;catgut, simp, ag, shalon;#;cm;#;3, 0, 4, 24;#;;#;;#;;#;;#;CATGUT SIMP 3 - 0 C/ AG 4CM C/ 24 SHALON
+129;esfignomanometro, velcro, abr, obeso;#;cm;#;68;#;;#;;#;;#;;#;013694 ESFIGNOMANOMETRO  VELCRO ABR. OBESA 68CM
+130;ecodopler, color, vascular, venoso, seg;#;;#;1;#;;#;;#;;#;;#;Ecodopler Color Vascular Venoso 1 Seg
+131;clips, niquelar, grs;#;;#;3, 0, 500;#;;#;;#;;#;;#;CLIPS NIQUELADO N 3/0 500 GRS.
+132;gelco, no16;#;;#;;#;;#;;#;;#;;#;Gelco no16
+133;esomeprasol;#;mg;#;40;#;;#;;#;;#;;#;ESOMEPRASOL 40MG...
+134;providine, degermante, aquoso, lt;#;;#;10, 1;#;;#;;#;;#;un;#;PROVIDINE DEGERMANTE 10  AQUOSO 1LT   UN 514012
+135;wireless, nanar, station, ghz;#;;#;5, 8;#;;#;;#;;#;;#;WIRELESS NANO STATION 5.8  GHZ
+136;prest, serv, seg, veic, qox;#;;#;612;#;;#;;#;;#;;#;PREST.SERV.SEG.VEIC. QOX-0612
+137;colagenaze, cloranf;#;g;#;0, 6, 1;#;;#;;#;;#;;#;COLAGENAZE+CLORANF. 0,6/0,01G
+138;antitranspirante;#;;#;;#;;#;;#;;#;;#;ANTITRANSPIRANTE
+139;descartador, coletor, perfurar, cortante, itros;#;;#;127, 0005, 13;#;;#;;#;;#;;#;0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001270005 DESCARTADOR-COLETOR PERFURO/CORTANTE 13ITROS
+140;maxicut, edenta;#;;#;1507, 1506;#;;#;;#;;#;;#;MAXICUT 1507 - EDENTA 1506
+141;coletor, perfurar, cortante, dup, trav;#;l;#;6829, 13;#;;#;;#;;#;;#;006829 COLETOR  PERFURO CORTANTE DUP. TRAV 13L
+142;coletor, perfurocortante;#;litro;#;13;#;;#;;#;;#;;#;20988 - COLETOR DE MATERIAL PERFUROCORTANTE - CAPACIDADE : 13 LITROS
+143;clonazepan;#;mg;#;0, 5;#;;#;;#;;#;;#;CLONAZEPAN 0,5 MG
+144;nobreak, microprocessado;#;;#;;#;;#;;#;;#;;#;NOBREAK, MICROPROCESSADO,
+145;sae, api, gl;#;;#;80, 90, 3;#;;#;;#;;#;;#;SAE 80w90 - API GL-3.
+146;aussie, sport;#;;#;;#;;#;;#;;#;;#;Aussie Sport
+147;micropore;#;;#;25, 10;#;;#;;#;;#;;#;MICROPORE 25X10
+148;coletor, mat, perf, lts;#;;#;13;#;;#;;#;;#;;#;COLETOR DE MAT. PERF. 13 LTS.
+149;req, mat, serv, f18, autocop;#;;#;50, 2;#;;#;;#;;#;;#;REQ MAT/SERV. F18 50X2 AUTOCOP
+150;ige, especificar, phadiatop, alergenos, inalante;#;;#;;#;;#;;#;;#;;#;IGE ESPECIFICO (PHADIATOP) ALERGENOS INALANTES
