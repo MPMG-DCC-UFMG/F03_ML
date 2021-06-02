@@ -48,7 +48,7 @@ def get_right_words(language='pt'):
     if language == 'en':
         right_word = {}
     elif language == 'pt':
-        with open('../dados/palavras/right_words_nilc.json', "r") as jfile:
+        with open('../data/palavras/right_words_nilc.json', "r") as jfile:
             right_word = json.load(jfile)
         jfile.close()
 

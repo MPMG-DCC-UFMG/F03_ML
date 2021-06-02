@@ -2,9 +2,10 @@
 
 import collections
 import json
-from nlp.preprocessing_portuguese import remove_accents
+from nlp.preprocessing_portuguese import TextPreProcessing as tpp
 from nlp.preprocessing import PreprocessingText
 from gensim.parsing.preprocessing import strip_multiple_whitespaces
+import re
 
 
 def add_first_token_column(data):
@@ -100,7 +101,7 @@ def process_un_medida(un_medida, stopwords, preprocessing, canonical_unit_metric
     if len(un_medida_process) == 50:
         un_medida_process = un_medida_process.lstrip('0')
     un_medida_process = remove_prefix(un_medida_process, "1 ")
-    un_medida_process = remove_accents(un_medida_process)
+    un_medida_process = tpp.remove_accents(un_medida_process)
 
     un_medida_process = remove_special_characters(un_medida_process)
     un_medida_process = remove_dots(un_medida_process)
@@ -135,7 +136,7 @@ def group_dsc_unidade_medida(items_df):
         'cx' -> 'caixa', ['unitario', 'unid', 'und'] -> 'unidade'.
     '''
 
-    with open('../dados/palavras/unit_metric_canonical.json', 'r') as data:
+    with open('../data/palavras/unit_metric_canonical.json', 'r') as data:
         unit_metric_canonical = json.load(data)
 
     # for canonic, unit_list in unit_metric_canonical.items():

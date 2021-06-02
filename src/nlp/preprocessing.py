@@ -213,7 +213,7 @@ class PreprocessingText:
         if words_set != None:
             words_set = set(words_set)
 
-        dictionary_file = '../dados/dicionario/delaf.dic.zip'
+        dictionary_file = '../data/dicionario/delaf.dic.zip'
         canonical_forms = collections.defaultdict(list)
         word_class = {}
         tags = {'A', 'ADV', 'CONJ','DET', 'INTERJ', 'N', 'PF', 'PREP', 'PRO', 'V',

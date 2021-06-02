@@ -27,7 +27,7 @@ class TextPreProcessing:
 
     @classmethod
     def __get_dicionary(cls, dict_name):
-        BASE_DIR = "../dados/palavras/"
+        BASE_DIR = "../data/palavras/"
         path = os.path.join(BASE_DIR, 'dictionaries', dict_name)
         with open(path, 'r', encoding='utf-8') as dictionary:
             return [p.replace('\n', '') for p in dictionary]
