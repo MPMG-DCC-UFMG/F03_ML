@@ -26,13 +26,13 @@ class ItemList:
     def __init__(self):
         self.items_list = []
         self.items_df = None
-        self.set_unit_metrics = get_tokens_set('../dados/palavras/estruturacao/unit_metrics.txt')
-        self.set_colors = get_tokens_set('../dados/palavras/estruturacao/colors.txt')
-        self.set_materials = get_tokens_set('../dados/palavras/estruturacao/materials.txt')
-        self.set_sizes = get_tokens_set('../dados/palavras/estruturacao/sizes.txt')
-        self.set_quantities = get_tokens_set('../dados/palavras/estruturacao/quantities.txt')
-        self.set_qualifiers = get_tokens_set('../dados/palavras/estruturacao/qualifiers.txt')
-        self.set_numbers = get_tokens_set('../dados/palavras/estruturacao/numbers.txt')
+        self.set_unit_metrics = get_tokens_set('../data/palavras/estruturacao/unit_metrics.txt')
+        self.set_colors = get_tokens_set('../data/palavras/estruturacao/colors.txt')
+        self.set_materials = get_tokens_set('../data/palavras/estruturacao/materials.txt')
+        self.set_sizes = get_tokens_set('../data/palavras/estruturacao/sizes.txt')
+        self.set_quantities = get_tokens_set('../data/palavras/estruturacao/quantities.txt')
+        self.set_qualifiers = get_tokens_set('../data/palavras/estruturacao/qualifiers.txt')
+        self.set_numbers = get_tokens_set('../data/palavras/estruturacao/numbers.txt')
         self.size = 0
         self.unique_words = None
         self.word_id = None
@@ -153,16 +153,16 @@ class ItemList:
         if items == None:
             items = self.items_list
 
-        with open('../dados/' + file[:-4], 'w') as json_file:
+        with open('../data/' + file[:-4], 'w') as json_file:
             for item in self.items_list:
                 item_dict = item.get_item_dict()
                 json_file.write(str(item_dict) + '\n')
         json_file.close()
 
-        with zipfile.ZipFile('../dados/' + file, 'w') as zip:
-            zip.write(os.path.join('../dados/', file[:-4]), arcname=file[:-4])
+        with zipfile.ZipFile('../data/' + file, 'w') as zip:
+            zip.write(os.path.join('../data/', file[:-4]), arcname=file[:-4])
 
-        os.remove('../dados/' + file[:-4])
+        os.remove('../data/' + file[:-4])
 
 
     def save_items_in_hive_table(self, table, dataframe, version):
