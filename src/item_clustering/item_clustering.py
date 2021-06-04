@@ -27,6 +27,7 @@ from item.clustering.utils import *
 from item.clustering.clustering import run_baseline_clustering
 from nlp.preprocessing import PreprocessingText
 from item.clustering.item_representation import get_item_vec
+from item.pricing.utils import group_dsc_unidade_medida
 from .config import Config
 
 
@@ -115,7 +116,7 @@ class ItemClustering(object):
 
         self.preprocess_items(items, 'f03_items.csv.zip')
         self.itemlist = self.get_input(self.config.artifacts_path + 'f03_items.csv.zip')
-        # group_dsc_unidade_medida(self.itemlist.items_df) # TODO
+        group_dsc_unidade_medida(self.itemlist.items_df) # TODO
 
         if self.word_embeddings is None:
             print(time.asctime(), "Loading word embeddings")

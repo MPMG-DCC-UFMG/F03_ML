@@ -48,12 +48,14 @@ class ItemList:
             original, funcao, ano.
         '''
 
-        for description, licitacao_item, licitacao, price, dsc_unidade, original, funcao, ano in items_descriptions:
+        for description, licitacao_item, licitacao, price, dsc_unidade, original, \
+            funcao, ano, mes, data, municipio, orgao in items_descriptions:
             if len(description) == 0:
                 continue
             item = Item()
-            item.extract_entities(description, licitacao_item, licitacao, price, dsc_unidade,
-                                  original, funcao, ano, self.set_unit_metrics,
+            item.extract_entities(description, licitacao_item, licitacao, price,
+                                  dsc_unidade, original, funcao, ano, mes, data,
+                                  municipio, orgao, self.set_unit_metrics,
                                   self.set_colors, self.set_materials,
                                   self.set_sizes, self.set_quantities,
                                   self.set_qualifiers, self.set_numbers)

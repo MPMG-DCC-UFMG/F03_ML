@@ -1,3 +1,4 @@
+
 class Item:
 
     def __init__(self, item=None, original=False):
@@ -16,6 +17,10 @@ class Item:
         self.original_preprocessed = None
         self.funcao = None
         self.ano = None
+        self.mes = None
+        self.data = None
+        self.municipo = None
+        self.orgao = None
         if item != None:
             self.load_item(item, original)
 
@@ -29,10 +34,10 @@ class Item:
         return True if token.isnumeric() else False
 
 
-    def extract_entities(self, description, licitacao_item, licitacao, price, dsc_unidade,
-                        original, funcao, ano, set_unit_metrics,
-                        set_colors, set_materials, set_sizes, set_quantities,
-                        set_qualifiers, set_numbers):
+    def extract_entities(self, description, licitacao_item, licitacao, price,
+                         dsc_unidade, original, funcao, ano, mes, data, municipio,
+                         orgao, set_unit_metrics, set_colors, set_materials,
+                         set_sizes, set_quantities, set_qualifiers, set_numbers):
         '''
             Structure item descriptions.
 
@@ -55,6 +60,10 @@ class Item:
         self.original_preprocessed = description
         self.funcao = funcao
         self.ano = ano
+        self.mes = mes
+        self.data = data
+        self.municipio = municipio
+        self.orgao = orgao
 
         for token in description:
             if token in set_qualifiers:
@@ -101,16 +110,11 @@ class Item:
         else:
             self.original = None
 
-        if 'licitacao' in item:
-            self.licitacao = item['licitacao']
-        if 'original_prep' in item:
-            self.original_preprocessed = item['original_prep']
-        if 'funcao' in item:
-            self.funcao = item['funcao']
-        if 'ano' in item:
-            self.ano = item['ano']
-        if 'licitacao_item' in item:
-            self.item_id = item['licitacao_item']
+        self.licitacao = item['licitacao']
+        self.original_preprocessed = item['original_prep']
+        self.funcao = item['funcao']
+        self.ano = item['ano']
+        self.item_id = item['licitacao_item']
 
 
     def print_item(self):
@@ -136,7 +140,11 @@ class Item:
             'original_prep' : self.original_preprocessed,
             'funcao' : self.funcao,
             'ano' : self.ano,
-            'licitacao_item' : self.item_id
+            'licitacao_item' : self.item_id,
+            'mes' : self.mes,
+            'data' : self.data,
+            'municipio' : self.municipio,
+            'orgao' : self.orgao
         }
 
         return item_dict

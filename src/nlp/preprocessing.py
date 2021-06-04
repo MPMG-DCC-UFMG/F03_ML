@@ -386,9 +386,12 @@ class PreprocessingText:
             licitacao = item[2]
             price = item[3]
             dsc_unidade = item[4]
-            # funcao = str(item[5])
             funcao = None
             ano = item[5]
+            mes = item[6]
+            data = item[7]
+            municipio = item[8]
+            orgao = item[9]
             if type(dsc_unidade) == str:
                 dsc_unidade = tpp.remove_accents(dsc_unidade.lower())
             elif math.isnan(dsc_unidade):
@@ -399,7 +402,8 @@ class PreprocessingText:
                 doc = self.preprocess_document(description)
                 doc = self.check_first_token(doc)
                 items_descriptions.append((doc, item_id, licitacao, price, \
-                                           dsc_unidade, description, funcao, ano))
+                                           dsc_unidade, description, funcao, ano, \
+                                           mes, data, municipio, orgao))
 
         results_process[it_process] = items_descriptions
 

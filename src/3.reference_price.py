@@ -92,6 +92,8 @@ def main():
     else:
         itemlist_train.load_items_from_file(args.train)
 
+    group_dsc_unidade_medida(itemlist_train.items_df)
+
     print(time.asctime()," Getting the statistics for each cluster finded in the training set:")
     # 1) PRICING: get the statistics for each cluster finded in the training set
     cluster_prices = get_clusters_prices(itemlist_train, results_train)
