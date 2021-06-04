@@ -30,6 +30,15 @@ from item.clustering.item_representation import get_item_vec
 from item.pricing.utils import group_dsc_unidade_medida
 from .config import Config
 
+# clustering evaluation
+from item.clustering.evaluate import (
+    get_score_pickle,
+    evaluate_results_pickle,
+    evaluate_results,
+    number_of_outliers_dict,
+    get_score_baseline_pickle
+)
+
 
 class ItemClustering(object):
 
@@ -42,7 +51,6 @@ class ItemClustering(object):
 
         self.preprocessing = PreprocessingText()
         self.itemlist = None        # items description
-
 
         # read word embeddings from file and store them in a map
         # word embeddings used to build items' representation
@@ -139,7 +147,56 @@ class ItemClustering(object):
         self.reducer_model = reducer_model
 
 
+    def evaluate(self):
+
+        self.n_groups = len(self.clusters)
+        outliers_items, outliers_groups, total = number_of_outliers_dict(self.clusters,
+                                                                        self.outliers,
+                                                                        baseline=True,
+                                                                        total_cov=False)
+        self.perc_outliers = 100*(outliers_items/total)
+
+        outliers_items, outliers_groups, total = number_of_outliers_dict(self.clusters,
+                                                                         self.outliers,
+                                                                         baseline=True,
+                                                                         total_cov=True)
+        self.perc_excluded = 100*(outliers_items/total)
+
+        self.avg_calinski = get_score_baseline_pickle(self.clusters, self.items_vec,
+                                                     score='calinski', sample_size=None,
+                                                     norm=False)
+        self.avg_davies = get_score_baseline_pickle(self.clusters, self.items_vec,
+                                                score='davies', sample_size=None,
+                                                norm=False)
+        self.avg_silhouette_euclidean = get_score_baseline_pickle(self.clusters,
+                                                             self.items_vec,
+                                                             score='silhouette',
+                                                             metric='euclidean',
+                                                             sample_size=None,
+                                                             norm=False)
+        self.avg_silhouette_cosine = get_score_baseline_pickle(self.clusters,
+                                                          self.items_vec,
+                                                          score='silhouette',
+                                                          metric='cosine',
+                                                          sample_size=None,
+                                                          norm=False)
+
+        metrics = {}
+        metrics['n_groups'] = self.n_groups
+        metrics['outliear'] = self.perc_outliers
+        metrics['excluded'] = self.perc_excluded
+        metrics['avg_calinski'] = self.avg_calinski
+        metrics['avg_davies-bouldin'] = self.avg_davies
+        metrics['avg_silhouette-euclidean'] = self.avg_silhouette_euclidean
+        metrics['avg_silhouette-cosine'] = self.avg_silhouette_cosine
+
+        return metrics
+
+
     def predict(self, items):
+
+        if self.clustering_model is None:
+            return None
 
         self.preprocess_items(items, 'f03_items_test.csv.zip')
         items = self.get_input(self.config.artifacts_path + 'f03_items_test.csv.zip')
@@ -147,7 +204,7 @@ class ItemClustering(object):
 
         results = predict_items_clusters(items, self.word_embeddings,
                                          self.word_class, self.reducer_model,
-                                         slef.clustering_model,
+                                         self.clustering_model,
                                          categories=self.config.categories,
                                          embedding_type=self.config.tags,
                                          operation=self.config.operation,
@@ -158,6 +215,9 @@ class ItemClustering(object):
 
 
     def predict_cluster(self, item):
+
+        if self.clustering_model is None:
+            return None
 
         # 1) TEXT CLEANING
         # Preprocessing
