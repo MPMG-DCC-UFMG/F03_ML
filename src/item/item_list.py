@@ -93,14 +93,20 @@ class ItemList:
             original_preprocessed = item.original_preprocessed
             funcao = item.funcao
             ano = item.ano
+            mes = item.mes
+            data = item.data
+            municipio = item.municipio
+            orgao = item.orgao
 
             tuples.append(tuple([words, unit_metrics, numbers, colors, materials, sizes,
                          quantities, price, dsc_unidade, original, licitacao,
-                         original_preprocessed, funcao, ano]))
+                         original_preprocessed, funcao, ano, mes, data, municipio,
+                         orgao]))
 
         columns = ['palavras', 'unidades_medida', 'numeros', 'cores', 'materiais', \
                     'tamanho', 'quantidade', 'preco', 'dsc_unidade_medida', 'original', \
-                    'licitacao', 'original_prep', 'funcao', 'ano']
+                    'licitacao', 'original_prep', 'funcao', 'ano', 'mes', 'data', \
+                    'municipio', 'orgao']
         dataframe = pd.DataFrame(tuples, columns=columns)
 
         return dataframe

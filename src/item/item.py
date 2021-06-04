@@ -19,7 +19,7 @@ class Item:
         self.ano = None
         self.mes = None
         self.data = None
-        self.municipo = None
+        self.municipio = None
         self.orgao = None
         if item != None:
             self.load_item(item, original)
