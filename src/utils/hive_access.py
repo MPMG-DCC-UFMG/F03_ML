@@ -12,11 +12,11 @@ nome_trilha = 'F03_PRECIFICACAO_ITEM_LICITACAO'
 host='hadoopmn-gsi-prod03.mpmg.mp.br'
 port=10000
 username='trilhasgsi'
-password='UFMGtrilhas2020'
 database='default'
 auth='CUSTOM'
 
-def hive_table_to_dataframe(table):
+
+def hive_table_to_dataframe(table, password):
     '''
         It returns the content of a Hive table in a data frame.
 
@@ -38,7 +38,9 @@ def hive_table_to_dataframe(table):
         dataframe=dataframe.rename(columns={column: column.split(".")[1]})
     return dataframe
 
-def _insert_hive_table(dataframe, table, version, batch_size, begin, end, process_cont):
+
+def _insert_hive_table(dataframe, table, version, batch_size, begin, end,
+                       process_cont, password):
     '''
         It inserts the content of a data frame in a Hive table.
 
@@ -51,6 +53,7 @@ def _insert_hive_table(dataframe, table, version, batch_size, begin, end, proces
         process_cont (int): Current process.
     '''
     cont = 1
+
     batch_rows_wr = io.StringIO()
     for index, row in dataframe.iloc[begin:end].iterrows():
 
@@ -90,13 +93,14 @@ def _insert_hive_table(dataframe, table, version, batch_size, begin, end, proces
         cont+=1
 
 
-def _calc_interval(total_size,num_process):
+def _calc_interval(total_size, num_process):
     '''
         It calculates the interval of the dataframe that each process must handle.
 
         total_size (int): Total size of the dataframe.
         num_process (int): Number of process.
     '''
+
     process_load = int(total_size / num_process)
     begin = 0
     end = 0
@@ -113,9 +117,12 @@ def _calc_interval(total_size,num_process):
 
     return intervals
 
-def dataframe_to_hive_table(dataframe, table, version, batch_size = 1000, num_process=20):
+
+def dataframe_to_hive_table(dataframe, table, version, password, batch_size=1000,
+                            num_process=20):
     '''
-        It saves the content of a data frame in a Hive table, using batch and multi-process. It drops then recreates the table.
+        It saves the content of a data frame in a Hive table, using batch and multi-process.
+        It drops then recreates the table.
 
         dataframe (dataframe): Dataframe to save in a Hive table.
         table (str): Hive table name.
@@ -151,7 +158,8 @@ def dataframe_to_hive_table(dataframe, table, version, batch_size = 1000, num_pr
     begin_end_tuples = _calc_interval(dataframe.shape[0],num_process)
     for x in range(len(begin_end_tuples)):
         begin, end = begin_end_tuples[x]
-        p = multiprocessing.Process(target=_insert_hive_table, args = [dataframe, table, version, batch_size, begin, end, x])
+        p = multiprocessing.Process(target=_insert_hive_table,
+                args=[dataframe, table, version, batch_size, begin, end, x, password])
         jobs.append(p)
         p.start()
 
