@@ -3,9 +3,10 @@ import json
 
 class Config:
 
-    def __init__(self, word_embeddings_path="../dados/embeddings/fasttext/skip_s100.txt",
-                 algorithm='hdbscan', categories=None, tags=None, operation='mean',
-                 n_process=4, artifacts_path="../dados/output/"):
+    def __init__(self, word_embeddings_path="../data/embeddings/fasttext/skip_s100.txt",
+                 algorithm='hdbscan', categories=['unidades_medida', 'numeros'],
+                 tags=['N', 'MED'], operation='concatenate', n_process=4,
+                 artifacts_path="../data/output/"):
 
         self.word_embeddings_path = word_embeddings_path
         self.algorithm = algorithm

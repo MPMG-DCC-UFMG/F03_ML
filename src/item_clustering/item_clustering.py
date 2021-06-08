@@ -115,7 +115,7 @@ class ItemClustering(object):
 
         # TODO:
         # else:
-            # itemlist = druid table
+            # itemlist = edw table
 
         return itemlist
 
@@ -165,25 +165,32 @@ class ItemClustering(object):
         self.avg_calinski = get_score_baseline_pickle(self.clusters, self.items_vec,
                                                      score='calinski', sample_size=None,
                                                      norm=False)
+        self.avg_calinski = np.mean(self.avg_calinski)
+
         self.avg_davies = get_score_baseline_pickle(self.clusters, self.items_vec,
                                                 score='davies', sample_size=None,
                                                 norm=False)
+        self.avg_davies = np.mean(self.avg_davies)
+
         self.avg_silhouette_euclidean = get_score_baseline_pickle(self.clusters,
                                                              self.items_vec,
                                                              score='silhouette',
                                                              metric='euclidean',
                                                              sample_size=None,
                                                              norm=False)
+        self.avg_silhouette_euclidean = np.mean(self.avg_silhouette_euclidean)
+
         self.avg_silhouette_cosine = get_score_baseline_pickle(self.clusters,
                                                           self.items_vec,
                                                           score='silhouette',
                                                           metric='cosine',
                                                           sample_size=None,
                                                           norm=False)
+        self.avg_silhouette_cosine = np.mean(self.avg_silhouette_cosine)
 
         metrics = {}
         metrics['n_groups'] = self.n_groups
-        metrics['outliear'] = self.perc_outliers
+        metrics['outlier'] = self.perc_outliers
         metrics['excluded'] = self.perc_excluded
         metrics['avg_calinski'] = self.avg_calinski
         metrics['avg_davies-bouldin'] = self.avg_davies

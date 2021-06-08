@@ -17,7 +17,7 @@ def get_tokens_tags(words_set=None, medications=True):
     if words_set != None:
         words_set = set(words_set)
 
-    medical = get_tokens_set('../dados/palavras/medications.txt')
+    medical = get_tokens_set('../data/palavras/medications.txt')
     preprocessing = PreprocessingText()
     canonical_word, word_class = preprocessing.canonical_word, preprocessing.word_class
 
