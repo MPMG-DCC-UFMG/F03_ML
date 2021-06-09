@@ -82,8 +82,8 @@ def remove_special_characters(text):
         result = result.replace(lista[i], ' ')
     return result
 
-def remove_dots(text):
-    lista = '.'
+def remove_dots_commas(text):
+    lista = '.,'
     result = text
     for i in range(0, len(lista)):
         result = result.replace(lista[i], '')
@@ -104,7 +104,7 @@ def process_un_medida(un_medida, stopwords, preprocessing, canonical_unit_metric
     un_medida_process = tpp.remove_accents(un_medida_process)
 
     un_medida_process = remove_special_characters(un_medida_process)
-    un_medida_process = remove_dots(un_medida_process)
+    un_medida_process = remove_dots_commas(un_medida_process)
 
     un_medida_process = ' '+un_medida_process+' '
     un_medida_process = re.sub(r' (\d+)([a-z]+) ', r' \1 \2 ', un_medida_process, flags=re.I)
