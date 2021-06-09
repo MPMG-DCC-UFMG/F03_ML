@@ -328,7 +328,10 @@ def evaluate_results_pickle(results, embeddings, baseline=True,
                 continue
             name_cluster[cluster_id] = group
             for item in items:
-                X.append(embeddings[str(item)])
+                if isinstance(list(embeddings.keys())[0], int):
+                    X.append(embeddings[item])
+                else:
+                    X.append(embeddings[str(item)])
                 groups[cluster_id].append(_id)
                 _id += 1
             cluster_id += 1
@@ -340,7 +343,10 @@ def evaluate_results_pickle(results, embeddings, baseline=True,
                 continue
             name_cluster[cluster_id] = group
             for item in items:
-                X.append(embeddings[str(item)])
+                if isinstance(list(embeddings.keys())[0], int):
+                    X.append(embeddings[item])
+                else:
+                    X.append(embeddings[str(item)])
                 groups[cluster_id].append(_id)
                 _id += 1
             cluster_id += 1
@@ -427,7 +433,10 @@ def get_score_pickle(results, embeddings, baseline=True, remove_outliers=True,
             if sample_group != None:
                 items = random.sample(items, int(len(items)*sample_group))
             for item in items:
-                X.append(embeddings[str(item)])
+                if isinstance(list(embeddings.keys())[0], int):
+                    X.append(embeddings[item])
+                else:
+                    X.append(embeddings[str(item)])
                 labels.append(group)
     else:
         for group, items in results.items():
@@ -436,7 +445,10 @@ def get_score_pickle(results, embeddings, baseline=True, remove_outliers=True,
             if sample_group != None:
                 items = random.sample(items, len(items)*sample_group)
             for item in items:
-                X.append(embeddings[str(item)])
+                if isinstance(list(embeddings.keys())[0], int):
+                    X.append(embeddings[item])
+                else:
+                    X.append(embeddings[str(item)])
                 labels.append(group)
 
     # Normalize items embeddings
@@ -557,7 +569,10 @@ def get_score_baseline_pickle(results, embeddings, remove_outliers=True,
         X = []
         labels = []
         for item in items:
-            X.append(embeddings[str(item)])
+            if isinstance(list(embeddings.keys())[0], int):
+                X.append(embeddings[item])
+            else:
+                X.append(embeddings[str(item)])
             labels.append(id_cluster)
 
         first_token_results[first_token] += labels

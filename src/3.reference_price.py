@@ -57,6 +57,8 @@ def parse_args():
     p.add_argument("-v", "--version", required=False, help="execution version.")
     p.add_argument("-i", "--hive", default=False, help="load table from hive and \
                     save the results on hive.")
+    p.add_argument('--operation', type = str, default = 'tcu'
+                  ,help='operation used to build the items embeddings')
     p.add_argument('--class2use', nargs = '*',
                    help='The list of syntatic classes that will be used to construct the '\
                    'embeddings. When none is set all the description will be used '\
@@ -148,10 +150,12 @@ def main():
         else:
             categories = None
 
+        operation = args.operation
+
         group_dsc_unidade_medida(itemlist.items_df)
         results = predict_items_clusters(itemlist, word_embeddings, word_class, \
                                      reducer_model, clustering_model, categories=categories, \
-                                     embedding_type=embedding_type, operation='concatenate', \
+                                     embedding_type=embedding_type, operation=operation, \
                                      n_process=6)
         items_test_df = get_reference_prices(results, cluster_prices_statistics,
                                              dsc_unidade=True)

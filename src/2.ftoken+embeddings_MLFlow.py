@@ -38,13 +38,14 @@ import mlflow
 def parse_args():
     p = argparse.ArgumentParser()
 
-    p.add_argument('--embeddings_path',type=str,default='../../../embeddings/word2vec/cbow_s50.txt',
-        help='Path to the file containing the embeddings to be used in the representation')
+    p.add_argument('--embeddings_path',type=str,
+        default='../data//embeddings/models/fasttext/sg/output/items_embeddings.vec',
+        help='path to the file containing the embeddings to be used in the representation')
     p.add_argument('--outpath',type=str,default='./results/',
         help='path to the write the outputs')
     p.add_argument('--input', type = str, default = 'f03_items_preprocessed_complete'
                   ,help='file containing the items dataset')
-    p.add_argument('--operation', type = str, default = 'concat-mean'
+    p.add_argument('--operation', type = str, default = 'concatenate'
                   ,help='operation used to build the items embeddings')
     p.add_argument('--algorithm', type = str, default = 'hdbscan'
                   ,help='clustering algorithm to use')

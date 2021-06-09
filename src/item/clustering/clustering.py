@@ -428,9 +428,9 @@ def run_baseline_clustering(itemlist, word_embeddings, word_class, algorithm='hd
         operation (str): operation to be used to build the item vectors.
     '''
 
-    itemlist.items_df.drop(columns=['original', 'original_prep', 'licitacao', \
-                                   'funcao', 'ano', 'preco', 'dsc_unidade_medida'],
-                           inplace=True)
+    itemlist.items_df.drop(columns=['original', 'licitacao', 'funcao', 'ano', \
+                                    'preco', 'dsc_unidade_medida', 'mes', 'data', \
+                                    'municipio', 'orgao'], inplace=True)
 
     manager = multiprocessing.Manager()
     results_process = manager.dict()

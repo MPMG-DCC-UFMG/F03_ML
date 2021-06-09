@@ -123,8 +123,10 @@ class ItemClustering(object):
     def fit(self, items):
 
         self.preprocess_items(items, 'f03_items.csv.zip')
+        del self.preprocessing
+
         self.itemlist = self.get_input(self.config.artifacts_path + 'f03_items.csv.zip')
-        group_dsc_unidade_medida(self.itemlist.items_df) # TODO
+        group_dsc_unidade_medida(self.itemlist.items_df)
 
         if self.word_embeddings is None:
             print(time.asctime(), "Loading word embeddings")
@@ -207,7 +209,7 @@ class ItemClustering(object):
 
         self.preprocess_items(items, 'f03_items_test.csv.zip')
         items = self.get_input(self.config.artifacts_path + 'f03_items_test.csv.zip')
-        # group_dsc_unidade_medida(items.items_df) # TODO
+        group_dsc_unidade_medida(items.items_df)
 
         results = predict_items_clusters(items, self.word_embeddings,
                                          self.word_class, self.reducer_model,

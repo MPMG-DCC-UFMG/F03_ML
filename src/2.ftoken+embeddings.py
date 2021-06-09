@@ -29,8 +29,9 @@ from item.clustering.clustering import run_baseline_clustering
 def parse_args():
     p = argparse.ArgumentParser()
 
-    p.add_argument('--embeddings_path',type=str,default='../../../embeddings/word2vec/cbow_s50.txt',
-        help='Path to the file containing the embeddings to be used in the representation')
+    p.add_argument('--embeddings_path',type=str,
+        default='../data//embeddings/models/fasttext/sg/output/items_embeddings.vec',
+        help='path to the file containing the embeddings to be used in the representation')
     p.add_argument('--outpath',type=str,default='./results/tcu/',
         help='path to the write the outputs')
     p.add_argument('--out_emb_file',type=str,default='embeddings.json',
