@@ -320,6 +320,10 @@ def evaluate_results_pickle(results, embeddings, baseline=True,
     cluster_name = dict()
     name_cluster = dict()
 
+    int_key = False
+    if isinstance(list(embeddings.keys())[0], int):
+        int_key = True
+
     if baseline:
         cluster_id = 0
         _id = 0
@@ -328,7 +332,7 @@ def evaluate_results_pickle(results, embeddings, baseline=True,
                 continue
             name_cluster[cluster_id] = group
             for item in items:
-                if isinstance(list(embeddings.keys())[0], int):
+                if int_key:
                     X.append(embeddings[item])
                 else:
                     X.append(embeddings[str(item)])
@@ -343,7 +347,7 @@ def evaluate_results_pickle(results, embeddings, baseline=True,
                 continue
             name_cluster[cluster_id] = group
             for item in items:
-                if isinstance(list(embeddings.keys())[0], int):
+                if int_key:
                     X.append(embeddings[item])
                 else:
                     X.append(embeddings[str(item)])
@@ -426,6 +430,10 @@ def get_score_pickle(results, embeddings, baseline=True, remove_outliers=True,
     X = []
     labels = []
 
+    int_key = False
+    if isinstance(list(embeddings.keys())[0], int):
+        int_key = True
+
     if baseline:
         for group, items in results.items():
             if remove_outliers and (group[-2:] == '-1' or '_' not in group):
@@ -433,7 +441,7 @@ def get_score_pickle(results, embeddings, baseline=True, remove_outliers=True,
             if sample_group != None:
                 items = random.sample(items, int(len(items)*sample_group))
             for item in items:
-                if isinstance(list(embeddings.keys())[0], int):
+                if int_key:
                     X.append(embeddings[item])
                 else:
                     X.append(embeddings[str(item)])
@@ -445,7 +453,7 @@ def get_score_pickle(results, embeddings, baseline=True, remove_outliers=True,
             if sample_group != None:
                 items = random.sample(items, len(items)*sample_group)
             for item in items:
-                if isinstance(list(embeddings.keys())[0], int):
+                if int_key:
                     X.append(embeddings[item])
                 else:
                     X.append(embeddings[str(item)])
@@ -556,6 +564,10 @@ def get_score_baseline_pickle(results, embeddings, remove_outliers=True,
     first_token_results = collections.defaultdict(list)
     first_token_embeddings = collections.defaultdict(list)
 
+    int_key = False
+    if isinstance(list(embeddings.keys())[0], int):
+        int_key = True
+
     for group, items in results.items():
         if remove_outliers and (group[-2:] == '-1' or '_' not in group):
             continue
@@ -569,7 +581,7 @@ def get_score_baseline_pickle(results, embeddings, remove_outliers=True,
         X = []
         labels = []
         for item in items:
-            if isinstance(list(embeddings.keys())[0], int):
+            if int_key:
                 X.append(embeddings[item])
             else:
                 X.append(embeddings[str(item)])
