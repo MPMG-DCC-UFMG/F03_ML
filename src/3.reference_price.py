@@ -97,8 +97,7 @@ def main():
 
     # 1) PRICING: get the statistics for each cluster finded in the training set
 
-    clusters_items = get_clusters_items(results_train, outliers_train)
-    clusters_df = get_clusters_dataframe(clusters_items, baseline=True)
+    clusters_df = get_clusters_dataframe(results_train, outliers_train, baseline=True)
     cluster_prices = get_clusters_prices(itemlist_train, results_train)
 
     print(time.asctime()," Pricing the items of the training set:")
@@ -165,8 +164,8 @@ def main():
         version = args.version
         dataframe_to_hive_table(itemlist_train.items_df, "f03_itens", version)
         dataframe_to_hive_table(clusters_df, "f03_grupos", version)
-        dataframe_to_hive_table(cluster_prices_statistics, "f03_grupos_estatisticas", version)
-        dataframe_to_hive_table(items_clusters_wo_outliers, "f03_itens_precificacao", version)
+        dataframe_to_hive_table(cluster_prices_statistics, "f03_banco_precos_grupos", version)
+        dataframe_to_hive_table(items_clusters_wo_outliers, "f03_banco_precos_itens", version)
     else:
         clusters_df.to_csv(args.outpath + "clusters.csv.zip", sep=';', index=False,
                            compression='zip')
