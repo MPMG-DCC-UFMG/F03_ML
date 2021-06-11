@@ -35,7 +35,8 @@ def parse_args():
                         help="results files directory.")
     parser.add_argument("-v", "--version", required=True,
                         help="execution version.")
-    parser.add_argument("-p", "--n_process", default=20, type=int,
+    p.add_argument("-p", "--password", default="", help="connection password.")
+    parser.add_argument("-n", "--n_process", default=20, type=int,
                     help="number of process in multiprocessing.")
 
     return parser.parse_args()
@@ -63,10 +64,12 @@ def main():
     version = args.version
     num_process = args.n_process
 
-    dataframe_to_hive_table(itemlist.items_df, "f03_itens", version)
-    dataframe_to_hive_table(clusters_df, "f03_grupos", version)
-    dataframe_to_hive_table(cluster_prices_statistics, "f03_banco_precos_grupos", version)
-    dataframe_to_hive_table(items_clusters_wo_outliers, "f03_banco_precos_itens", version)
+    dataframe_to_hive_table(itemlist.items_df, "f03_itens", version, args.password)
+    dataframe_to_hive_table(clusters_df, "f03_grupos", version, args.password)
+    dataframe_to_hive_table(cluster_prices_statistics, "f03_banco_precos_grupos",
+                            version, args.password)
+    dataframe_to_hive_table(items_clusters_wo_outliers, "f03_banco_precos_itens",
+                            version, args.password)
 
 
 if __name__ == "__main__":

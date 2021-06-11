@@ -28,6 +28,7 @@ def parse_args():
                         help="embeddings file.")
     parser.add_argument("-s", "--sample", type=str, default=0.2,
                         help="embeddings file.")
+    p.add_argument("-p", "--password", default="", help="connection password.")
     p.add_argument("-i", "--hive", default=False, help="load table from hive and.")
 
     return parser.parse_args()
@@ -45,7 +46,8 @@ def main():
 
     if args.hive:
         results, outliers = load_clustering_results_hive_table('f03_grupos_sem_outliers',
-                                                                'f03_grupos_outliers')
+                                                                'f03_grupos_outliers',
+                                                                args.password)
     else:
         results_train, outliers_train = load_clustering_results_pickle(results_dir)
     embeddings = load_items_embeddings(embeddings_file)

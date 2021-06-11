@@ -142,14 +142,15 @@ class ItemList:
         self.set_unique_words()
         self.set_words_ids()
 
-    def load_items_from_hive_table(self, table):
+    def load_items_from_hive_table(self, table, password):
         '''
             It reads a Hive table that contains the Items.
 
             table (str): Hive table.
+            password (str): connection password.
         '''
 
-        self.items_df = hive_table_to_dataframe(table)
+        self.items_df = hive_table_to_dataframe(table, password)
         self.size = len(self.items_df)
         self.set_unique_words()
         self.set_words_ids()
@@ -175,11 +176,11 @@ class ItemList:
         os.remove('../data/' + file[:-4])
 
 
-    def save_items_in_hive_table(self, table, dataframe, version):
+    def save_items_in_hive_table(self, table, dataframe, version, password):
         '''
             It saves the items as a dataframe in a Hive Table.
         '''
-        dataframe_to_hive_table(dataframe, table, version)
+        dataframe_to_hive_table(dataframe, table, version, password)
 
 
     def save_items_in_dataframe(self, file, dataframe):
@@ -258,7 +259,7 @@ class ItemList:
 
 
     def products_services_split(self, products_table, services_table, version='',
-                                save_in_hive=False):
+                                save_in_hive=False, password=''):
         '''
             It splits the set of items into products and services subsets.
 
@@ -298,14 +299,16 @@ class ItemList:
         self.save_items_in_dataframe(products_table, products_df)
 
         if save_in_hive:
-            self.save_items_in_hive_table(services_table, services_df, version)
-            self.save_items_in_hive_table(products_table, products_df, version)
+            self.save_items_in_hive_table(services_table, services_df, version,
+                                          password)
+            self.save_items_in_hive_table(products_table, products_df, version,
+                                          password)
 
         return products, services
 
 
     def train_test_split(self, train_table, test_table, version='', train_size=0.8,
-                         save_in_hive=False):
+                         save_in_hive=False, password=''):
         '''
             It splits the set of items into random train and test subsets
 
@@ -350,8 +353,8 @@ class ItemList:
         self.save_items_in_dataframe(test_table, test_df)
 
         if save_in_hive:
-            self.save_items_in_hive_table(train_table, train_df, version)
-            self.save_items_in_hive_table(test_table, test_df, version)
+            self.save_items_in_hive_table(train_table, train_df, version, password)
+            self.save_items_in_hive_table(test_table, test_df, version, password)
 
         return train, test
 

@@ -185,7 +185,8 @@ def load_clustering_results(file):
     return items_clusters_df
 
 
-def save_clustering_results_hive_table(results, outliers, results_table, outliers_table, version):
+def save_clustering_results_hive_table(results, outliers, results_table,
+                                       outliers_table, version, password):
     '''
         It saves the clustering results in Hive tables.
 
@@ -194,6 +195,7 @@ def save_clustering_results_hive_table(results, outliers, results_table, outlier
         results_table (str): Hive table to save clusters results.
         outliers_table (str): Hive table to save clusters outliers.
         version (str): execution version.
+        password (str): connection password.
     '''
     dicts = [results, outliers]
     tables = [results_table, outliers_table]
@@ -209,20 +211,21 @@ def save_clustering_results_hive_table(results, outliers, results_table, outlier
                 for v in values:
                     data.append([k, v])
         dataframe = pd.DataFrame(np.asarray(data), columns = ['cluster_id', 'item_id'])
-        dataframe_to_hive_table(dataframe, t, version)
+        dataframe_to_hive_table(dataframe, t, version, password)
 
 
-def load_clustering_results_hive_table(results_table, outliers_table):
+def load_clustering_results_hive_table(results_table, outliers_table, password):
     '''
         It loads the clustering results in dictionaries from Hive tables.
 
         results_table (str): Hive table to load clusters results.
         outliers_table (str): Hive table to load clusters outliers.
+        password (str): connection password.
     '''
     results = {}
     outliers = {}
     for dict_return, table in zip([results, outliers], [results_table, outliers_table]):
-        dataframe = hive_table_to_dataframe(table)
+        dataframe = hive_table_to_dataframe(table, password)
         clusters = dataframe['cluster_id'].unique()
         for c in clusters:
             filtered = dataframe[dataframe['cluster_id'] == c]
