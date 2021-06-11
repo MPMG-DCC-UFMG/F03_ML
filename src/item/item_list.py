@@ -11,7 +11,7 @@ from utils.hive_access import (
     hive_table_to_dataframe
 )
 from spellcheck.spellcheckeropt import SpellcheckerOpt
-from item.pricing.utils import group_dsc_unidade_medida
+from nlp.preprocess_units import group_dsc_unidade_medida
 import ast
 import zipfile
 import collections

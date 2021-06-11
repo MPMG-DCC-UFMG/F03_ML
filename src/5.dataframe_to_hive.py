@@ -65,8 +65,8 @@ def main():
 
     dataframe_to_hive_table(itemlist.items_df, "f03_itens", version)
     dataframe_to_hive_table(clusters_df, "f03_grupos", version)
-    dataframe_to_hive_table(cluster_prices_statistics, "f03_grupos_estatisticas", version)
-    dataframe_to_hive_table(items_clusters_wo_outliers, "f03_itens_precificacao", version)
+    dataframe_to_hive_table(cluster_prices_statistics, "f03_banco_precos_grupos", version)
+    dataframe_to_hive_table(items_clusters_wo_outliers, "f03_banco_precos_itens", version)
 
 
 if __name__ == "__main__":

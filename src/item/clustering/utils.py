@@ -28,6 +28,17 @@ def get_clusters_items(clusters_items, outliers):
     return result
 
 
+def add_original_description(data):
+    '''
+        Add "original_dsc" column to dataframe.
+    '''
+
+    data['original_dsc'] = data['original_prep'].apply(lambda x: ' '.join(eval(x)))
+    data.drop(columns=['original_prep'], inplace=True)
+
+    return data
+
+
 def add_first_token_column(data):
     '''
         Add "primeiro_termo" column to dataframe.

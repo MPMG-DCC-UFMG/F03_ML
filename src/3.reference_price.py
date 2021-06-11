@@ -77,11 +77,7 @@ def main():
 
     args = parse_args()
 
-    if args.hive:
-        results_train, outliers_train = load_clustering_results_hive_table('f03_grupos_sem_outliers', \
-                                                                           'f03_grupos_outliers')
-    else:
-        results_train, outliers_train = load_clustering_results_pickle(args.clusters)
+    results_train, outliers_train = load_clustering_results_pickle(args.clusters)
 
     print(time.asctime()," Getting the descriptions processed:")
 
@@ -99,6 +95,10 @@ def main():
 
     clusters_df = get_clusters_dataframe(results_train, outliers_train, baseline=True)
     cluster_prices = get_clusters_prices(itemlist_train, results_train)
+
+    if args.hive:
+        version = args.version
+        dataframe_to_hive_table(itemlist_train.items_df, "f03_itens", version)
 
     print(time.asctime()," Pricing the items of the training set:")
     cluster_prices_statistics, cluster_prices_statistics_year, \
@@ -162,7 +162,6 @@ def main():
     # 3) Save result tables
     if args.hive:
         version = args.version
-        dataframe_to_hive_table(itemlist_train.items_df, "f03_itens", version)
         dataframe_to_hive_table(clusters_df, "f03_grupos", version)
         dataframe_to_hive_table(cluster_prices_statistics, "f03_banco_precos_grupos", version)
         dataframe_to_hive_table(items_clusters_wo_outliers, "f03_banco_precos_itens", version)

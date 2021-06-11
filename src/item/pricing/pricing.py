@@ -8,7 +8,8 @@ from item.clustering.utils import (
     get_clusters_dataframe,
     add_first_token_column,
     add_outlier_column,
-    get_items_dataframe
+    get_items_dataframe,
+    add_original_description
 )
 
 
@@ -267,6 +268,11 @@ def pricing(itemlist, cluster_items, cluster_prices, dsc_unidade=True, year=True
         baseline (bool): if the first token grouping was used to generete the
                          groups.
     '''
+
+    itemlist.items_df.drop(columns=[['palavras', 'unidades_medida', 'numeros', \
+                                    'cores', 'materiais', 'tamanho', 'quantidade', \
+                                    'item_id']], inplace=True)
+    itemlist.items_df = add_original_description(itemlist.items_df)
 
     if remove_outliers:
         cluster_prices, cluster_items = remove_outlier_prices(itemlist, cluster_items,
