@@ -109,6 +109,7 @@ class ItemList:
                     'licitacao', 'original_prep', 'funcao', 'ano', 'mes', 'data', \
                     'municipio', 'orgao']
         dataframe = pd.DataFrame(tuples, columns=columns)
+        dataframe["item_id"] = list(range(len(dataframe)))
 
         return dataframe
 
@@ -286,8 +287,13 @@ class ItemList:
 
         services_df = self.to_dataframe(items=services)
         products_df = self.to_dataframe(items=products)
+
+        services_df["item_id"] = list(range(len(services_df)))
+        products_df["item_id"] = list(range(len(products_df)))
+
         group_dsc_unidade_medida(services_df)
         group_dsc_unidade_medida(products_df)
+
         self.save_items_in_dataframe(services_table, services_df)
         self.save_items_in_dataframe(products_table, products_df)
 
