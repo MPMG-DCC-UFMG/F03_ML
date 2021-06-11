@@ -5,6 +5,7 @@ import pandas as pd
 import random
 import collections
 from .utils import group_dsc_unidade_medida, add_first_token_column, add_outlier_column
+from item.clustering.utils import get_clusters_dataframe
 
 
 def get_items_sample(itemlist, prices, items):
@@ -168,8 +169,9 @@ def sample_per_decile(itemlist, cluster_items, cluster_prices, threshold, baseli
 def get_items_dataframe(itemlist, cluster_items, baseline=True):
     '''
         Get the items dataframe. The dataframe should have the following columns:
-        ['item_id', 'seq_dim_licitacao', 'outlier', 'cluster', 'dsc_unidade_medida',
-        'description', 'price'].
+        ['item_id', 'seq_dim_licitacao', 'ruido', 'grupo', 'dsc_unidade_medida',
+         'ano', 'descricao', 'descricao_original', 'areas', 'vlr_unitario', 'mes',
+         'data', 'cidade', 'orgao'].
 
         itemlist (ItemList object): contains the items and informations about
                                     the dataset.
@@ -177,6 +179,9 @@ def get_items_dataframe(itemlist, cluster_items, baseline=True):
         baseline (bool): if the first token grouping was used to generete the
                          groups.
     '''
+
+    # TODO:
+    # JOIN: items table and groups table
 
     group_dsc_unidade_medida(itemlist.items_df)
 
@@ -187,6 +192,10 @@ def get_items_dataframe(itemlist, cluster_items, baseline=True):
             price = item_dict['preco']
             dsc_unidade_medida = item_dict['dsc_unidade_medida']
             year = item_dict['ano']
+            month = item_dict['mes']
+            date = item_dict['data']
+            city = item_dict['municipio']
+            institution = item_dict['orgao']
             try:
                 dsc_unidade_medida = dsc_unidade_medida.lower()
             except:
@@ -197,18 +206,21 @@ def get_items_dataframe(itemlist, cluster_items, baseline=True):
             areas = item_dict['funcao']
             if baseline and ('_' not in cluster or cluster[-2:] == '-1'):
                 line = (item, licitacao, 1, cluster, dsc_unidade_medida, year, \
-                        description, original, areas, price)
+                        description, original, areas, price, month, date, city, \
+                        institution)
             elif not baseline and cluster == '-1':
                 line = (item, licitacao, 1, cluster, dsc_unidade_medida, year, \
-                        description, original, areas, price)
+                        description, original, areas, price, month, date, city, \
+                        institution)
             else:
                 line = (item, licitacao, 0, cluster, dsc_unidade_medida, year, \
-                        description, original, areas, price)
+                        description, original, areas, price, month, date, city, \
+                        institution)
             lines.append(line)
 
-    columns = ('item_id', 'seq_dim_licitacao', 'outlier', 'cluster', \
-               'dsc_unidade_medida', 'ano', 'description', 'original', 'areas', \
-               'price')
+    columns = ('item_id', 'seq_dim_licitacao', 'ruido', 'grupo', 'dsc_unidade_medida', \
+                'ano', 'descricao', 'descricao_original', 'areas', 'vlr_unitario', \
+                'mes', 'data', 'cidade', 'orgao')
     items_clusters_df = pd.DataFrame(lines, columns=columns)
     items_clusters_df = add_first_token_column(items_clusters_df)
 
@@ -220,36 +232,33 @@ def get_prices_statistics_df(items_clusters_df, dsc_unidade=True, year=False):
         Get item prices statistics such as mean, median, max, min, first
         quantile, etc.
 
-        items_clusters_df (DataFrame): items dataframe. It should have the
-                                        following columns:
-        ['item_id', 'seq_dim_licitacao', 'outlier', 'cluster', 'dsc_unidade_medida',
-        'description', 'price'].
+        items_clusters_df (DataFrame): items dataframe.
         dsc_unidade (bool): if the field 'dsc_unidade_medida' should be used for
                             pricing.
         year (bool): if the field 'ano' should be used for pricing.
     '''
 
     if dsc_unidade and year:
-        group_by = ['cluster', 'dsc_unidade_medida', 'ano']
+        group_by = ['grupo', 'dsc_unidade_medida', 'ano']
     elif dsc_unidade:
-        group_by = ['cluster', 'dsc_unidade_medida']
+        group_by = ['grupo', 'dsc_unidade_medida']
     elif year:
-        group_by = ['cluster', 'ano']
+        group_by = ['grupo', 'ano']
     else:
-        group_by = ['cluster']
+        group_by = ['grupo']
 
-    results_df = items_clusters_df[group_by + ['price']]
+    results_df = items_clusters_df[group_by + ['preco']]
 
-    results_grouped=results_df.groupby(group_by, as_index=False)['price'].mean()
-    results_grouped=results_grouped.rename(columns = {'price':'mean'})
-    results_grouped['count']=results_df.groupby(group_by, as_index=False)['price'].count().transform('price')
-    results_grouped['max']=results_df.groupby(group_by, as_index=False)['price'].max().transform('price')
-    results_grouped['min']=results_df.groupby(group_by, as_index=False)['price'].min().transform('price')
-    results_grouped['median']=results_df.groupby(group_by, as_index=False)['price'].median().transform('price')
-    results_grouped['std']=results_df.groupby(group_by)['price'].std().reset_index().transform('price')
-    results_grouped['var']=results_df.groupby(group_by)['price'].var().reset_index().transform('price')
-    results_grouped['quantile_1']=results_df.groupby(group_by)['price'].quantile(q=0.25).reset_index().transform('price')
-    results_grouped['quantile_3']=results_df.groupby(group_by)['price'].quantile(q=0.75).reset_index().transform('price')
+    results_grouped=results_df.groupby(group_by, as_index=False)['preco'].mean()
+    results_grouped=results_grouped.rename(columns = {'preco':'media'})
+    results_grouped['qtd']=results_df.groupby(group_by, as_index=False)['preco'].count().transform('preco')
+    results_grouped['max']=results_df.groupby(group_by, as_index=False)['preco'].max().transform('preco')
+    results_grouped['min']=results_df.groupby(group_by, as_index=False)['preco'].min().transform('preco')
+    results_grouped['mediana']=results_df.groupby(group_by, as_index=False)['preco'].median().transform('preco')
+    results_grouped['desvio_padrao']=results_df.groupby(group_by)['preco'].std().reset_index().transform('preco')
+    results_grouped['var']=results_df.groupby(group_by)['preco'].var().reset_index().transform('preco')
+    results_grouped['quantil_1']=results_df.groupby(group_by)['preco'].quantile(q=0.25).reset_index().transform('preco')
+    results_grouped['quantil_3']=results_df.groupby(group_by)['preco'].quantile(q=0.75).reset_index().transform('preco')
 
     return results_grouped
 
@@ -270,24 +279,24 @@ def get_prices_statistics_dict(cluster_prices, baseline=True):
     for cluster, prices in cluster_prices.items():
         if baseline and '_' not in cluster:
             prices_statistics = {
-                'mean': -1,
-                'median': -1,
+                'media': -1,
+                'mediana': -1,
                 'var': -1,
-                'std': -1,
+                'desvio_padrao': -1,
             }
         elif not baseline and cluster == '-1':
             prices_statistics = {
-                'mean': -1,
-                'median': -1,
+                'media': -1,
+                'mediana': -1,
                 'var': -1,
-                'std': -1,
+                'desvio_padrao': -1,
             }
         else:
             prices_statistics = {
-                'mean': np.mean(prices),
-                'median': np.median(prices),
+                'media': np.mean(prices),
+                'mediana': np.median(prices),
                 'var': np.var(prices),
-                'std': np.std(prices)
+                'desvio_padrao': np.std(prices)
             }
         cluster_prices_statistics[cluster] = prices_statistics
 
@@ -317,12 +326,13 @@ def pricing(itemlist, cluster_items, cluster_prices, dsc_unidade=True, year=True
     '''
 
     if remove_outliers:
-        cluster_prices, cluster_items = remove_outlier_prices(itemlist,
-                            cluster_items, cluster_prices, threshold, baseline)
+        cluster_prices, cluster_items = remove_outlier_prices(itemlist, cluster_items,
+                                                    cluster_prices, threshold, baseline)
     if sample:
-        cluster_prices, cluster_items = sample_per_decile(itemlist,
-                        clisters_items, cluster_prices, threshold, baseline)
+        cluster_prices, cluster_items = sample_per_decile(itemlist, clusters_items,
+                                                cluster_prices, threshold, baseline)
 
+    cluster_items_df = get_clusters_dataframe(cluster_items, baseline=baseline)
     items_clusters_df = get_items_dataframe(itemlist, cluster_items, baseline)
     cluster_prices_statistics = get_prices_statistics_df(items_clusters_df,
                                                          dsc_unidade)
@@ -353,36 +363,36 @@ def get_reference_prices(results, cluster_prices_statistics, dsc_unidade=True,
     '''
 
     if dsc_unidade and year:
-        indexes = ['cluster', 'dsc_unidade_medida', 'ano']
+        indexes = ['grupo', 'dsc_unidade_medida', 'ano']
     elif dsc_unidade:
-        indexes = ['cluster', 'dsc_unidade_medida']
+        indexes = ['grupo', 'dsc_unidade_medida']
     elif year:
-        indexes = ['cluster', 'ano']
+        indexes = ['grupo', 'ano']
     else:
-        indexes = ['cluster']
+        indexes = ['grupo']
     prices_dict = cluster_prices_statistics.set_index(indexes).to_dict('index')
     item_reference_price = {}
 
     for result in results:
         if dsc_unidade and year:
-            group = (result['cluster'], result['dsc_unidade_medida'], result['ano'])
+            group = (result['grupo'], result['dsc_unidade_medida'], result['ano'])
         elif dsc_unidade:
-            group = (result['cluster'], result['dsc_unidade_medida'])
+            group = (result['grupo'], result['dsc_unidade_medida'])
         elif year:
-            group = (result['cluster'], result['ano'])
+            group = (result['grupo'], result['ano'])
         else:
-            group = result['cluster']
+            group = result['grupo']
         if group not in prices_dict:
             statistics = {
-                'mean': -1,
-                'median': -1,
+                'media': -1,
+                'mediana': -1,
                 'var': -1,
-                'std': -1,
-                'count': -1,
+                'desvio_padrao': -1,
+                'qtd': -1,
                 'max' : -1,
                 'min' : -1,
-                'quantile_1': -1,
-                'quantile_3': -1
+                'quantil_1': -1,
+                'quantil_3': -1
             }
         else:
             statistics = prices_dict[group]

@@ -14,6 +14,34 @@ from utils.hive_access import (
 )
 
 
+def get_clusters_dataframe(cluster_items, baseline=True):
+    '''
+        Get the clusters dataframe. The dataframe should have the following columns:
+        ['item_id', 'ruido', 'grupo'].
+
+        cluster_items (dict): dictionary of groups (group_id -> list of item ids).
+        baseline (bool): if the first token grouping was used to generete the
+                         groups.
+    '''
+
+    lines = []
+    for cluster, items in cluster_items.items():
+        for item in items:
+            if baseline and ('_' not in cluster or cluster[-2:] == '-1'):
+                outlier = 1
+            elif not baseline and cluster == '-1':
+                outlier = 1
+            else:
+                outlier = 0
+            line = (item, outlier, cluster)
+            lines.append(line)
+
+    columns = ('item_id', 'ruido', 'grupo')
+    clusters_df = pd.DataFrame(lines, columns=columns)
+
+    return clusters_df
+
+
 def save_clustering_results(results, desc_original, clustering_descriptions,
                             file, items_vec=None, first_token=True):
     '''
