@@ -23,6 +23,7 @@ from item.item_list import (
     ItemList,
     Item
 )
+from nlp.preprocess_units import group_dsc_unidade_medida
 
 
 def parse_args():
@@ -54,16 +55,20 @@ def main():
     itemlist = ItemList()
     itemlist.structure_items(items_descriptions)
 
+    items_df = itemlist.to_dataframe()
+    group_dsc_unidade_medida(items_df)
+    itemlist.save_items_in_dataframe('../data/items_preprocessed_complete.csv.zip', items_df)
+
     # Split products-services
-    products, services = itemlist.products_services_split('f03_items_preprocessed_complete', \
-                                                          'f03_items_preprocessed_complete_servicos', \
+    products, services = itemlist.products_services_split('../data/f03_items_preprocessed_complete', \
+                                                          '../data/f03_items_preprocessed_complete_servicos', \
                                                           version, save_in_hive=args.hive)
 
     itemlist.items_list = products
 
     # Split train-test set
-    train, test = itemlist.train_test_split('f03_items_preprocessed_complete_train', \
-                                            'f03_items_preprocessed_complete_test', \
+    train, test = itemlist.train_test_split('../data/f03_items_preprocessed_complete_train', \
+                                            '../data/f03_items_preprocessed_complete_test', \
                                             version, save_in_hive=args.hive)
 
 
