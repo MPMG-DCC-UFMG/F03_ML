@@ -27,7 +27,7 @@ from item.clustering.utils import *
 from item.clustering.clustering import run_baseline_clustering
 from nlp.preprocessing import PreprocessingText
 from item.clustering.item_representation import get_item_vec
-from item.pricing.utils import group_dsc_unidade_medida
+from nlp.preprocess_units import group_dsc_unidade_medida
 from .config import Config
 
 # clustering evaluation
@@ -98,6 +98,7 @@ class ItemClustering(object):
 
         if save_dataframe:
             items_df = itemlist.to_dataframe()
+            group_dsc_unidade_medida(items_df)
             itemlist.save_items_in_dataframe(self.config.artifacts_path + table_name,
                                              items_df)
             del items_df
@@ -126,7 +127,6 @@ class ItemClustering(object):
         del self.preprocessing
 
         self.itemlist = self.get_input(self.config.artifacts_path + 'f03_items.csv.zip')
-        group_dsc_unidade_medida(self.itemlist.items_df)
 
         if self.word_embeddings is None:
             print(time.asctime(), "Loading word embeddings")
@@ -209,7 +209,6 @@ class ItemClustering(object):
 
         self.preprocess_items(items, 'f03_items_test.csv.zip')
         items = self.get_input(self.config.artifacts_path + 'f03_items_test.csv.zip')
-        group_dsc_unidade_medida(items.items_df)
 
         results = predict_items_clusters(items, self.word_embeddings,
                                          self.word_class, self.reducer_model,

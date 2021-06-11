@@ -31,7 +31,7 @@ def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument("--input", default='f03_dataset_item_licitacao', help="input table.")
     parser.add_argument("-v", "--version", required=True, help="execution version.")
-    p.add_argument("-i", "--hive", default=False, help="load table from hive and")
+    p.add_argument("-i", "--hive", default=False, help="load table from hive.")
 
     return parser.parse_args()
 
@@ -56,13 +56,15 @@ def main():
 
     # Split products-services
     products, services = itemlist.products_services_split('f03_items_preprocessed_complete', \
-                                                          'f03_items_preprocessed_complete_servicos', version)
+                                                          'f03_items_preprocessed_complete_servicos', \
+                                                          version, save_in_hive=args.hive)
 
     itemlist.items_list = products
 
     # Split train-test set
     train, test = itemlist.train_test_split('f03_items_preprocessed_complete_train', \
-                                            'f03_items_preprocessed_complete_test', version)
+                                            'f03_items_preprocessed_complete_test', \
+                                            version, save_in_hive=args.hive)
 
 
 if __name__ == "__main__":

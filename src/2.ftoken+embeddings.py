@@ -114,8 +114,9 @@ def main():
 
     if args.hive:
         version = args.version
-        save_clustering_results_hive_table(clusters, outliers, 'f03_grupos_hdbscan', \
-                                           'f03_grupos_hdbscan_outliers', version)
+        save_clustering_results_hive_table(clusters, outliers,  \
+                                           'f03_grupos_sem_outliers', \
+                                           'f03_grupos_outliers', version)
     else:
         save_clustering_results_pickle(clusters, outliers, args.outpath)
 

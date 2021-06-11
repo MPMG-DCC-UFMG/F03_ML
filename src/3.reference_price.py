@@ -78,11 +78,10 @@ def main():
     args = parse_args()
 
     if args.hive:
-        results_train, outliers_train, \
-        prices_train = load_clustering_results_hive_table('f03_grupos_hdbscan', \
-                                                          'f03_grupos_hdbscan_outliers')
+        results_train, outliers_train = load_clustering_results_hive_table('f03_grupos_sem_outliers', \
+                                                                           'f03_grupos_outliers')
     else:
-        results_train, outliers_train, prices_train = load_clustering_results_pickle(args.clusters)
+        results_train, outliers_train = load_clustering_results_pickle(args.clusters)
 
     print(time.asctime()," Getting the descriptions processed:")
 
@@ -94,12 +93,13 @@ def main():
     else:
         itemlist_train.load_items_from_file(args.train)
 
-    group_dsc_unidade_medida(itemlist_train.items_df)
-
     print(time.asctime()," Getting the statistics for each cluster finded in the training set:")
+
     # 1) PRICING: get the statistics for each cluster finded in the training set
+
+    clusters_items = get_clusters_items(results_train, outliers_train)
+    clusters_df = get_clusters_dataframe(clusters_items, baseline=True)
     cluster_prices = get_clusters_prices(itemlist_train, results_train)
-    items_clusters_df = get_items_dataframe(itemlist_train, results_train)
 
     print(time.asctime()," Pricing the items of the training set:")
     cluster_prices_statistics, cluster_prices_statistics_year, \
@@ -152,7 +152,6 @@ def main():
 
         operation = args.operation
 
-        group_dsc_unidade_medida(itemlist.items_df)
         results = predict_items_clusters(itemlist, word_embeddings, word_class, \
                                      reducer_model, clustering_model, categories=categories, \
                                      embedding_type=embedding_type, operation=operation, \
@@ -161,14 +160,16 @@ def main():
                                              dsc_unidade=True)
 
 
+    # 3) Save result tables
     if args.hive:
         version = args.version
-        dataframe_to_hive_table(items_clusters_df, "f03_items_clusters_train", version)
-        dataframe_to_hive_table(items_clusters_wo_outliers, "f03_items_clusters_train_wo_out", version)
-        dataframe_to_hive_table(cluster_prices_statistics, "f03_cluster_prices_statistics", version)
+        dataframe_to_hive_table(itemlist_train.items_df, "f03_itens", version)
+        dataframe_to_hive_table(clusters_df, "f03_grupos", version)
+        dataframe_to_hive_table(cluster_prices_statistics, "f03_grupos_estatisticas", version)
+        dataframe_to_hive_table(items_clusters_wo_outliers, "f03_itens_precificacao", version)
     else:
-        items_clusters_df.to_csv(args.outpath + "items_clusters_train.csv.zip",
-                                 sep=';', index=False, compression='zip')
+        clusters_df.to_csv(args.outpath + "clusters.csv.zip", sep=';', index=False,
+                           compression='zip')
         items_clusters_wo_outliers.to_csv(args.outpath + "items_clusters_train_wo_out.csv.zip",
                                           sep=';', index=False, compression='zip')
         cluster_prices_statistics.to_csv(args.outpath + "cluster_prices_statistics.csv.zip",
@@ -177,7 +178,7 @@ def main():
                                  sep=';', index=False, compression='zip')
 
     if args.hive and args.run_test:
-        dataframe_to_hive_table(items_test_df, "f03_items_clusters_test", version)
+        dataframe_to_hive_table(items_test_df, "f03_itens_teste", version)
     elif args.run_test:
         items_test_df.to_csv(args.outpath + "items_clusters_test.csv.zip",
                              sep=';', index=False, compression='zip')

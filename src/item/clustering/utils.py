@@ -14,6 +14,62 @@ from utils.hive_access import (
 )
 
 
+def get_clusters_items(clusters_items, outliers):
+    '''
+        It gets the complete clustering result (without outlier removal).
+
+        results (dict): clusters (cluster id -> list of items).
+        outliers (dict): clusters outliers (cluster id -> list of items).
+    '''
+    result = {}
+    for group, items_list in clusters_items.items():
+        result[group] = items_list + outliers[group]
+
+    return result
+
+
+def add_first_token_column(data):
+    '''
+        Add "primeiro_termo" column to dataframe.
+    '''
+
+    data['primeiro_termo'] = data['grupo'].str.split('_').str[0]
+    return data
+
+
+def add_outlier_column(data):
+    '''
+        Add "ruido" column to dataframe.
+    '''
+
+    data['ruido'] = data['cluster'].str.split('_').str[1]
+    data['ruido'].fillna(1, inplace=True)
+    data['ruido'].replace({'-1': 1}, inplace=True)
+
+    return data
+
+
+def get_items_dataframe(itemlist, cluster_items_df, baseline=True):
+    '''
+        Get the items dataframe. The dataframe should have the following columns:
+        ['item_id', 'seq_dim_licitacao', 'ruido', 'grupo', 'dsc_unidade_medida',
+         'ano', 'descricao', 'descricao_original', 'areas', 'vlr_unitario', 'mes',
+         'data', 'cidade', 'orgao'].
+
+        itemlist (ItemList object): contains the items and informations about
+                                    the dataset.
+        cluster_items_df (dataframe): clusters dataframe.
+        baseline (bool): if the first token grouping was used to generete the
+                         groups.
+    '''
+
+    items_clusters_df = pd.merge(left=cluster_items_df, right=itemlist.items_df,
+                                 left_on='item_id', right_on='item_id')
+    items_clusters_df = add_first_token_column(items_clusters_df)
+
+    return items_clusters_df
+
+
 def get_clusters_dataframe(cluster_items, baseline=True):
     '''
         Get the clusters dataframe. The dataframe should have the following columns:
@@ -189,14 +245,7 @@ def load_clustering_results_pickle(dir):
         outliers = pickle.load(PFile)
     PFile.close()
 
-    try:
-        with open(dir + "cluster_prices.pkl", "rb") as PFile:
-            cluster_prices = pickle.load(PFile)
-        PFile.close()
-    except:
-        cluster_prices = None
-
-    return results, outliers, cluster_prices
+    return results, outliers
 
 
 def save_models_pickle(clustering_model, reducer_model, out_dir):

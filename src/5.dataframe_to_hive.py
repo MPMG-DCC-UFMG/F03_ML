@@ -29,12 +29,12 @@ def parse_args():
     """Parses command line parameters through argparse and returns parsed args.
     """
     parser = argparse.ArgumentParser()
-    parser.add_argument("-d", "--dataframe", required=True,
-                        help="daframe file.")
+    p.add_argument('--input', type = str, default = 'f03_items_preprocessed_complete'
+                  ,help='file containing the items dataset')
+    parser.add_argument("-r", "--results", default=True,
+                        help="results files directory.")
     parser.add_argument("-v", "--version", required=True,
                         help="execution version.")
-    parser.add_argument("-n", "--name", required=True,
-                        help="name of the table on hive.")
     parser.add_argument("-p", "--n_process", default=20, type=int,
                     help="number of process in multiprocessing.")
 
@@ -45,17 +45,28 @@ def main():
 
     args = parse_args()
 
-    # Load dataframe
-    dataframe = pd.read_csv(args.dataframe, sep=';', low_memory=False)
+    # Load dataframes
 
-    print(dataframe.info())
+    # It gets the descriptions processed [TRAINING]:
+    itemlist = ItemList()
+    itemlist.load_items_from_file(args.train)
+
+    clusters_df = pd.read_csv(args.results + "clusters.csv.zip", sep=';',
+                              low_memory=False)
+    cluster_prices_statistics = pd.read_csv(args.results + "cluster_prices_statistics.csv.zip",
+                                            sep=';', low_memory=False)
+    items_clusters_wo_outliers = pd.read_csv(args.results + "items_clusters_train_wo_out.csv.zip",
+                                             sep=';', low_memory=False)
 
     # Save tables to HIVE
 
     version = args.version
-    table_name = args.name
     num_process = args.n_process
-    dataframe_to_hive_table(dataframe, table_name, version, num_process=num_process)
+
+    dataframe_to_hive_table(itemlist.items_df, "f03_itens", version)
+    dataframe_to_hive_table(clusters_df, "f03_grupos", version)
+    dataframe_to_hive_table(cluster_prices_statistics, "f03_grupos_estatisticas", version)
+    dataframe_to_hive_table(items_clusters_wo_outliers, "f03_itens_precificacao", version)
 
 
 if __name__ == "__main__":

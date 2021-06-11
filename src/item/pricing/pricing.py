@@ -4,8 +4,12 @@ import numpy as np
 import pandas as pd
 import random
 import collections
-from .utils import group_dsc_unidade_medida, add_first_token_column, add_outlier_column
-from item.clustering.utils import get_clusters_dataframe
+from item.clustering.utils import (
+    get_clusters_dataframe,
+    add_first_token_column,
+    add_outlier_column,
+    get_items_dataframe
+)
 
 
 def get_items_sample(itemlist, prices, items):
@@ -166,67 +170,6 @@ def sample_per_decile(itemlist, cluster_items, cluster_prices, threshold, baseli
     return cluster_prices, cluster_items
 
 
-def get_items_dataframe(itemlist, cluster_items, baseline=True):
-    '''
-        Get the items dataframe. The dataframe should have the following columns:
-        ['item_id', 'seq_dim_licitacao', 'ruido', 'grupo', 'dsc_unidade_medida',
-         'ano', 'descricao', 'descricao_original', 'areas', 'vlr_unitario', 'mes',
-         'data', 'cidade', 'orgao'].
-
-        itemlist (ItemList object): contains the items and informations about
-                                    the dataset.
-        cluster_items (dict): dictionary of groups (group_id -> list of item ids).
-        baseline (bool): if the first token grouping was used to generete the
-                         groups.
-    '''
-
-    # TODO:
-    # JOIN: items table and groups table
-
-    group_dsc_unidade_medida(itemlist.items_df)
-
-    lines = []
-    for cluster, items in cluster_items.items():
-        for item in items:
-            item_dict = itemlist.items_df.iloc[item].to_dict()
-            price = item_dict['preco']
-            dsc_unidade_medida = item_dict['dsc_unidade_medida']
-            year = item_dict['ano']
-            month = item_dict['mes']
-            date = item_dict['data']
-            city = item_dict['municipio']
-            institution = item_dict['orgao']
-            try:
-                dsc_unidade_medida = dsc_unidade_medida.lower()
-            except:
-                dsc_unidade_medida = ""
-            description = ' '.join(eval(item_dict['original_prep']))
-            original = item_dict['original']
-            licitacao = item_dict['licitacao']
-            areas = item_dict['funcao']
-            if baseline and ('_' not in cluster or cluster[-2:] == '-1'):
-                line = (item, licitacao, 1, cluster, dsc_unidade_medida, year, \
-                        description, original, areas, price, month, date, city, \
-                        institution)
-            elif not baseline and cluster == '-1':
-                line = (item, licitacao, 1, cluster, dsc_unidade_medida, year, \
-                        description, original, areas, price, month, date, city, \
-                        institution)
-            else:
-                line = (item, licitacao, 0, cluster, dsc_unidade_medida, year, \
-                        description, original, areas, price, month, date, city, \
-                        institution)
-            lines.append(line)
-
-    columns = ('item_id', 'seq_dim_licitacao', 'ruido', 'grupo', 'dsc_unidade_medida', \
-                'ano', 'descricao', 'descricao_original', 'areas', 'vlr_unitario', \
-                'mes', 'data', 'cidade', 'orgao')
-    items_clusters_df = pd.DataFrame(lines, columns=columns)
-    items_clusters_df = add_first_token_column(items_clusters_df)
-
-    return items_clusters_df
-
-
 def get_prices_statistics_df(items_clusters_df, dsc_unidade=True, year=False):
     '''
         Get item prices statistics such as mean, median, max, min, first
@@ -333,17 +276,19 @@ def pricing(itemlist, cluster_items, cluster_prices, dsc_unidade=True, year=True
                                                 cluster_prices, threshold, baseline)
 
     cluster_items_df = get_clusters_dataframe(cluster_items, baseline=baseline)
-    items_clusters_df = get_items_dataframe(itemlist, cluster_items, baseline)
+    items_clusters_df = get_items_dataframe(itemlist, cluster_items_df, baseline)
     cluster_prices_statistics = get_prices_statistics_df(items_clusters_df,
                                                          dsc_unidade)
     cluster_prices_statistics = add_first_token_column(cluster_prices_statistics)
-    cluster_prices_statistics = add_outlier_column(cluster_prices_statistics)
+    if baseline:
+        cluster_prices_statistics = add_outlier_column(cluster_prices_statistics)
 
     if year:
         cluster_prices_statistics_year = get_prices_statistics_df(items_clusters_df,
                                                              dsc_unidade, year)
         cluster_prices_statistics_year = add_first_token_column(cluster_prices_statistics_year)
-        cluster_prices_statistics_year = add_outlier_column(cluster_prices_statistics_year)
+        if baseline:
+            cluster_prices_statistics_year = add_outlier_column(cluster_prices_statistics_year)
     else:
         cluster_prices_statistics_year = None
 

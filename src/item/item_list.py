@@ -11,6 +11,7 @@ from utils.hive_access import (
     hive_table_to_dataframe
 )
 from spellcheck.spellcheckeropt import SpellcheckerOpt
+from item.pricing.utils import group_dsc_unidade_medida
 import ast
 import zipfile
 import collections
@@ -285,6 +286,8 @@ class ItemList:
 
         services_df = self.to_dataframe(items=services)
         products_df = self.to_dataframe(items=products)
+        group_dsc_unidade_medida(services_df)
+        group_dsc_unidade_medida(products_df)
         self.save_items_in_dataframe(services_table, services_df)
         self.save_items_in_dataframe(products_table, products_df)
 
@@ -330,8 +333,13 @@ class ItemList:
 
         train_df = self.to_dataframe(items=train)
         test_df = self.to_dataframe(items=test)
+
         train_df["item_id"] = list(range(len(train_df)))
         test_df["item_id"] = list(range(len(test_df)))
+
+        group_dsc_unidade_medida(train_df)
+        group_dsc_unidade_medida(test_df)
+
         self.save_items_in_dataframe(train_table, train_df)
         self.save_items_in_dataframe(test_table, test_df)
 
