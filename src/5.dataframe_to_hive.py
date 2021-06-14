@@ -8,12 +8,8 @@ import copy
 import random
 import math
 import matplotlib.pyplot as plt
-from nlp.preprocessing import preprocess_items
 from nlp.utils import (
     read_json_file)
-from utils.read_files import (
-    get_items
-)
 from item.item_list import (
     ItemList,
     Item
@@ -28,18 +24,20 @@ from pyhive import hive
 def parse_args():
     """Parses command line parameters through argparse and returns parsed args.
     """
-    parser = argparse.ArgumentParser()
+    p = argparse.ArgumentParser()
     p.add_argument('--input', type = str, default = 'f03_items_preprocessed_complete'
                   ,help='file containing the items dataset')
-    parser.add_argument("-r", "--results", default=True,
+    p.add_argument("-r", "--results", default=True,
                         help="results files directory.")
-    parser.add_argument("-v", "--version", required=True,
+    p.add_argument("-v", "--version", required=True,
                         help="execution version.")
     p.add_argument("-p", "--password", default="", help="connection password.")
-    parser.add_argument("-n", "--n_process", default=20, type=int,
+    p.add_argument("-n", "--n_process", default=20, type=int,
                     help="number of process in multiprocessing.")
 
-    return parser.parse_args()
+    parsed = p.parse_args()
+
+    return parsed
 
 
 def main():
@@ -48,9 +46,11 @@ def main():
 
     # Load dataframes
 
+    print(time.asctime()," Getting the descriptions processed:")
+
     # It gets the descriptions processed [TRAINING]:
     itemlist = ItemList()
-    itemlist.load_items_from_file(args.train)
+    itemlist.load_items_from_file(args.input)
 
     clusters_df = pd.read_csv(args.results + "clusters.csv.zip", sep=';',
                               low_memory=False)
@@ -63,6 +63,8 @@ def main():
 
     version = args.version
     num_process = args.n_process
+
+    print(time.asctime()," Saving dataframe to a HIVE table:")
 
     dataframe_to_hive_table(itemlist.items_df, "f03_itens", version, args.password)
     dataframe_to_hive_table(clusters_df, "f03_grupos", version, args.password)
