@@ -53,7 +53,7 @@ def add_outlier_column(data):
         Add "ruido" column to dataframe.
     '''
 
-    data['ruido'] = data['cluster'].str.split('_').str[1]
+    data['ruido'] = data['grupo'].str.split('_').str[1]
     data['ruido'].fillna(1, inplace=True)
     data['ruido'].replace({'-1': 1}, inplace=True)
 
@@ -81,7 +81,7 @@ def get_items_dataframe(itemlist, cluster_items_df, baseline=True):
     return items_clusters_df
 
 
-def get_clusters_dataframe(cluster_items, outliers, baseline=True):
+def get_clusters_dataframe(cluster_items, outliers=None, baseline=True):
     '''
         Get the clusters dataframe. The dataframe should have the following columns:
         ['item_id', 'ruido', 'grupo'].
@@ -104,16 +104,17 @@ def get_clusters_dataframe(cluster_items, outliers, baseline=True):
             line = (item, cluster, outlier, outlier)
             lines.append(line)
 
-    for cluster, items in outliers.items():
-        for item in items:
-            if baseline and ('_' not in cluster or cluster[-2:] == '-1'):
-                outlier = 1
-            elif not baseline and cluster == '-1':
-                outlier = 1
-            else:
-                outlier = 0
-            line = (item, cluster, outlier, 1)
-            lines.append(line)
+    if outliers is not None:
+        for cluster, items in outliers.items():
+            for item in items:
+                if baseline and ('_' not in cluster or cluster[-2:] == '-1'):
+                    outlier = 1
+                elif not baseline and cluster == '-1':
+                    outlier = 1
+                else:
+                    outlier = 0
+                line = (item, cluster, outlier, 1)
+                lines.append(line)
 
     columns = ('item_id', 'grupo', 'grupo_ruido', 'item_ruido')
     clusters_df = pd.DataFrame(lines, columns=columns)

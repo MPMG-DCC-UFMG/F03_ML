@@ -269,9 +269,9 @@ def pricing(itemlist, cluster_items, cluster_prices, dsc_unidade=True, year=True
                          groups.
     '''
 
-    itemlist.items_df.drop(columns=[['palavras', 'unidades_medida', 'numeros', \
-                                    'cores', 'materiais', 'tamanho', 'quantidade', \
-                                    'item_id']], inplace=True)
+    itemlist.items_df.drop(columns=['palavras', 'unidades_medida', 'numeros', \
+                                    'cores', 'materiais', 'tamanho', 'quantidade'],
+                                    inplace=True)
     itemlist.items_df = add_original_description(itemlist.items_df)
 
     if remove_outliers:

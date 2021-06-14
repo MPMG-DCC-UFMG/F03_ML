@@ -1,6 +1,8 @@
 from nlp.preprocessing_portuguese import TextPreProcessing as tpp
 from nlp.preprocessing import PreprocessingText
 from gensim.parsing.preprocessing import strip_multiple_whitespaces
+import json
+import re
 
 
 def isfloat(value):
