@@ -106,19 +106,18 @@ class ItemClustering(object):
         del itemlist
 
 
-    def get_input(self, input_table, dataframe=True):
+    def get_input(self, input_table, dataframe=True, password=None):
 
         # It gets the descriptions processed:
 
+        self.itemlist = ItemList()
+
         if dataframe:
-            itemlist = ItemList()
-            itemlist.load_items_from_file(input_table)
+            self.itemlist.load_items_from_file(input_table)
+        else:
+            self.itemlist.load_items_from_hive_table(input_table, password)
 
-        # TODO:
-        # else:
-            # itemlist = edw table
-
-        return itemlist
+        return self.itemlist
 
 
     def fit(self, items):
@@ -126,7 +125,7 @@ class ItemClustering(object):
         self.preprocess_items(items, 'f03_items.csv.zip')
         del self.preprocessing
 
-        self.itemlist = self.get_input(self.config.artifacts_path + 'f03_items.csv.zip')
+        self.get_input(self.config.artifacts_path + 'f03_items.csv.zip')
 
         if self.word_embeddings is None:
             print(time.asctime(), "Loading word embeddings")
