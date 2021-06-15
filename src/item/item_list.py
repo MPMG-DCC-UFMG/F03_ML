@@ -90,6 +90,7 @@ class ItemList:
             dsc_unidade = item.dsc_unidade
             original = item.original
             licitacao = item.licitacao
+            licitacao_item = item.licitacao_item
             original_preprocessed = item.original_preprocessed
             ano = item.ano
 
@@ -99,7 +100,7 @@ class ItemList:
 
         columns = ['palavras', 'unidades_medida', 'numeros', 'cores', 'materiais', \
                     'tamanho', 'quantidade', 'preco', 'dsc_unidade_medida', 'original', \
-                    'licitacao', 'original_prep', 'ano']
+                    'licitacao', 'licitacao_item', 'original_prep', 'ano']
         dataframe = pd.DataFrame(tuples, columns=columns)
         dataframe["item_id"] = list(range(len(dataframe)))
 
@@ -133,6 +134,7 @@ class ItemList:
             self.size = len(self.items_df)
         self.set_unique_words()
         self.set_words_ids()
+
 
     def load_items_from_hive_table(self, table, password):
         '''

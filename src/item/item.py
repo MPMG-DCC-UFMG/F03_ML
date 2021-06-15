@@ -2,7 +2,7 @@
 class Item:
 
     def __init__(self, item=None, original=False):
-        self.item_id = None
+        self.licitacao_item = None
         self.words = []
         self.unit_metrics = []
         self.numbers = []
@@ -46,7 +46,7 @@ class Item:
             ano (int): year the item was traded.
         '''
 
-        self.item_id = licitacao_item
+        self.licitacao_item = licitacao_item
         self.licitacao = licitacao
         self.price = price
         self.dsc_unidade = dsc_unidade
@@ -102,7 +102,7 @@ class Item:
         self.licitacao = item['licitacao']
         self.original_preprocessed = item['original_prep']
         self.ano = item['ano']
-        self.item_id = item['licitacao_item']
+        self.licitacao_item = item['licitacao_item']
 
 
     def print_item(self):
@@ -127,7 +127,7 @@ class Item:
             'licitacao' : self.licitacao,
             'original_prep' : self.original_preprocessed,
             'ano' : self.ano,
-            'item_id' : self.item_id
+            'licitacao_item' : self.licitacao_item
         }
 
         return item_dict
