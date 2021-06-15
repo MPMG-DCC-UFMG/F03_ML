@@ -15,12 +15,7 @@ class Item:
         self.licitacao = None
         self.original = None
         self.original_preprocessed = None
-        self.funcao = None
         self.ano = None
-        self.mes = None
-        self.data = None
-        self.municipio = None
-        self.orgao = None
         if item != None:
             self.load_item(item, original)
 
@@ -35,9 +30,9 @@ class Item:
 
 
     def extract_entities(self, description, licitacao_item, licitacao, price,
-                         dsc_unidade, original, funcao, ano, mes, data, municipio,
-                         orgao, set_unit_metrics, set_colors, set_materials,
-                         set_sizes, set_quantities, set_qualifiers, set_numbers):
+                         dsc_unidade, original, ano, set_unit_metrics,
+                         set_colors, set_materials, set_sizes, set_quantities,
+                         set_qualifiers, set_numbers):
         '''
             Structure item descriptions.
 
@@ -48,7 +43,6 @@ class Item:
             price (float): item price.
             dsc_unidade (str): item unit of measure.
             original (str): item original description.
-            funcao (str): areas.
             ano (int): year the item was traded.
         '''
 
@@ -58,12 +52,7 @@ class Item:
         self.dsc_unidade = dsc_unidade
         self.original = original
         self.original_preprocessed = description
-        self.funcao = funcao
         self.ano = ano
-        self.mes = mes
-        self.data = data
-        self.municipio = municipio
-        self.orgao = orgao
 
         for token in description:
             if token in set_qualifiers:
@@ -112,7 +101,6 @@ class Item:
 
         self.licitacao = item['licitacao']
         self.original_preprocessed = item['original_prep']
-        self.funcao = item['funcao']
         self.ano = item['ano']
         self.item_id = item['licitacao_item']
 
@@ -138,13 +126,8 @@ class Item:
             'original' : self.original,
             'licitacao' : self.licitacao,
             'original_prep' : self.original_preprocessed,
-            'funcao' : self.funcao,
             'ano' : self.ano,
-            'licitacao_item' : self.item_id,
-            'mes' : self.mes,
-            'data' : self.data,
-            'municipio' : self.municipio,
-            'orgao' : self.orgao
+            'item_id' : self.item_id
         }
 
         return item_dict

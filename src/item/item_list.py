@@ -45,18 +45,17 @@ class ItemList:
             Structure item descriptions.
 
             items_descriptions (list): list of items. Each item has the following
-            informations: description, seq_licitacao_item, licitacao, price, dcs_unidade_medida,
-            original, funcao, ano.
+            informations: description, seq_licitacao_item, licitacao, price,
+            dcs_unidade_medida, original, ano.
         '''
 
         for description, licitacao_item, licitacao, price, dsc_unidade, original, \
-            funcao, ano, mes, data, municipio, orgao in items_descriptions:
+            ano in items_descriptions:
             if len(description) == 0:
                 continue
             item = Item()
             item.extract_entities(description, licitacao_item, licitacao, price,
-                                  dsc_unidade, original, funcao, ano, mes, data,
-                                  municipio, orgao, self.set_unit_metrics,
+                                  dsc_unidade, original, ano, self.set_unit_metrics,
                                   self.set_colors, self.set_materials,
                                   self.set_sizes, self.set_quantities,
                                   self.set_qualifiers, self.set_numbers)
@@ -92,22 +91,15 @@ class ItemList:
             original = item.original
             licitacao = item.licitacao
             original_preprocessed = item.original_preprocessed
-            funcao = item.funcao
             ano = item.ano
-            mes = item.mes
-            data = item.data
-            municipio = item.municipio
-            orgao = item.orgao
 
             tuples.append(tuple([words, unit_metrics, numbers, colors, materials, sizes,
                          quantities, price, dsc_unidade, original, licitacao,
-                         original_preprocessed, funcao, ano, mes, data, municipio,
-                         orgao]))
+                         original_preprocessed, ano]))
 
         columns = ['palavras', 'unidades_medida', 'numeros', 'cores', 'materiais', \
                     'tamanho', 'quantidade', 'preco', 'dsc_unidade_medida', 'original', \
-                    'licitacao', 'original_prep', 'funcao', 'ano', 'mes', 'data', \
-                    'municipio', 'orgao']
+                    'licitacao', 'original_prep', 'ano']
         dataframe = pd.DataFrame(tuples, columns=columns)
         dataframe["item_id"] = list(range(len(dataframe)))
 
