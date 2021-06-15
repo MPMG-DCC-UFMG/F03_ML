@@ -1,3 +1,7 @@
+
+import os,sys
+sys.path.insert(1, os.path.join(sys.path[0], '..'))
+
 import argparse
 import time
 import pandas as pd
@@ -8,12 +12,6 @@ import copy
 import random
 import math
 import matplotlib.pyplot as plt
-from nlp.preprocessing import preprocess_items
-from nlp.utils import (
-    read_json_file)
-from utils.read_files import (
-    get_items
-)
 from item.item_list import (
     ItemList,
     Item
@@ -56,7 +54,7 @@ def main():
     # Save tables to HIVE
 
     version = args.version
-    table_name = args.name
+    table_name = args.table
     num_process = args.n_process
     dataframe_to_hive_table(dataframe, table_name, version, args.password,
                             num_process=num_process)

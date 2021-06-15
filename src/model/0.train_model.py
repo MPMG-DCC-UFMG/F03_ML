@@ -1,3 +1,7 @@
+
+import os,sys
+sys.path.insert(1, os.path.join(sys.path[0], '..'))
+
 import time
 import argparse
 from item_clustering.item_clustering import ItemClustering
