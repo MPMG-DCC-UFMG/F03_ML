@@ -66,12 +66,14 @@ def main():
 
     print(time.asctime()," Saving dataframe to a HIVE table:")
 
-    dataframe_to_hive_table(itemlist.items_df, "f03_itens", version, args.password)
-    dataframe_to_hive_table(clusters_df, "f03_grupos", version, args.password)
+    dataframe_to_hive_table(itemlist.items_df, "f03_itens", version, args.password,
+                            num_process=num_process)
+    dataframe_to_hive_table(clusters_df, "f03_grupos", version, args.password,
+                            num_process=num_process)
     dataframe_to_hive_table(cluster_prices_statistics, "f03_banco_precos_grupos",
-                            version, args.password)
+                            version, args.password, num_process=num_process)
     dataframe_to_hive_table(items_clusters_wo_outliers, "f03_banco_precos_itens",
-                            version, args.password)
+                            version, args.password, num_process=num_process)
 
 
 if __name__ == "__main__":

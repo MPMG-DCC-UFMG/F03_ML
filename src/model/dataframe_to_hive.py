@@ -28,17 +28,20 @@ from pyhive import hive
 def parse_args():
     """Parses command line parameters through argparse and returns parsed args.
     """
-    parser = argparse.ArgumentParser()
-    parser.add_argument("-d", "--dataframe", required=True,
+    p = argparse.ArgumentParser()
+    p.add_argument("-d", "--dataframe", required=True,
                         help="daframe file.")
-    parser.add_argument("-v", "--version", required=True,
+    p.add_argument("-v", "--version", required=True,
                         help="execution version.")
-    parser.add_argument("-n", "--name", required=True,
+    p.add_argument("-t", "--table", required=True,
                         help="name of the table on hive.")
-    parser.add_argument("-p", "--n_process", default=20, type=int,
+    p.add_argument("-p", "--password", default="", help="connection password.")
+    p.add_argument("-n", "--n_process", default=20, type=int,
                     help="number of process in multiprocessing.")
 
-    return parser.parse_args()
+    parsed = p.parse_args()
+
+    return parsed
 
 
 def main():
@@ -55,7 +58,8 @@ def main():
     version = args.version
     table_name = args.name
     num_process = args.n_process
-    dataframe_to_hive_table(dataframe, table_name, version, num_process=num_process)
+    dataframe_to_hive_table(dataframe, table_name, version, args.password,
+                            num_process=num_process)
 
 
 if __name__ == "__main__":
