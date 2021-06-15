@@ -10,7 +10,7 @@ from nlp.preprocessing import (
     tokenize,
     preprocess_document,
     tokenize_document,
-    get_stopwords, 
+    get_stopwords,
     lemmatization_document,
     get_canonical_words)
 from nlp.utils import (
@@ -60,16 +60,16 @@ import pickle
 
 def get_list_of_words(group_desc, itemlist, medicines, canonical_form, word_class):
     list_words = list()
-   
+
     for desc_id in group_desc:
         words = itemlist.items_list[desc_id].get_item_dict()['palavras']
         for p in words:
-            if((p not in list_words)): 
+            if((p not in list_words)):
                 if ((p in medicines) or ((p in word_class) and (word_class[p] == 'N'))):
                     list_words.append(p)
-                
+
     list_words.sort()
-    
+
     return list_words
 
 
@@ -78,17 +78,17 @@ def define_zero_matrix(group_desc, itemlist, medicines, canonical_form, word_cla
     rows = len(group_desc)
     columns = len(list_words)
     matrix_bow = np.zeros((rows, columns))
-    
+
     return matrix_bow, list_words
 
 
 def define_description_bow(group_desc, itemlist, medicines, canonical_form, word_class):
     matrix_list = define_zero_matrix(group_desc, itemlist, medicines, canonical_form, word_class)
     zeros = matrix_list[0]
-    list_words = matrix_list[1]    
+    list_words = matrix_list[1]
     i = 0
     for desc_id in group_desc:
-        words = itemlist.items_list[desc_id].get_item_dict()['palavras']           
+        words = itemlist.items_list[desc_id].get_item_dict()['palavras']
         for w in words:
             if(w in list_words):
                 k = list_words.index(w)
@@ -103,13 +103,13 @@ def cluster_by_xmeans(bow, number_of_descriptions):
     print(xmeans_instance)
     xmeans_instance.process();
     clusters = xmeans_instance.get_clusters();
-    
+
     return clusters
 
 
 def translate_id_to_descriptions(ids, descriptions_ids):
     arr = []
-    
+
     for i in ids:
         arr.append(descriptions_ids[i])
     return arr
@@ -124,7 +124,7 @@ def cluster_on_first_token_groups_bow(itemlist, it_thread, lower, upper, medicin
     # It gets the values of each group (i.e., the id of the descriptions into that group):
     group_descriptions = list(first_token_groups.values())
     # It defines the dictionary that will have the clustering with first token
-    # together with x-means considering a bag-of-words of the descriptions 
+    # together with x-means considering a bag-of-words of the descriptions
     # grouped by the first token approach:
     first_token_plus_bow_xmeans = {}
     # Iterator of the first token groups:
@@ -143,10 +143,10 @@ def cluster_on_first_token_groups_bow(itemlist, it_thread, lower, upper, medicin
             # Bag of words for the group 0:
             bow = define_description_bow(group_descriptions[ft_it], itemlist, medicines, canonical_form, word_class)
             bow_shape = bow.shape
-            
+
             row = bow_shape[0]
             col = bow_shape[1]
-            
+
             sum_cols = sum_cols + col
             sum_rows = sum_rows + row
 
@@ -161,7 +161,7 @@ def cluster_on_first_token_groups_bow(itemlist, it_thread, lower, upper, medicin
 
             if(col > max_cols):
                 max_col = col
-            
+
             iterat = iterat + 1
 
         ft_it = ft_it + 1
@@ -173,7 +173,7 @@ def cluster_on_first_token_groups_bow(itemlist, it_thread, lower, upper, medicin
 
 
 
-        
+
 def get_ranges(group_len, n_threads):
     total_len = group_len
     num_threads = n_threads
@@ -187,19 +187,19 @@ def get_ranges(group_len, n_threads):
 
     lower[0] = 0
     upper[0] = step
-  
+
     i = 1
     j = 0
-    while (i < num_threads):    
+    while (i < num_threads):
         upper[i]  = upper[j] + step
         lower[i]  = upper[j] +  1
         if(i%2 != 0):
             upper[i] = upper[i] + 1
-        
+
         i = i + 1
         j = j + 1
-        
-    upper[n_threads - 1] = upper[n_threads - 1] - 6 
+
+    upper[n_threads - 1] = upper[n_threads - 1] - 6
     return lower, upper
 
 
@@ -211,31 +211,30 @@ def main():
 
     medicines = get_tokens_set('../dados/palavras/medications.txt')
     canonical_form, word_class = get_canonical_words()
-    
+
     # It gets the descpitons processed:
     itemlist = ItemList()
-    itemlist.load_items_from_file('../dados/items_preprocessed.zip')    
+    itemlist.load_items_from_file('../dados/items_preprocessed.zip')
     #It gets the list of preprocessed descriptions:
-            
-    #print('Read data preprocessed')    
+
+    #print('Read data preprocessed')
     # It gets the first tokens of each description and groups
     # based on this approach:
     first_token_groups = itemlist.get_first_token_groups()
     group_len = len(first_token_groups)
-    
+
     # It defines the ranges (of the groups) the threads will work on:
     thread_ranges = get_ranges(group_len, n_threads)
     #print('Read ranges')
-    #print(thread_ranges) 
+    #print(thread_ranges)
 
     i = 0
-    
+
     for tr in thread_ranges:
         cluster_on_first_token_groups_bow(itemlist, i, thread_ranges[0][i], thread_ranges[1][i], medicines, canonical_form, word_class, Return_dict)
-        i = i + 1    
+        i = i + 1
 
 
 
 if __name__ == "__main__":
     main()
-

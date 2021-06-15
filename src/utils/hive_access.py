@@ -165,3 +165,4 @@ def dataframe_to_hive_table(dataframe, table, version, password, batch_size=1000
 
     for proc in jobs:
         proc.join()
+        proc.close()
