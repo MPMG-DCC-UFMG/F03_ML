@@ -60,6 +60,8 @@ def main():
                               low_memory=False)
     cluster_prices_statistics = pd.read_csv(args.results + "cluster_prices_statistics.csv.zip",
                                             sep=';', low_memory=False)
+    cluster_prices_statistics_year = pd.read_csv(args.results + "cluster_prices_statistics_year.csv.zip",
+                                            sep=';', low_memory=False)
     items_clusters_wo_outliers = pd.read_csv(args.results + "items_clusters_train_wo_out.csv.zip",
                                              sep=';', low_memory=False)
 
@@ -76,7 +78,9 @@ def main():
                             num_process=num_process)
     dataframe_to_hive_table(cluster_prices_statistics, "f03_banco_precos_grupos",
                             version, args.password, num_process=num_process)
-    dataframe_to_hive_table(items_clusters_wo_outliers, "f03_banco_precos_itens",
+    dataframe_to_hive_table(cluster_prices_statistics, "f03_banco_precos_grupos_ano",
+                            version, args.password, num_process=num_process)
+    dataframe_to_hive_table(items_clusters_wo_outliers, "f03_itens_precificacao",
                             version, args.password, num_process=num_process)
 
 
