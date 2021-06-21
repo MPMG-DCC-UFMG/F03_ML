@@ -6,6 +6,7 @@ import random
 import collections
 from item.clustering.utils import (
     get_clusters_dataframe,
+    add_group_id_column,
     add_first_token_column,
     add_outlier_column,
     get_items_dataframe,
@@ -282,10 +283,11 @@ def pricing(itemlist, cluster_items, cluster_prices, dsc_unidade=True, year=True
                                                 cluster_prices, threshold, baseline)
 
     cluster_items_df = get_clusters_dataframe(cluster_items, baseline=baseline)
-    items_clusters_df = get_items_dataframe(itemlist, cluster_items_df, baseline)
+    items_clusters_df = get_items_dataframe(itemlist.items_df, cluster_items_df)
     cluster_prices_statistics = get_prices_statistics_df(items_clusters_df,
                                                          dsc_unidade)
     cluster_prices_statistics = add_first_token_column(cluster_prices_statistics)
+    cluster_prices_statistics = add_group_id_column(cluster_prices_statistics)
     if baseline:
         cluster_prices_statistics = add_outlier_column(cluster_prices_statistics)
 
@@ -297,6 +299,11 @@ def pricing(itemlist, cluster_items, cluster_prices, dsc_unidade=True, year=True
             cluster_prices_statistics_year = add_outlier_column(cluster_prices_statistics_year)
     else:
         cluster_prices_statistics_year = None
+
+    items_clusters_df = get_items_dataframe(items_clusters_df,
+                            cluster_prices_statistics[['grupo', 'dsc_unidade_medida', 'grupo_id']],
+                            left_on=['grupo', 'dsc_unidade_medida'],
+                            right_on=['grupo', 'dsc_unidade_medida'])
 
     return cluster_prices_statistics, cluster_prices_statistics_year, items_clusters_df
 

@@ -39,6 +39,15 @@ def add_original_description(data):
     return data
 
 
+def add_group_id_column(data):
+    '''
+        Add "grupo_id" column to dataframe.
+    '''
+
+    data['grupo_id'] = list(range(len(data)))
+    return data
+
+
 def add_first_token_column(data):
     '''
         Add "primeiro_termo" column to dataframe.
@@ -60,22 +69,20 @@ def add_outlier_column(data):
     return data
 
 
-def get_items_dataframe(itemlist, cluster_items_df, baseline=True):
+def get_items_dataframe(items_clusters_df, cluster_items_df, left_on='item_id',
+                        right_on='item_id'):
     '''
         Get the items dataframe. The dataframe should have the following columns:
         ['item_id', 'seq_dim_licitacao', 'ruido', 'grupo', 'dsc_unidade_medida',
          'ano', 'descricao', 'descricao_original', 'areas', 'vlr_unitario', 'mes',
          'data', 'cidade', 'orgao'].
 
-        itemlist (ItemList object): contains the items and informations about
-                                    the dataset.
+        items_clusters_df (dataframe): contains the items.
         cluster_items_df (dataframe): clusters dataframe.
-        baseline (bool): if the first token grouping was used to generete the
-                         groups.
     '''
 
-    items_clusters_df = pd.merge(left=cluster_items_df, right=itemlist.items_df,
-                                 left_on='item_id', right_on='item_id')
+    items_clusters_df = pd.merge(left=cluster_items_df, right=items_clusters_df,
+                                 left_on=left_id, right_on=right_id)
     items_clusters_df = add_first_token_column(items_clusters_df)
 
     return items_clusters_df
@@ -84,7 +91,7 @@ def get_items_dataframe(itemlist, cluster_items_df, baseline=True):
 def get_clusters_dataframe(cluster_items, outliers=None, baseline=True):
     '''
         Get the clusters dataframe. The dataframe should have the following columns:
-        ['item_id', 'ruido', 'grupo'].
+        ['item_id', 'grupo', 'grupo_ruido', 'item_ruido'].
 
         cluster_items (dict): dictionary of groups (group_id -> list of item ids).
         outliers (dict): clusters outliers (cluster id -> list of items).
