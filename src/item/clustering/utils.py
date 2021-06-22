@@ -82,7 +82,7 @@ def get_items_dataframe(items_clusters_df, cluster_items_df, left_on='item_id',
     '''
 
     items_clusters_df = pd.merge(left=cluster_items_df, right=items_clusters_df,
-                                 left_on=left_id, right_on=right_id)
+                                 left_on=left_on, right_on=right_on)
     items_clusters_df = add_first_token_column(items_clusters_df)
 
     return items_clusters_df
