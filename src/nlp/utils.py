@@ -40,6 +40,9 @@ def get_stopwords(language='pt'):
         stopwords_.append(w)
     stopwords_ = set(stopwords_)
 
+    if language == 'pt':
+        return stopwords_, relevant_stopwords
+
     return stopwords_
 
 

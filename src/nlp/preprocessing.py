@@ -42,14 +42,7 @@ class PreprocessingText:
         self.remove_punctuation = remove_punctuation
 
         if self.remove_stopwords:
-            self.stopwords = get_stopwords(language)
-            self.relevant_stopwords = {'para', 'com', 'nao', 'mais', 'muito', 'so', 'sem', \
-                                  'mesmo', 'mesma', 'ha', 'haja', 'hajam', 'houver', \
-                                  'houvera', 'seja', 'sejam', 'fosse', 'fossem', 'forem', \
-                                  'sera', 'serao', 'seria', 'seriam', 'tem', 'tinha', \
-                                  'teve', 'tinham', 'tenha', 'tiver', 'tiverem', 'tera', \
-                                  'terao', 'teria', 'teriam', 'uma', 'mais', 'entre', \
-                                  'te'}
+            self.stopwords, self.relevant_stopwords  = get_stopwords(language)
 
         if self.spellcheck:
             self.right_word = get_right_words(language)

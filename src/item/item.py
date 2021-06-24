@@ -76,8 +76,12 @@ class Item:
                 self.words.append(token)
 
         if len(self.words) == 0:
-            if description[0] in set_ambiguous:
-                self.words.append(description[0])
+            if len(self.quantities) > 0 and self.quantities[0] in set_ambiguous:
+                self.words.append(self.quantities[0])
+            elif len(self.materials) > 0 and self.materials[0] in set_ambiguous:
+                self.words.append(self.materials[0])
+            elif len(self.colors) > 0 and self.colors[0] in set_ambiguous:
+                self.words.append(self.colors[0])
 
 
     def load_item(self, item, original):
