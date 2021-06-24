@@ -43,6 +43,13 @@ class PreprocessingText:
 
         if self.remove_stopwords:
             self.stopwords = get_stopwords(language)
+            self.relevant_stopwords = {'para', 'com', 'nao', 'mais', 'muito', 'so', 'sem', \
+                                  'mesmo', 'mesma', 'ha', 'haja', 'hajam', 'houver', \
+                                  'houvera', 'seja', 'sejam', 'fosse', 'fossem', 'forem', \
+                                  'sera', 'serao', 'seria', 'seriam', 'tem', 'tinha', \
+                                  'teve', 'tinham', 'tenha', 'tiver', 'tiverem', 'tera', \
+                                  'terao', 'teria', 'teriam', 'uma', 'mais', 'entre', \
+                                  'te'}
 
         if self.spellcheck:
             self.right_word = get_right_words(language)
@@ -368,8 +375,8 @@ class PreprocessingText:
 
         first_token = doc[0]
 
-        if first_token in self.stopwords or has_numbers(first_token) or \
-            first_token.isnumeric():
+        if first_token in self.stopwords or first_token in self.relevant_stopwords or \
+           has_numbers(first_token) or first_token.isnumeric():
             doc.remove(first_token)
             doc.append(first_token)
 

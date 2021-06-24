@@ -32,7 +32,7 @@ class Item:
     def extract_entities(self, description, licitacao_item, licitacao, price,
                          dsc_unidade, original, ano, set_unit_metrics,
                          set_colors, set_materials, set_sizes, set_quantities,
-                         set_qualifiers, set_numbers):
+                         set_qualifiers, set_numbers, set_ambiguous):
         '''
             Structure item descriptions.
 
@@ -74,6 +74,10 @@ class Item:
                 continue
             else:
                 self.words.append(token)
+
+        if len(self.words) == 0:
+            if description[0] in set_ambiguous:
+                self.words.append(description[0])
 
 
     def load_item(self, item, original):

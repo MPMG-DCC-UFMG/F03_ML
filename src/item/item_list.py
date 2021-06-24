@@ -34,6 +34,7 @@ class ItemList:
         self.set_quantities = get_tokens_set('../data/palavras/estruturacao/quantities.txt')
         self.set_qualifiers = get_tokens_set('../data/palavras/estruturacao/qualifiers.txt')
         self.set_numbers = get_tokens_set('../data/palavras/estruturacao/numbers.txt')
+        self.set_ambiguous = get_tokens_set('../data/palavras/estruturacao/ambiguous.txt')
         self.size = 0
         self.unique_words = None
         self.word_id = None
@@ -58,7 +59,8 @@ class ItemList:
                                   dsc_unidade, original, ano, self.set_unit_metrics,
                                   self.set_colors, self.set_materials,
                                   self.set_sizes, self.set_quantities,
-                                  self.set_qualifiers, self.set_numbers)
+                                  self.set_qualifiers, self.set_numbers,
+                                  self.set_ambiguous)
             self.items_list.append(item)
 
         self.size = len(self.items_list)
