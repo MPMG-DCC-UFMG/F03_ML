@@ -1,7 +1,7 @@
 # imports
 
 import pandas as pd
-from hive_access import (
+from .hive_access import (
     hive_table_to_dataframe
 )
 

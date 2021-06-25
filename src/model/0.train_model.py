@@ -13,7 +13,7 @@ from utils.read_files import (
 )
 import mlflow
 from mlflow_model import wrapper
-from util.get_items_hive import get_items_hive
+from utils.get_items_hive import get_items_hive
 
 
 def parse_args():
@@ -51,7 +51,7 @@ def main():
     model = ItemClustering(config=config)
 
     file = args.input
-    if bool(args.hive):
+    if not bool(args.hive):
         items = get_items(file)
     else:
         items = get_items_hive(args.hive)
