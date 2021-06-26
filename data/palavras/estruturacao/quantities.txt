@@ -22,7 +22,6 @@ pcts
 frasco
 comprimido
 injetavel
-seringa
 rolo
 po
 kit

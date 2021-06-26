@@ -2,7 +2,6 @@ rolo
 lona
 caixa
 palha
-seringa
 bloco
 ferro
 gesso
