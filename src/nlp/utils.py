@@ -11,8 +11,53 @@ from .preprocessing_portuguese import TextPreProcessing as tpp
 from nltk import corpus
 
 
+def get_scientific_notation(token):
+    return "{:.2e}".format(float(token))
+
+
 def has_numbers(string):
     return any(char.isdigit() for char in string)
+
+
+def isfloat(value):
+    value_ = value.replace(',','.')
+    try:
+        float(value_)
+        return True
+    except ValueError:
+        return False
+
+
+def remove_special_characters(text):
+    lista = '-#@%?º°ª:/;~^`[{]}\\|!$"\'&*()=+><\t\r\n…'
+    result = text
+    for i in range(0, len(lista)):
+        result = result.replace(lista[i], ' ')
+    return result
+
+
+def remove_dots_commas(text, puctuations='.,'):
+    lista = punctuations
+    result = text
+    for i in range(0, len(lista)):
+        result = result.replace(lista[i], '')
+    return result
+
+
+def remove_dots(text):
+
+    tokens = text.split(' ')
+    tokens_ = []
+
+    for token in tokens:
+        if not isfloat(token):
+            tokens_.append(token.replace('.', ''))
+
+    return ' '.join(tokens_)
+
+
+def remove_prefix(text, prefix):
+    return text[text.startswith(prefix) and len(prefix):]
 
 
 def get_stopwords(language='pt'):

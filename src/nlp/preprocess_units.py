@@ -1,37 +1,14 @@
 from nlp.preprocessing_portuguese import TextPreProcessing as tpp
 from nlp.preprocessing import PreprocessingText
 from gensim.parsing.preprocessing import strip_multiple_whitespaces
+from nlp.utils import (
+    isfloat,
+    remove_special_characters,
+    remove_dots_commas,
+    remove_prefix
+)
 import json
 import re
-
-
-def isfloat(value):
-    value_ = value.replace(',','.')
-    try:
-        float(value_)
-        return True
-    except ValueError:
-        return False
-
-
-def remove_prefix(text, prefix):
-    return text[text.startswith(prefix) and len(prefix):]
-
-
-def remove_special_characters(text):
-    lista = '-#@%?º°ª:/;~^`[{]}\\|!$"\'&*()=+><\t\r\n…'
-    result = text
-    for i in range(0, len(lista)):
-        result = result.replace(lista[i], ' ')
-    return result
-
-
-def remove_dots_commas(text):
-    lista = '.,'
-    result = text
-    for i in range(0, len(lista)):
-        result = result.replace(lista[i], '')
-    return result
 
 
 def lemmatize_unit_metric(text, canonical_unit_metric):

@@ -92,7 +92,7 @@ class PreprocessingText:
         # remove duplicate tokens
         for t in tokens:
             if self.remove_tokens_with_digits and t not in strings:
-                if t.isnumeric():
+                if t.isnumeric() or isfloat(t):
                     tokens_.append(t)
                 elif not has_numbers(t):
                     tokens_.append(t)
@@ -106,16 +106,15 @@ class PreprocessingText:
     def preprocess_document_portuguese(self, document):
 
         item = document
+        item = item.replace(',', '.')
 
         # lowercase letters
         description = item.lower()
         if self.remove_punctuation:
-            # swaps punctuation with spaces
-            description = strip_punctuation2(description)
             perc = True if '%' in description else False
             # remove non alphanumeric tokens
-            description = strip_non_alphanum(description)
-            description = tpp.remove_special_characters(description)
+            description = remove_special_characters(description)
+            description = remove_dots(description)
             # add '%' at the end of the description
             if perc:
                 description += '%'
@@ -369,7 +368,7 @@ class PreprocessingText:
         first_token = doc[0]
 
         if first_token in self.stopwords or first_token in self.relevant_stopwords or \
-           has_numbers(first_token) or first_token.isnumeric():
+           has_numbers(first_token) or first_token.isnumeric() or isfloat(first_token):
             doc.remove(first_token)
             doc.append(first_token)
 
