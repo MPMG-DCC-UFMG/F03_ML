@@ -1,4 +1,7 @@
-from nlp.utils import isfloat
+from nlp.utils import (
+    isfloat,
+    get_scientific_notation
+)
 
 
 class Item:
@@ -61,7 +64,7 @@ class Item:
                 continue
 
             if self.is_number(token) or token in set_numbers or isfloat(token):
-                self.numbers.append(token)
+                self.numbers.append(get_scientific_notation(token))
             elif token in set_unit_metrics:
                 self.unit_metrics.append(token)
             elif token in set_colors:
