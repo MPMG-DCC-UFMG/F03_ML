@@ -36,7 +36,7 @@ def remove_special_characters(text):
     return result
 
 
-def remove_dots_commas(text, puctuations='.,'):
+def remove_dots_commas(text, punctuations='.,'):
     lista = punctuations
     result = text
     for i in range(0, len(lista)):

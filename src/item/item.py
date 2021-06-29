@@ -63,8 +63,10 @@ class Item:
             if token in set_qualifiers:
                 continue
 
-            if self.is_number(token) or token in set_numbers or isfloat(token):
+            if self.is_number(token) or isfloat(token):
                 self.numbers.append(get_scientific_notation(token))
+            elif token in set_numbers:
+                self.numbers.append(token)
             elif token in set_unit_metrics:
                 self.unit_metrics.append(token)
             elif token in set_colors:
