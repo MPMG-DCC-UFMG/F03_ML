@@ -51,7 +51,8 @@ def remove_dots(text):
 
     for token in tokens:
         if not isfloat(token):
-            tokens_.append(token.replace('.', ''))
+            token = token.replace('.', '')
+        tokens_.append(token)
 
     return ' '.join(tokens_)
 

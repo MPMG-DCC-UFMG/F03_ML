@@ -170,7 +170,7 @@ class PreprocessingText:
         return description
 
 
-    def preprocess_document(self, document, stopwords=None):
+    def preprocess_document(self, document):
 
         if self.language == 'pt':
             description = self.preprocess_document_portuguese(document)
