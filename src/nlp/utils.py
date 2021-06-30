@@ -29,7 +29,7 @@ def isfloat(value):
 
 
 def remove_special_characters(text):
-    lista = '-#@%?º°ª:/;~^`[{]}\\|!$"\'&*()=+><\t\r\n…'
+    lista = '-#@%?º°ª:/;~^`[{]}\\|!$"\'&*()=+><\t\r\n…_'
     result = text
     for i in range(0, len(lista)):
         result = result.replace(lista[i], ' ')
