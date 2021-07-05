@@ -12,6 +12,7 @@ from utils.hive_access import (
 )
 from spellcheck.spellcheckeropt import SpellcheckerOpt
 from nlp.preprocess_units import group_dsc_unidade_medida
+from nlp.utils import get_stopwords
 import ast
 import zipfile
 import collections
@@ -34,10 +35,13 @@ class ItemList:
         self.set_quantities = get_tokens_set('../data/palavras/estruturacao/quantities.txt')
         self.set_qualifiers = get_tokens_set('../data/palavras/estruturacao/qualifiers.txt')
         self.set_numbers = get_tokens_set('../data/palavras/estruturacao/numbers.txt')
+        self.set_ambiguous = get_tokens_set('../data/palavras/estruturacao/ambiguous.txt')
         self.size = 0
         self.unique_words = None
         self.word_id = None
         self.id_word = None
+        self.stopwords, self.relevant_stopwords  = get_stopwords('pt')
+        self.stopwords.update(self.relevant_stopwords)
 
 
     def structure_items(self, items_descriptions):
@@ -58,7 +62,8 @@ class ItemList:
                                   dsc_unidade, original, ano, self.set_unit_metrics,
                                   self.set_colors, self.set_materials,
                                   self.set_sizes, self.set_quantities,
-                                  self.set_qualifiers, self.set_numbers)
+                                  self.set_qualifiers, self.set_numbers,
+                                  self.set_ambiguous, self.stopwords)
             self.items_list.append(item)
 
         self.size = len(self.items_list)
@@ -94,13 +99,13 @@ class ItemList:
             original_preprocessed = item.original_preprocessed
             ano = item.ano
 
-            tuples.append(tuple([words, unit_metrics, numbers, colors, materials, sizes,
-                         quantities, price, dsc_unidade, original, licitacao,
-                         original_preprocessed, ano]))
+            tuples.append(tuple([words, unit_metrics, numbers, colors, materials,
+                        sizes, quantities, price, dsc_unidade, original,
+                        original_preprocessed, ano, licitacao, licitacao_item]))
 
         columns = ['palavras', 'unidades_medida', 'numeros', 'cores', 'materiais', \
                     'tamanho', 'quantidade', 'preco', 'dsc_unidade_medida', 'original', \
-                    'licitacao', 'licitacao_item', 'original_prep', 'ano']
+                    'original_prep', 'ano', 'licitacao', 'licitacao_item']
         dataframe = pd.DataFrame(tuples, columns=columns)
         dataframe["item_id"] = list(range(len(dataframe)))
 

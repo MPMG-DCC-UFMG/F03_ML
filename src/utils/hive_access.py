@@ -1,22 +1,26 @@
 # imports
 
+import os
+from dotenv import load_dotenv
 from pyhive import hive
 import pandas as pd
 import io
 import math
 import multiprocessing
 
-schema = 'trilhas'
-nome_trilha = 'F03_PRECIFICACAO_ITEM_LICITACAO'
+load_dotenv()
 
-host='hadoopmn-gsi-prod03.mpmg.mp.br'
-port=10000
-username='trilhasgsi'
+schema = os.environ.get('DB_SCHEMA')
+nome_trilha = 'F03_PRECIFICACAO_ITEM_LICITACAO'
+host = os.environ.get('DB_HOST')
+port = os.environ.get('DB_PORT')
+username = os.environ.get('DB_USER_NAME')
+password = os.environ.get('DB_PASSWORD')
 database='default'
 auth='CUSTOM'
 
 
-def hive_table_to_dataframe(table, password):
+def hive_table_to_dataframe(table):
     '''
         It returns the content of a Hive table in a data frame.
 
@@ -40,7 +44,7 @@ def hive_table_to_dataframe(table, password):
 
 
 def _insert_hive_table(dataframe, table, version, batch_size, begin, end,
-                       process_cont, password):
+                       process_cont):
     '''
         It inserts the content of a data frame in a Hive table.
 
@@ -118,7 +122,7 @@ def _calc_interval(total_size, num_process):
     return intervals
 
 
-def dataframe_to_hive_table(dataframe, table, version, password, batch_size=1000,
+def dataframe_to_hive_table(dataframe, table, version, batch_size=1000,
                             num_process=20):
     '''
         It saves the content of a data frame in a Hive table, using batch and multi-process.
@@ -159,7 +163,7 @@ def dataframe_to_hive_table(dataframe, table, version, password, batch_size=1000
     for x in range(len(begin_end_tuples)):
         begin, end = begin_end_tuples[x]
         p = multiprocessing.Process(target=_insert_hive_table,
-                args=[dataframe, table, version, batch_size, begin, end, x, password])
+                args=[dataframe, table, version, batch_size, begin, end, x])
         jobs.append(p)
         p.start()
 

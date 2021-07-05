@@ -20,6 +20,10 @@ from item.item_list import (
 from gensim.models import FastText
 from gensim.models.fasttext import load_facebook_model
 from gensim.test.utils import datapath
+from nlp.utils import (
+    isfloat,
+    get_scientific_notation
+)
 
 
 def parse_args():
@@ -39,7 +43,10 @@ def parse_args():
                         help="Trained model file.")
     parser.add_argument("-e", "--num_epochs", default=5,
                         help="number of epochs to train the model.")
-
+    parser.add_argument("-w", "--num_workers", default=4,
+                        help="number of worker threads to train the model.")
+    parser.add_argument("-s", "--sci_notation", default=True,
+                        help="convert numbers to scientific notation.")
 
     return parser.parse_args()
 
@@ -60,6 +67,7 @@ def main():
         model = FastText(size=300, window=10, batch_words=1000, sg=1, workers=3,
                         iter=20, min_count=0, word_ngrams=1)
 
+    model.workers = int(args.num_workers)
 
     if args.type == 'item':
         items_list = list(itemlist.items_df['original_prep'])
@@ -81,6 +89,17 @@ def main():
             for item in items_list:
                 licitacao_items_list += item
             items_list.append(licitacao_items_list)
+
+    if args.sci_notation:
+        samples = []
+        for item in items_list:
+            sample = []
+            for token in item:
+                if isfloat(token):
+                    token = get_scientific_notation(token)
+                sample.append(token)
+            samples.append(sample)
+        items_list = samples
 
     print('Training model...')
     if args.pretrained != None:

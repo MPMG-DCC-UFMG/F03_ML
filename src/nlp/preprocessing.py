@@ -42,7 +42,7 @@ class PreprocessingText:
         self.remove_punctuation = remove_punctuation
 
         if self.remove_stopwords:
-            self.stopwords = get_stopwords(language)
+            self.stopwords, self.relevant_stopwords  = get_stopwords(language)
 
         if self.spellcheck:
             self.right_word = get_right_words(language)
@@ -92,7 +92,7 @@ class PreprocessingText:
         # remove duplicate tokens
         for t in tokens:
             if self.remove_tokens_with_digits and t not in strings:
-                if t.isnumeric():
+                if t.isnumeric() or isfloat(t):
                     tokens_.append(t)
                 elif not has_numbers(t):
                     tokens_.append(t)
@@ -106,16 +106,15 @@ class PreprocessingText:
     def preprocess_document_portuguese(self, document):
 
         item = document
+        item = item.replace(',', '.')
 
         # lowercase letters
         description = item.lower()
         if self.remove_punctuation:
-            # swaps punctuation with spaces
-            description = strip_punctuation2(description)
             perc = True if '%' in description else False
             # remove non alphanumeric tokens
-            description = strip_non_alphanum(description)
-            description = tpp.remove_special_characters(description)
+            description = remove_special_characters(description)
+            description = remove_dots(description)
             # add '%' at the end of the description
             if perc:
                 description += '%'
@@ -171,7 +170,7 @@ class PreprocessingText:
         return description
 
 
-    def preprocess_document(self, document, stopwords=None):
+    def preprocess_document(self, document):
 
         if self.language == 'pt':
             description = self.preprocess_document_portuguese(document)
@@ -368,8 +367,8 @@ class PreprocessingText:
 
         first_token = doc[0]
 
-        if first_token in self.stopwords or has_numbers(first_token) or \
-            first_token.isnumeric():
+        if first_token in self.stopwords or first_token in self.relevant_stopwords or \
+           has_numbers(first_token) or first_token.isnumeric() or isfloat(first_token):
             doc.remove(first_token)
             doc.append(first_token)
 
@@ -386,24 +385,14 @@ class PreprocessingText:
             licitacao = item[2]
             price = item[3]
             dsc_unidade = item[4]
-            funcao = None
             ano = item[5]
-            mes = item[6]
-            data = item[7]
-            municipio = item[8]
-            orgao = item[9]
-            if type(dsc_unidade) == str:
-                dsc_unidade = tpp.remove_accents(dsc_unidade.lower())
-            elif math.isnan(dsc_unidade):
+            if type(dsc_unidade) is not str and math.isnan(dsc_unidade):
                 dsc_unidade = ""
-            if funcao == 'nan':
-                funcao = 'Vazio'
             if isinstance(description, str) and description != "":
                 doc = self.preprocess_document(description)
                 doc = self.check_first_token(doc)
                 items_descriptions.append((doc, item_id, licitacao, price, \
-                                           dsc_unidade, description, funcao, ano, \
-                                           mes, data, municipio, orgao))
+                                           dsc_unidade, description, ano))
 
         results_process[it_process] = items_descriptions
 

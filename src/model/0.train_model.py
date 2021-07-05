@@ -13,7 +13,7 @@ from utils.read_files import (
 )
 import mlflow
 from mlflow_model import wrapper
-from util.get_items_hive import get_items_hive
+from utils.get_items_hive import get_items_hive
 
 
 def parse_args():
@@ -21,8 +21,8 @@ def parse_args():
 
     p.add_argument('-x', '--experiment_name', type=str,
                   default='banco_precos', help='name of the experiment.')
-    p.add_argument('--hive', type=str, default=True,
-                    help='if the input items should be read from hive.')
+    p.add_argument('--hive', type=str, default='',
+                    help='input hive table.')
     p.add_argument('-i', '--input', type=str,
                   default='../data/dataset_item_druid.csv', help='items table.')
     p.add_argument('-o', '--outpath', type=str, default='../data/output/test/',
@@ -51,10 +51,10 @@ def main():
     model = ItemClustering(config=config)
 
     file = args.input
-    if args.hive:
+    if not bool(args.hive):
         items = get_items(file)
     else:
-        items = get_items_hive('f03_licitacao_item')
+        items = get_items_hive(args.hive)
 
     mlflow.set_experiment(experiment_name=args.experiment_name)
     mlflow_pyfunc_model_path = "item_clustering_mlflow_pyfunc"

@@ -1,3 +1,8 @@
+from nlp.utils import (
+    isfloat,
+    get_scientific_notation
+)
+
 
 class Item:
 
@@ -32,7 +37,7 @@ class Item:
     def extract_entities(self, description, licitacao_item, licitacao, price,
                          dsc_unidade, original, ano, set_unit_metrics,
                          set_colors, set_materials, set_sizes, set_quantities,
-                         set_qualifiers, set_numbers):
+                         set_qualifiers, set_numbers, set_ambiguous, stopwords):
         '''
             Structure item descriptions.
 
@@ -58,7 +63,9 @@ class Item:
             if token in set_qualifiers:
                 continue
 
-            if self.is_number(token) or token in set_numbers:
+            if self.is_number(token) or isfloat(token):
+                self.numbers.append(get_scientific_notation(token))
+            elif token in set_numbers:
                 self.numbers.append(token)
             elif token in set_unit_metrics:
                 self.unit_metrics.append(token)
@@ -74,6 +81,16 @@ class Item:
                 continue
             else:
                 self.words.append(token)
+
+        if len(self.words) > 0 and self.words[0] in stopwords:
+            self.words = [description[0]] + self.words
+        else:
+            if len(self.quantities) > 0 and self.quantities[0] in set_ambiguous:
+                self.words.append(self.quantities[0])
+            elif len(self.materials) > 0 and self.materials[0] in set_ambiguous:
+                self.words.append(self.materials[0])
+            elif len(self.colors) > 0 and self.colors[0] in set_ambiguous:
+                self.words.append(self.colors[0])
 
 
     def load_item(self, item, original):
