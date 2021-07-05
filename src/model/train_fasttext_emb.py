@@ -67,7 +67,7 @@ def main():
         model = FastText(size=300, window=10, batch_words=1000, sg=1, workers=3,
                         iter=20, min_count=0, word_ngrams=1)
 
-    model.workers = args.num_workers
+    model.workers = int(args.num_workers)
 
     if args.type == 'item':
         items_list = list(itemlist.items_df['original_prep'])
