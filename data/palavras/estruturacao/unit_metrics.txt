@@ -65,7 +65,7 @@ mb
 dl
 watts
 kva
-mA
+ma
 grs
 hp
 kw
