@@ -78,7 +78,7 @@ class Item:
             elif token in set_quantities:
                 self.quantities.append(token)
             elif len(token) == 1:
-                continue
+                self.unit_metrics.append(token)
             else:
                 self.words.append(token)
 
