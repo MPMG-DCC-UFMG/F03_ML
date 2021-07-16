@@ -63,7 +63,13 @@ abs
 ano
 mb
 dl
+watt
 watts
+mw
+mwatt
+mwatts
+joule
+joules
 kva
 ma
 grs
@@ -88,8 +94,13 @@ semana
 mes
 mmol
 hertz
+khertz
+mhertz
+ghertz
 hz
 khz
+mhz
+ghz
 bit
 byte
 kb
@@ -107,6 +118,5 @@ terabyte
 quilo
 gr
 ag
-mhz
 gota
 nm
