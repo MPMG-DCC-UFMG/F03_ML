@@ -194,7 +194,7 @@ def load_clustering_results(file):
 
 
 def save_clustering_results_hive_table(results, outliers, results_table,
-                                       outliers_table, version, password):
+                                       outliers_table, version):
     '''
         It saves the clustering results in Hive tables.
 
@@ -219,7 +219,7 @@ def save_clustering_results_hive_table(results, outliers, results_table,
                 for v in values:
                     data.append([k, v])
         dataframe = pd.DataFrame(np.asarray(data), columns = ['cluster_id', 'item_id'])
-        dataframe_to_hive_table(dataframe, t, version, password)
+        dataframe_to_hive_table(dataframe, t, version)
 
 
 def load_clustering_results_hive_table(results_table, outliers_table, password):

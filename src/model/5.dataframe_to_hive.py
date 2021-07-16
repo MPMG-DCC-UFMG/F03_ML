@@ -31,13 +31,11 @@ def parse_args():
     p = argparse.ArgumentParser()
     p.add_argument('--input', type = str, default = 'f03_items_preprocessed_complete'
                   ,help='file containing the items dataset')
-    p.add_argument("-r", "--results", default=True,
-                        help="results files directory.")
-    p.add_argument("-v", "--version", required=True,
-                        help="execution version.")
-    p.add_argument("-p", "--password", default="", help="connection password.")
+    p.add_argument("-r", "--results", default=True, help="results files directory.")
+    p.add_argument("-s", "--suffix", default="", help="table name suffix.")
+    p.add_argument("-v", "--version", required=True, help="execution version.")
     p.add_argument("-n", "--n_process", default=20, type=int,
-                    help="number of process in multiprocessing.")
+                   help="number of process in multiprocessing.")
 
     parsed = p.parse_args()
 
@@ -56,14 +54,14 @@ def main():
     itemlist = ItemList()
     itemlist.load_items_from_file(args.input)
 
-    clusters_df = pd.read_csv(args.results + "clusters.csv.zip", sep=';',
-                              low_memory=False)
+    # clusters_df = pd.read_csv(args.results + "clusters.csv.zip", sep=';',
+    #                           low_memory=False)
     cluster_prices_statistics = pd.read_csv(args.results + "cluster_prices_statistics.csv.zip",
                                             sep=';', low_memory=False)
-    cluster_prices_statistics_year = pd.read_csv(args.results + "cluster_prices_statistics_year.csv.zip",
-                                            sep=';', low_memory=False)
-    items_clusters_wo_outliers = pd.read_csv(args.results + "items_clusters_train_wo_out.csv.zip",
-                                             sep=';', low_memory=False)
+    # cluster_prices_statistics_year = pd.read_csv(args.results + "cluster_prices_statistics_year.csv.zip",
+    #                                         sep=';', low_memory=False)
+    # items_clusters_wo_outliers = pd.read_csv(args.results + "items_clusters_train_wo_out.csv.zip",
+    #                                          sep=';', low_memory=False)
 
     # Save tables to HIVE
 
@@ -72,16 +70,16 @@ def main():
 
     print(time.asctime()," Saving dataframe to a HIVE table:")
 
-    dataframe_to_hive_table(itemlist.items_df, "f03_itens", version, args.password,
-                            num_process=num_process)
-    dataframe_to_hive_table(clusters_df, "f03_grupos", version, args.password,
-                            num_process=num_process)
-    dataframe_to_hive_table(cluster_prices_statistics, "f03_banco_precos_grupos",
-                            version, args.password, num_process=num_process)
-    dataframe_to_hive_table(cluster_prices_statistics, "f03_banco_precos_grupos_ano",
-                            version, args.password, num_process=num_process)
-    dataframe_to_hive_table(items_clusters_wo_outliers, "f03_itens_precificacao",
-                            version, args.password, num_process=num_process)
+    # dataframe_to_hive_table(itemlist.items_df, "f03_itens" + args.suffix, version,
+    #                         num_process=num_process)
+    # dataframe_to_hive_table(clusters_df, "f03_grupos" + args.suffix, version,
+    #                         num_process=num_process)
+    dataframe_to_hive_table(cluster_prices_statistics, "f03_banco_precos_grupos" + args.suffix,
+                            version, num_process=num_process)
+    # dataframe_to_hive_table(cluster_prices_statistics, "f03_banco_precos_grupos_ano" + args.suffix,
+    #                         version, num_process=num_process)
+    # dataframe_to_hive_table(items_clusters_wo_outliers, "f03_itens_precificacao" + args.suffix,
+                            # version, num_process=num_process)
 
 
 if __name__ == "__main__":

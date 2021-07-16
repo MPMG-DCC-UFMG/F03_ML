@@ -1,23 +1,27 @@
 # imports
 
 import os
-from dotenv import load_dotenv
+from dotenv import load_dotenv, dotenv_values
 from pyhive import hive
 import pandas as pd
 import io
 import math
 import multiprocessing
 
-load_dotenv()
-
-schema = os.environ.get('DB_SCHEMA')
 nome_trilha = 'F03_PRECIFICACAO_ITEM_LICITACAO'
-host = os.environ.get('DB_HOST')
-port = os.environ.get('DB_PORT')
-username = os.environ.get('DB_USER_NAME')
-password = os.environ.get('DB_PASSWORD')
 database='default'
 auth='CUSTOM'
+
+def get_database_parameters():
+
+    load_dotenv()
+    username = os.environ.get('DB_USER_NAME')
+    password = os.environ.get('DB_PASSWORD')
+    host = os.environ.get('DB_HOST')
+    port = int(os.environ.get('DB_PORT'))
+    schema = os.environ.get('DB_SCHEMA')
+
+    return (username, password, host, port, schema)
 
 
 def hive_table_to_dataframe(table):
@@ -26,6 +30,8 @@ def hive_table_to_dataframe(table):
 
         table (str): Hive table name.
     '''
+
+    username, password, host, port, schema = get_database_parameters()
     hive_connection = hive.Connection(
                 host=host,
                 port=port,
@@ -56,6 +62,8 @@ def _insert_hive_table(dataframe, table, version, batch_size, begin, end,
         end (int): Ending of the interval of the dataframe.
         process_cont (int): Current process.
     '''
+
+    username, password, host, port, schema = get_database_parameters()
     cont = 1
 
     batch_rows_wr = io.StringIO()
@@ -135,6 +143,7 @@ def dataframe_to_hive_table(dataframe, table, version, batch_size=1000,
         num_process (int): Number of process.
     '''
 
+    username, password, host, port, schema = get_database_parameters()
     hive_connection = hive.Connection(
         host=host,
         port=port,

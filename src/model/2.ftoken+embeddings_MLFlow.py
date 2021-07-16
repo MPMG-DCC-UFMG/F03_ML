@@ -55,7 +55,6 @@ def parse_args():
                   ,help='clustering algorithm to use')
     p.add_argument('--n_process', type=int, default=10
                   ,help='number of process to use on clustering')
-    p.add_argument("-p", "--password", default="", help="connection password.")
     p.add_argument("-v", "--version", default="", help="execution version.")
     p.add_argument("-i", "--hive", default=False, help="load table from hive and \
                     save the results on hive.")
@@ -153,7 +152,7 @@ def main():
     itemlist = ItemList()
 
     if args.hive:
-        itemlist.load_items_from_hive_table(args.input, args.password)
+        itemlist.load_items_from_hive_table(args.input)
     else:
         itemlist.load_items_from_file(args.input)
 
@@ -232,8 +231,7 @@ def main():
     if args.hive:
         version = args.version
         save_clustering_results_hive_table(clusters, outliers, 'f03_grupos_hdbscan',
-                                           'f03_grupos_hdbscan_outliers', version,
-                                           args.password)
+                                           'f03_grupos_hdbscan_outliers', version)
     else:
         save_clustering_results_pickle(clusters, outliers, args.outpath)
 
