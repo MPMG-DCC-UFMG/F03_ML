@@ -1,6 +1,8 @@
 # imports
 
 import pandas as pd
+import json
+import pickle
 
 
 def get_items(file_items):
@@ -17,3 +19,21 @@ def get_items(file_items):
                       'ano_exercicio']].values.tolist()
 
     return items
+
+
+def read_json_file(file):
+
+    with open(file, "r") as JFile:
+        data = json.load(JFfile)
+    JFile.close()
+
+    return data
+
+
+def read_pickle_file(file):
+
+    with open(file, "rb") as PFile:
+        data = pickle.load(PFile)
+    PFile.close()
+
+    return data

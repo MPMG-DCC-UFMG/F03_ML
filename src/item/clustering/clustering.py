@@ -11,6 +11,7 @@ import multiprocessing
 import nltk
 import pickle
 import json
+import shutil
 from .utils import *
 from .item_representation import *
 
@@ -121,8 +122,7 @@ def shuffle_groups(groups):
 
 
 def merge_multiprocessing_results(results_process, outliers_process,
-                                  items_vec_process, clustering_model_process,
-                                  reducer_model_process, n_process):
+                                  output_path, n_process):
 
     clusters = {}
     outliers = {}
@@ -133,9 +133,16 @@ def merge_multiprocessing_results(results_process, outliers_process,
     for i in range(n_process):
         clusters.update(results_process[i])
         outliers.update(outliers_process[i])
-        items_vec.update(items_vec_process[i])
-        clustering_model.update(clustering_model_process[i])
-        reducer_model.update(reducer_model_process[i])
+
+    for group_name, item_ids in clusters.items():
+        items_vec[group_name] = get_cluster_embeddings(output_path, group_name)[group_name]
+        clustering_model[group_name] = get_model(output_path, "clustering_model", group_name)[group_name]
+        reducer_model[group_name] = get_model(output_path, "dimred_model", group_name)[group_name]
+
+    # remove directory
+    shutil.rmtree(os.path.join(output_path, "clustering_model"))
+    shutil.rmtree(os.path.join(output_path, "dimred_model"))
+    shutil.rmtree(os.path.join(output_path, "embeddings"))
 
     return clusters, outliers, items_vec, clustering_model, reducer_model
 
@@ -175,8 +182,7 @@ def cluster_embeddings_by(embeddings_matrix, algorithm, kmax=None):
 
 def baseline_plus_clustering(items_data, groups, word_embeddings, word_class,
                             categories, embedding_type, it_process, algorithm,
-                            operation, result_dict, embeddings_dict,
-                            clustering_model_dict, reducer_model_dict,
+                            operation, result_dict, output_path,
                             items_embeddings=None, dim_reduction=True, norm=True,
                             sample_size=0.2):
     '''
@@ -211,9 +217,6 @@ def baseline_plus_clustering(items_data, groups, word_embeddings, word_class,
     # together with x-means considering a the item embeddings
     # grouped by the first token approach:
     first_token_plus_emb = {}
-    items_vec = {}
-    cluster_model = {}
-    dimred_model = {}
 
     for ft_it in range(len(groups_names)):
         if(len(group_descriptions[ft_it]) > 30):
@@ -229,10 +232,16 @@ def baseline_plus_clustering(items_data, groups, word_embeddings, word_class,
                                                 sample_size=sample_size,
                                                 algorithm='UMAP')
                     embeddings_matrix = reducer.transform(embeddings_matrix)
+                    dimred_model = {}
                     dimred_model[groups_names[ft_it]] = reducer
+                    save_model(output_path, "dimred_model", groups_names[ft_it],
+                               dimred_model)
 
+                items_vec = {}
                 for _id, desc_id in enumerate(group_descriptions[ft_it]):
                     items_vec[desc_id] = [float(x) for x in embeddings_matrix[_id]]
+
+                save_cluster_embeddings(output_path, groups_names[ft_it], items_vec)
             else:
                 embeddings_matrix = get_group_embeddings_from_dict(group_descriptions[ft_it],
                                                                   items_embeddings,
@@ -240,10 +249,13 @@ def baseline_plus_clustering(items_data, groups, word_embeddings, word_class,
 
             kmax = len(group_descriptions[ft_it])/30
             #It applies the clusters on the embeddings matrix:
-            clustering = cluster_embeddings_by(embeddings_matrix, algorithm,
-                                                        kmax)
+            clustering = cluster_embeddings_by(embeddings_matrix, algorithm, kmax)
+            cluster_model = {}
             cluster_model[groups_names[ft_it]] = clustering
             clusters_embeddings = clustering.get_clusters()
+
+            save_model(output_path, "clustering_model", groups_names[ft_it],
+                       cluster_model)
 
             it = 0
             for c in clusters_embeddings:
@@ -258,9 +270,6 @@ def baseline_plus_clustering(items_data, groups, word_embeddings, word_class,
             first_token_plus_emb[groups_names[ft_it]] = group_descriptions[ft_it]
 
     result_dict[it_process] = first_token_plus_emb
-    embeddings_dict[it_process] = items_vec
-    clustering_model_dict[it_process] = cluster_model
-    reducer_model_dict[it_process] = dimred_model
 
 
 def cluster_embeddings_by_hdbscan(embeddings_matrix, min_samples=None):
@@ -312,8 +321,7 @@ def run_dim_reduction(embeddings_matrix, sample_size=None, algorithm='UMAP'):
 
 def baseline_plus_hdbscan(items_data, groups, word_embeddings,
                           word_class, categories, embedding_type, it_process,
-                          operation, result_dict, outliers_dict, embeddings_dict,
-                          clustering_model_dict, reducer_model_dict,
+                          operation, result_dict, outliers_dict, output_path,
                           items_embeddings=None, dim_reduction=True, norm=True,
                           sample_size=0.2):
     '''
@@ -348,9 +356,6 @@ def baseline_plus_hdbscan(items_data, groups, word_embeddings,
     # grouped by the first token approach:
     first_token_plus_emb = {}
     first_token_plus_emb_outliers = {}
-    items_vec = {}
-    hdbscan_model = {}
-    dimred_model = {}
 
     for ft_it in range(len(groups_names)):
         if(len(group_descriptions[ft_it]) > 30):
@@ -366,10 +371,15 @@ def baseline_plus_hdbscan(items_data, groups, word_embeddings,
                                                 sample_size=sample_size,
                                                 algorithm='UMAP')
                     embeddings_matrix = reducer.transform(embeddings_matrix)
+                    dimred_model = {}
                     dimred_model[groups_names[ft_it]] = reducer
+                    save_model(output_path, "dimred_model", groups_names[ft_it],
+                              dimred_model)
 
+                items_vec = {}
                 for _id, desc_id in enumerate(group_descriptions[ft_it]):
                     items_vec[desc_id] = [float(x) for x in embeddings_matrix[_id]]
+                save_cluster_embeddings(output_path, groups_names[ft_it], items_vec)
             else:
                 embeddings_matrix = get_group_embeddings_from_dict(group_descriptions[ft_it],
                                                                   items_embeddings,
@@ -378,11 +388,13 @@ def baseline_plus_hdbscan(items_data, groups, word_embeddings,
             #It applies the clusters on the embeddings matrix:
             clustering = cluster_embeddings_by_hdbscan(embeddings_matrix)
             del embeddings_matrix
+            hdbscan_model = {}
             hdbscan_model[groups_names[ft_it]] = clustering
             clusters_embeddings, outliers = get_hdbscan_outliers(clustering)
             cluster_items, cluster_items_outliers = get_hdbscan_clusters(group_descriptions[ft_it],
                                                                          clusters_embeddings,
                                                                          outliers)
+            save_model(output_path, "clustering_model", groups_names[ft_it], hdbscan_model)
 
             for cluster, items in cluster_items.items():
                 # It translates ids from HDBSCAN to actual descriptions (new groups):
@@ -400,15 +412,12 @@ def baseline_plus_hdbscan(items_data, groups, word_embeddings,
 
     result_dict[it_process] = first_token_plus_emb
     outliers_dict[it_process] = first_token_plus_emb_outliers
-    embeddings_dict[it_process] = items_vec
-    clustering_model_dict[it_process] = hdbscan_model
-    reducer_model_dict[it_process] = dimred_model
 
 
-def run_baseline_clustering(itemlist, word_embeddings, word_class, algorithm='hdbscan',
-                            items_embeddings=None, dim_reduction=True, norm=True,
-                            n_process=10, categories=None, embedding_type=None,
-                            operation='mean'):
+def run_baseline_clustering(itemlist, word_embeddings, word_class, output_path,
+                            algorithm='hdbscan', items_embeddings=None,
+                            dim_reduction=True, norm=True, n_process=10,
+                            categories=None, embedding_type=None, operation='mean'):
     '''
         It runs the HDBSCAN algorithm for each group generated by the first token
         grouping.
@@ -467,8 +476,7 @@ def run_baseline_clustering(itemlist, word_embeddings, word_class, algorithm='hd
             p = multiprocessing.Process(target=baseline_plus_clustering,
             args = (items_data, (groups_names, groups_items), word_embeddings, \
                     word_class, categories, embedding_type, i, algorithm, \
-                    operation, results_process, items_vec_process, \
-                    clustering_model_process, reducer_model_process, \
+                    operation, results_process, output_path, \
                     items_embeddings, dim_reduction, norm))
             jobs.append(p)
             p.start()
@@ -481,8 +489,7 @@ def run_baseline_clustering(itemlist, word_embeddings, word_class, algorithm='hd
             p = multiprocessing.Process(target=baseline_plus_hdbscan,
             args = (items_data, (groups_names, groups_items), word_embeddings, \
                     word_class, categories, embedding_type, i, operation, \
-                    results_process, outliers_process, items_vec_process, \
-                    clustering_model_process, reducer_model_process, \
+                    results_process, outliers_process, output_path, \
                     items_embeddings, dim_reduction, norm))
             jobs.append(p)
             p.start()
@@ -494,8 +501,7 @@ def run_baseline_clustering(itemlist, word_embeddings, word_class, algorithm='hd
     # merge multiprocessing results
     clusters, outliers, items_vec, clustering_model, \
     reducer_model = merge_multiprocessing_results(results_process, outliers_process,
-                                      items_vec_process, clustering_model_process,
-                                      reducer_model_process, n_process)
+                                                  output_path, n_process)
 
     return clusters, outliers, items_vec, clustering_model, reducer_model
 

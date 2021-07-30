@@ -9,6 +9,7 @@ import pickle
 import json
 import sys
 import os
+from utils.read_files import *
 
 
 def get_item_vec(_item, word_embeddings, word_class, categories=None,
@@ -512,6 +513,7 @@ def save_items_embeddings(items_embeddings, file):
     # write to json file
     with open(file, "w") as JFile:
         json.dump(items_embeddings, JFile)
+    JFile.close()
 
 
 def load_items_embeddings(file):
@@ -519,11 +521,7 @@ def load_items_embeddings(file):
         It loads item embeddings from a json file.
     '''
 
-    with open(file, "r") as JFile:
-        items_embs = json.load(JFile)
-    JFile.close()
-
-    return items_embs
+    return read_json_file(file)
 
 
 def get_group_embeddings_matrix(group_desc, items_list, word_embeddings, word_class,

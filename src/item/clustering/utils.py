@@ -1,4 +1,4 @@
-import os,sys
+import os, sys
 sys.path.insert(1, os.path.join(sys.path[0], '...'))
 
 import numpy as np
@@ -12,6 +12,50 @@ from utils.hive_access import (
     dataframe_to_hive_table,
     hive_table_to_dataframe
 )
+from .item_representation import (
+    save_items_embeddings,
+    load_items_embeddings
+)
+from utils.read_files import *
+
+
+def save_model(output_path, model_name, group_name, model):
+
+    model_path = os.path.join(output_path, model_name, group_name)
+
+    if not os.path.exists(model_path):
+        os.makedirs(model_path)
+
+    with open(model_path + "/" + model_name + ".pkl", "wb") as PFile:
+        pickle.dump(model, PFile)
+    PFile.close()
+
+
+def get_model(output_path, model_name, group_name):
+
+    model_path = os.path.join(output_path, model_name, group_name)
+    model = read_pickle_file(model_path + "/" + model_name + ".pkl")
+
+    return model
+
+
+def save_cluster_embeddings(output_path, group_name, items_embeddings):
+
+    embeddings_path = os.path.join(output_path, 'embeddings', group_name)
+
+    if not os.path.exists(embeddings_path):
+        os.makedirs(embeddings_path)
+
+    # write to json file
+    save_items_embeddings(items_embeddings, embeddings_path + "/items_vec.json")
+
+
+def get_cluster_embeddings(output_path, group_name):
+
+    embeddings_path = os.path.join(output_path, 'embeddings', group_name)
+    items_embeddings = load_items_embeddings(embeddings_path + "/items_vec.json")
+
+    return items_embeddings
 
 
 def get_clusters_items(clusters_items, outliers):
@@ -271,13 +315,8 @@ def load_clustering_results_pickle(dir):
         dir (str): folder which the results were saved on.
     '''
 
-    with open(dir + "results.pkl", "rb") as PFile:
-        results = pickle.load(PFile)
-    PFile.close()
-
-    with open(dir + "outliers.pkl", "rb") as PFile:
-        outliers = pickle.load(PFile)
-    PFile.close()
+    results = read_pickle_file(dir + "results.pkl")
+    outliers = read_pickle_file(dir + "outliers.pkl")
 
     return results, outliers
 
@@ -307,13 +346,8 @@ def load_models_pickle(folder):
         folder (str): folder which the results were saved on.
     '''
 
-    with open(folder + "clustering_model.pkl", "rb") as PFile:
-        clustering_model = pickle.load(PFile)
-    PFile.close()
-
-    with open(folder + "dimred_model.pkl", "rb") as PFile:
-        reducer_model = pickle.load(PFile)
-    PFile.close()
+    clustering_model = read_pickle_file(folder + "clustering_model.pkl")
+    reducer_model = read_pickle_file(folder + "dimred_model.pkl")
 
     return clustering_model, reducer_model
 

@@ -28,12 +28,3 @@ def translate_id_to_descriptions(ids, descriptions_ids):
     for i in ids:
         arr.append(descriptions_ids[i])
     return arr
-
-
-def read_json_file(file):
-
-    with open(file, "r") as jfile:
-        file_dict = json.load(jfile)
-    jfile.close()
-
-    return file_dict
