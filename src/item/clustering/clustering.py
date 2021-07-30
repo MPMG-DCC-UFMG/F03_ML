@@ -236,12 +236,14 @@ def baseline_plus_clustering(items_data, groups, word_embeddings, word_class,
                     dimred_model[groups_names[ft_it]] = reducer
                     save_model(output_path, "dimred_model", groups_names[ft_it],
                                dimred_model)
+                    del reducer
 
                 items_vec = {}
                 for _id, desc_id in enumerate(group_descriptions[ft_it]):
                     items_vec[desc_id] = [float(x) for x in embeddings_matrix[_id]]
 
                 save_cluster_embeddings(output_path, groups_names[ft_it], items_vec)
+                del items_vec
             else:
                 embeddings_matrix = get_group_embeddings_from_dict(group_descriptions[ft_it],
                                                                   items_embeddings,
@@ -253,9 +255,9 @@ def baseline_plus_clustering(items_data, groups, word_embeddings, word_class,
             cluster_model = {}
             cluster_model[groups_names[ft_it]] = clustering
             clusters_embeddings = clustering.get_clusters()
-
             save_model(output_path, "clustering_model", groups_names[ft_it],
                        cluster_model)
+            del clustering
 
             it = 0
             for c in clusters_embeddings:
@@ -375,11 +377,14 @@ def baseline_plus_hdbscan(items_data, groups, word_embeddings,
                     dimred_model[groups_names[ft_it]] = reducer
                     save_model(output_path, "dimred_model", groups_names[ft_it],
                               dimred_model)
+                    del reducer
 
                 items_vec = {}
                 for _id, desc_id in enumerate(group_descriptions[ft_it]):
                     items_vec[desc_id] = [float(x) for x in embeddings_matrix[_id]]
+
                 save_cluster_embeddings(output_path, groups_names[ft_it], items_vec)
+                del items_vec
             else:
                 embeddings_matrix = get_group_embeddings_from_dict(group_descriptions[ft_it],
                                                                   items_embeddings,
@@ -395,6 +400,7 @@ def baseline_plus_hdbscan(items_data, groups, word_embeddings,
                                                                          clusters_embeddings,
                                                                          outliers)
             save_model(output_path, "clustering_model", groups_names[ft_it], hdbscan_model)
+            del clustering
 
             for cluster, items in cluster_items.items():
                 # It translates ids from HDBSCAN to actual descriptions (new groups):
