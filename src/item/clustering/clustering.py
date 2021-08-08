@@ -450,9 +450,6 @@ def run_baseline_clustering(itemlist, word_embeddings, word_class, output_path,
     manager = multiprocessing.Manager()
     results_process = manager.dict()
     outliers_process = manager.dict()
-    items_vec_process = manager.dict()
-    clustering_model_process = manager.dict()
-    reducer_model_process = manager.dict()
     jobs = []
 
     # It gets the first tokens of each description and groups
