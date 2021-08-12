@@ -431,3 +431,43 @@ def get_ranges(group_len, n_process):
     upper[n_process - 1] = group_len - 1
 
     return lower, upper
+
+
+def get_items_for_process(items_df, groups, limits):
+
+    items_ids = []
+    groups_names = list(groups.keys())
+    group_descriptions = list(groups.values())
+
+    lower = limits[0]
+    upper = limits[1]
+
+    sample_groups_names = []
+    sample_groups_items = []
+
+    # conferir limites
+    for i in range(lower, upper + 1):
+        sample_groups_names.append(groups_names[i])
+        sample_groups_items.append(group_descriptions[i])
+        items_ids += group_descriptions[i]
+
+    sample_items = items_df.loc[items_ids]
+    items_df.drop(items_ids, inplace=True)
+
+    return sample_items, sample_groups_names, sample_groups_items
+
+
+def get_items_for_processes(items_df, n_process, process_ranges, groups):
+
+    # get items sample for each process
+    process_items = {}  # process -> (items, groups_names, groups_items)
+
+    for i in range(n_process):
+        lower = process_ranges[0][i]
+        upper = process_ranges[1][i]
+        limits = (lower, upper)
+        items_data, groups_names, groups_items = get_items_for_process(items_df,
+                                                        groups, limits)
+        process_items[i] = (items_data, groups_names, groups_items)
+
+    return process_items

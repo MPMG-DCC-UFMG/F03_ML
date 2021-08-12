@@ -148,6 +148,16 @@ def cosine_similarity(arrayA, arrayB):
     return 1 - cosine_distance(arrayA, arrayB)
 
 
+def calc_distance(arrayA, arrayB, distance='cosine'):
+    '''
+        Get the distance between two vectors.
+    '''
+    if distance == 'cosine':
+        value = cosine_distance(arrayA, arrayB)
+
+    return value
+
+
 def zero_vector(embedding):
     '''
         Check if an item embedding is a zero vector.

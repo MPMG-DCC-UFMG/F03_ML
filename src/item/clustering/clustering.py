@@ -66,46 +66,6 @@ def get_hdbscan_clusters(group_descriptions, clusters_embeddings, outliers):
     return cluster_items, cluster_items_outliers
 
 
-def get_items_for_process(itemlist, groups, limits):
-
-    items_ids = []
-    groups_names = list(groups.keys())
-    group_descriptions = list(groups.values())
-
-    lower = limits[0]
-    upper = limits[1]
-
-    sample_groups_names = []
-    sample_groups_items = []
-
-    # conferir limites
-    for i in range(lower, upper + 1):
-        sample_groups_names.append(groups_names[i])
-        sample_groups_items.append(group_descriptions[i])
-        items_ids += group_descriptions[i]
-
-    sample_items = itemlist.items_df.loc[items_ids]
-    itemlist.items_df.drop(items_ids, inplace=True)
-
-    return sample_items, sample_groups_names, sample_groups_items
-
-
-def get_items_for_processes(itemlist, n_process, process_ranges, groups):
-
-    # get items sample for each process
-    process_items = {}  # process -> (items, groups_names, groups_items)
-
-    for i in range(n_process):
-        lower = process_ranges[0][i]
-        upper = process_ranges[1][i]
-        limits = (lower, upper)
-        items_data, groups_names, groups_items = get_items_for_process(itemlist,
-                                                        groups, limits)
-        process_items[i] = (items_data, groups_names, groups_items)
-
-    return process_items
-
-
 def shuffle_groups(groups):
 
     group_len = len(groups)
@@ -135,9 +95,11 @@ def merge_multiprocessing_results(results_process, outliers_process,
         outliers.update(outliers_process[i])
 
     for group_name, item_ids in clusters.items():
-        items_vec[group_name] = get_cluster_embeddings(output_path, group_name)[group_name]
-        clustering_model[group_name] = get_model(output_path, "clustering_model", group_name)[group_name]
-        reducer_model[group_name] = get_model(output_path, "dimred_model", group_name)[group_name]
+        if '_' in group_name:
+            ftoken = group_name.split('_')[0]
+            items_vec.update(get_cluster_embeddings(output_path, ftoken))
+            clustering_model.update(get_model(output_path, "clustering_model", ftoken))
+            reducer_model.update(get_model(output_path, "dimred_model", ftoken))
 
     # remove directory
     shutil.rmtree(os.path.join(output_path, "clustering_model"))
@@ -227,27 +189,28 @@ def baseline_plus_clustering(items_data, groups, word_embeddings, word_class,
                                                                 word_class, categories,
                                                                 embedding_type,
                                                                 norm, operation)
-                if dim_reduction:
-                    reducer = run_dim_reduction(embeddings_matrix,
-                                                sample_size=sample_size,
-                                                algorithm='UMAP')
-                    embeddings_matrix = reducer.transform(embeddings_matrix)
-                    dimred_model = {}
-                    dimred_model[groups_names[ft_it]] = reducer
-                    save_model(output_path, "dimred_model", groups_names[ft_it],
-                               dimred_model)
-                    del reducer
-
-                items_vec = {}
-                for _id, desc_id in enumerate(group_descriptions[ft_it]):
-                    items_vec[desc_id] = [float(x) for x in embeddings_matrix[_id]]
-
-                save_cluster_embeddings(output_path, groups_names[ft_it], items_vec)
-                del items_vec
             else:
                 embeddings_matrix = get_group_embeddings_from_dict(group_descriptions[ft_it],
                                                                   items_embeddings,
                                                                   norm=norm)
+
+            if dim_reduction:
+                reducer = run_dim_reduction(embeddings_matrix,
+                                            sample_size=sample_size,
+                                            algorithm='UMAP')
+                embeddings_matrix = reducer.transform(embeddings_matrix)
+                dimred_model = {}
+                dimred_model[groups_names[ft_it]] = reducer
+                save_model(output_path, "dimred_model", groups_names[ft_it],
+                           dimred_model)
+                del reducer
+
+            items_vec = {}
+            for _id, desc_id in enumerate(group_descriptions[ft_it]):
+                items_vec[desc_id] = [float(x) for x in embeddings_matrix[_id]]
+
+            save_cluster_embeddings(output_path, groups_names[ft_it], items_vec)
+            del items_vec
 
             kmax = len(group_descriptions[ft_it])/30
             #It applies the clusters on the embeddings matrix:
@@ -368,27 +331,28 @@ def baseline_plus_hdbscan(items_data, groups, word_embeddings,
                                                                 word_class, categories,
                                                                 embedding_type,
                                                                 norm, operation)
-                if dim_reduction:
-                    reducer = run_dim_reduction(embeddings_matrix,
-                                                sample_size=sample_size,
-                                                algorithm='UMAP')
-                    embeddings_matrix = reducer.transform(embeddings_matrix)
-                    dimred_model = {}
-                    dimred_model[groups_names[ft_it]] = reducer
-                    save_model(output_path, "dimred_model", groups_names[ft_it],
-                              dimred_model)
-                    del reducer
-
-                items_vec = {}
-                for _id, desc_id in enumerate(group_descriptions[ft_it]):
-                    items_vec[desc_id] = [float(x) for x in embeddings_matrix[_id]]
-
-                save_cluster_embeddings(output_path, groups_names[ft_it], items_vec)
-                del items_vec
             else:
                 embeddings_matrix = get_group_embeddings_from_dict(group_descriptions[ft_it],
                                                                   items_embeddings,
                                                                   norm=norm)
+
+            if dim_reduction:
+                reducer = run_dim_reduction(embeddings_matrix,
+                                            sample_size=sample_size,
+                                            algorithm='UMAP')
+                embeddings_matrix = reducer.transform(embeddings_matrix)
+                dimred_model = {}
+                dimred_model[groups_names[ft_it]] = reducer
+                save_model(output_path, "dimred_model", groups_names[ft_it],
+                          dimred_model)
+                del reducer
+
+            items_vec = {}
+            for _id, desc_id in enumerate(group_descriptions[ft_it]):
+                items_vec[desc_id] = [float(x) for x in embeddings_matrix[_id]]
+
+            save_cluster_embeddings(output_path, groups_names[ft_it], items_vec)
+            del items_vec
 
             #It applies the clusters on the embeddings matrix:
             clustering = cluster_embeddings_by_hdbscan(embeddings_matrix)
@@ -466,7 +430,7 @@ def run_baseline_clustering(itemlist, word_embeddings, word_class, output_path,
     if items_embeddings != None:
         dim_reduction = False
 
-    process_items = get_items_for_processes(itemlist, n_process, process_ranges,
+    process_items = get_items_for_processes(itemlist.items_df, n_process, process_ranges,
                                             groups_new)
     del itemlist
 
@@ -632,8 +596,9 @@ def predict_items_clusters(itemlist, word_embeddings, word_class, reducer_model,
     print('Read ranges')
     print(process_ranges)
 
-    process_items = get_items_for_processes(itemlist, n_process, process_ranges,
+    process_items = get_items_for_processes(itemlist.items_df, n_process, process_ranges,
                                             groups_new)
+    del itemlist
 
     for i in range(n_process):
         items_data = process_items[i][0]
