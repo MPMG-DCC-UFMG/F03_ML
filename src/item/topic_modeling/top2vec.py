@@ -87,12 +87,34 @@ def top2vec(items_data, groups, word_embeddings, reducer_model, items_vec,
     results_dict[it_process] = cluster_words
 
 
+def merge_multiprocessing_results(results_process, n_process):
+
+    cluster_words = {}
+
+    for i in range(n_process):
+        cluster_words.update(results_process[i])
+
+    return cluster_words
+
+
+def get_valid_groups(groups):
+
+    valid_groups = {}
+
+    for group_name, desc_ids in groups.items():
+        if '_' in group_name and "-1" not in group_name:
+            valid_groups[group_name] = desc_ids
+
+    return valid_groups
+
+
 def get_cluster_words(itemlist, groups, word_embeddings, reducer_model, items_vec,
                       distance='cosine', num_words=10, n_process=4):
 
     manager = multiprocessing.Manager()
     results_process = manager.dict()
     jobs = []
+    groups = get_valid_groups(groups)
 
     # It defines the ranges (of the groups) the process will work on:
     group_len = len(groups)
@@ -120,6 +142,6 @@ def get_cluster_words(itemlist, groups, word_embeddings, reducer_model, items_ve
         proc.join()
         proc.close()
 
-    cluster_words = mege_multiprocessing_results(results_process, n_process)
+    cluster_words = merge_multiprocessing_results(results_process, n_process)
 
     return cluster_words
