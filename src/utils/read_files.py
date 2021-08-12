@@ -24,7 +24,7 @@ def get_items(file_items):
 def read_json_file(file):
 
     with open(file, "r") as JFile:
-        data = json.load(JFfile)
+        data = json.load(JFile)
     JFile.close()
 
     return data

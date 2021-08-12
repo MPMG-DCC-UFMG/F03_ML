@@ -239,12 +239,6 @@ def save_items_embeddings(items_embeddings, file):
     return items_embs_df
 
 
-def load_items_embeddings(file):
-
-    items_embs_df = pd.read_pickle(file)
-    return items_embs_df
-
-
 '''
     It saves items embeddings in a json file.
 '''
@@ -255,6 +249,9 @@ def save_items_embeddings_json(items_embeddings, file):
         json.dump(items_embeddings, JFile)
 
 
+'''
+    It loads items embeddings from a json file.
+'''
 def load_items_embeddings_json(file):
 
     with open(file, "r") as JFile:
