@@ -254,7 +254,8 @@ def cluster_embeddings_by_hdbscan(embeddings_matrix, min_samples=None):
     return hdb_clusterer
 
 
-def run_dim_reduction(embeddings_matrix, sample_size=None, algorithm='UMAP'):
+def run_dim_reduction(embeddings_matrix, sample_size=None, algorithm='UMAP',
+                      init='spectral'):
     '''
         Reduce the dimensionality of the input vectors.
 
@@ -268,7 +269,7 @@ def run_dim_reduction(embeddings_matrix, sample_size=None, algorithm='UMAP'):
     if algorithm == 'UMAP':
         reducer = umap.UMAP(n_components=15, metric='euclidean',
                             random_state=999, low_memory=True,
-                            verbose=False)
+                            verbose=False, init=init)
     elif algorithm == 'PCA':
         reducer = PCA(n_components=15, random_state=999)
 

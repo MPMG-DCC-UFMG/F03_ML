@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd
 import multiprocessing
 from item.clustering.utils import *
+from item.clustering.clustering import run_dim_reduction
 from nlp.word_embeddings import calc_distance
 
 # Import UMAP (Uniform Manifold Approximation and Projection for Dimension Reduction)
@@ -22,7 +23,8 @@ def get_cluster_centroid(group_desc, items_vec):
     return centroid
 
 
-def get_token_embeddings(items_data, group_desc, word_embeddings,  dimred_model):
+def get_token_embeddings(items_data, group_desc, word_embeddings,
+                         dimred_model=None):
 
     tokens = set()
 
@@ -42,10 +44,18 @@ def get_token_embeddings(items_data, group_desc, word_embeddings,  dimred_model)
     for token in tokens:
         if token in word_embeddings:
             tokens_with_embedding.append(token)
-            tok_embedding = word_embeddings[token] + [0.0] * 100
+            tok_embedding = word_embeddings[token]
+            if dimred_model is not None:
+                tok_embedding += [0.0] * 100
             tok_embeddings.append(tok_embedding)
 
-    embeddings_matrix = dimred_model.transform(tok_embeddings)
+    if dimred_model is not None:
+        embeddings_matrix = dimred_model.transform(tok_embeddings)
+    elif len(tok_embeddings) > 15:
+        reducer = run_dim_reduction(tok_embeddings, algorithm='UMAP', init='random')
+        embeddings_matrix = reducer.transform(tok_embeddings)
+    else:
+        return tokens
 
     return dict(zip(tokens_with_embedding, embeddings_matrix))
 
@@ -65,8 +75,8 @@ def find_topic_words_and_scores(centroid, tok_embedding, num_words,
     return tokens_score
 
 
-def top2vec(items_data, groups, word_embeddings, reducer_model, items_vec,
-            it_process, results_dict, distance='cosine', num_words=10):
+def top2vec(items_data, groups, word_embeddings, items_vec, it_process,
+            results_dict, reducer_model=None, distance='cosine', num_words=10):
 
     print(it_process)
 
@@ -80,12 +90,17 @@ def top2vec(items_data, groups, word_embeddings, reducer_model, items_vec,
     for ft_it in range(len(groups_names)):
         group_name = groups_names[ft_it]
         first_token = group_name.split('_')[0]
-        dimred_model = reducer_model[first_token]
+        dimred_model = None
+        if reducer_model is not None:
+            dimred_model = reducer_model[first_token]
         tok_embedding = get_token_embeddings(items_data, group_descriptions[ft_it],
                                               word_embeddings, dimred_model)
-        centroid = get_cluster_centroid(group_descriptions[ft_it], items_vec)
-        words = find_topic_words_and_scores(centroid, tok_embedding, num_words,
-                                            distance=distance)
+        if isinstance(tok_embedding, list):
+            words = dict([(tok, 1.0) for tok in tok_embedding])
+        else:
+            centroid = get_cluster_centroid(group_descriptions[ft_it], items_vec)
+            words = find_topic_words_and_scores(centroid, tok_embedding, num_words,
+                                                distance=distance)
         cluster_words[group_name] = words
 
     results_dict[it_process] = cluster_words
@@ -112,8 +127,9 @@ def get_valid_groups(groups):
     return valid_groups
 
 
-def get_cluster_words(itemlist, groups, word_embeddings, reducer_model, items_vec,
-                      distance='cosine', num_words=10, n_process=4):
+def get_cluster_words(itemlist, groups, word_embeddings, items_vec,
+                      reducer_model=None, distance='cosine', num_words=10,
+                      n_process=4):
 
     manager = multiprocessing.Manager()
     results_process = manager.dict()
@@ -137,7 +153,7 @@ def get_cluster_words(itemlist, groups, word_embeddings, reducer_model, items_ve
 
         p = multiprocessing.Process(target=top2vec,
             args = (items_data, (groups_names, groups_items), word_embeddings,
-                    reducer_model, items_vec, i, results_process, distance,
+                    items_vec, i, results_process, reducer_model, distance,
                     num_words))
         jobs.append(p)
         p.start()
