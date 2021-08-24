@@ -41,7 +41,7 @@ def get_item_vec(_item, word_embeddings, word_class, categories=None,
 
     return item_vec
 
-def select_columns():
+def select_columns(items_df):
     '''
         It selects the columns ['palavras', 'unidades_medida', 'numeros', 'cores',
         'materiais', 'tamanho', 'quantidade', 'original_prep'] of a dataframe.
