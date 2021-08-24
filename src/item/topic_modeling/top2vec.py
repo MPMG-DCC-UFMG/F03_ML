@@ -44,10 +44,10 @@ def get_token_embeddings(items_data, group_desc, word_embeddings,
     for token in tokens:
         if token in word_embeddings:
             tokens_with_embedding.append(token)
-            tok_embedding = word_embeddings[token]
+            tok_embedding = np.array(word_embeddings[token])
             if dimred_model is not None:
                 tok_embedding += [0.0] * 100
-            tok_embeddings.append(tok_embedding)
+            tok_embeddings.append(np.array(tok_embedding))
 
     if dimred_model is not None:
         embeddings_matrix = dimred_model.transform(tok_embeddings)
@@ -96,7 +96,7 @@ def top2vec(items_data, groups, word_embeddings, items_vec, it_process,
         tok_embedding = get_token_embeddings(items_data, group_descriptions[ft_it],
                                               word_embeddings, dimred_model)
         if isinstance(tok_embedding, list):
-            words = dict([(tok, 1.0) for tok in tok_embedding])
+            words = [(tok, 1.0) for tok in tok_embedding]
         else:
             centroid = get_cluster_centroid(group_descriptions[ft_it], items_vec)
             words = find_topic_words_and_scores(centroid, tok_embedding, num_words,

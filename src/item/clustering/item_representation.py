@@ -476,9 +476,9 @@ def get_items_embeddings(items_list, word_embeddings, word_class, categories=Non
                                                    embedding_type=embedding_type))
 
         if type == 'list':
-            items_embs.append(item_emb)
+            items_embs.append(np.array(item_emb))
         elif type == 'dict':
-            items_embs[id] = item_emb
+            items_embs[id] = np.array(item_emb)
         id += 1
 
     return items_embs
@@ -555,7 +555,7 @@ def get_group_embeddings_matrix(group_desc, items_list, word_embeddings, word_cl
                                               word_class,
                                               embedding_type=embedding_type)
 
-        embeddings_matrix.append(list(item_emb))
+        embeddings_matrix.append(np.array(item_emb))
 
     if norm:
         embeddings_matrix = normalize(embeddings_matrix)
@@ -572,7 +572,7 @@ def get_group_embeddings_from_dict(group_desc, items_embeddings, norm=False):
 
     for desc_id in group_desc:
         item_emb = items_embeddings[str(desc_id)]
-        embeddings_matrix.append(list(item_emb))
+        embeddings_matrix.append(np.array(item_emb))
 
     if norm:
         embeddings_matrix = normalize(embeddings_matrix)

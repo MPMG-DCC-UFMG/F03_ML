@@ -207,7 +207,7 @@ def baseline_plus_clustering(items_data, groups, word_embeddings, word_class,
 
             items_vec = {}
             for _id, desc_id in enumerate(group_descriptions[ft_it]):
-                items_vec[desc_id] = [float(x) for x in embeddings_matrix[_id]]
+                items_vec[desc_id] = embeddings_matrix[_id].tolist()
 
             save_cluster_embeddings(output_path, groups_names[ft_it], items_vec)
             del items_vec
@@ -350,7 +350,7 @@ def baseline_plus_hdbscan(items_data, groups, word_embeddings,
 
             items_vec = {}
             for _id, desc_id in enumerate(group_descriptions[ft_it]):
-                items_vec[desc_id] = [float(x) for x in embeddings_matrix[_id]]
+                items_vec[desc_id] = embeddings_matrix[_id].tolist()
 
             save_cluster_embeddings(output_path, groups_names[ft_it], items_vec)
             del items_vec
