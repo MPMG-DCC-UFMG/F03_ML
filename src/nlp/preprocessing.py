@@ -56,6 +56,9 @@ class PreprocessingText:
         text = text.rjust(1 + len(text))
         text += " "    # insert a space in end of the string
 
+        # remove item and subitem indicator, eg, 1.2.3[.4[.5[...]]]
+        text = re.sub(r'^\d+\.\d+(?:.\d+)+', ' ', text)
+
         # insert a space between sequence of digits and measurement units
         text = re.sub(r'([0-9]+)x([0-9]+)([a-z]+)', r' \1 x \2 \3 ', text, flags=re.I)
 
