@@ -56,7 +56,6 @@ def parse_args():
     p.add_argument('--embeddings_path',type=str,default='../../../embeddings/word2vec/cbow_s50.txt',
         help='Path to the file containing the embeddings to be used in the representation')
     p.add_argument("-t", "--run_test", default=False, help="get prices for the items in the test set.")
-    p.add_argument("-p", "--password", default="", help="connection password.")
     p.add_argument("-v", "--version", required=False, help="execution version.")
     p.add_argument("-i", "--hive", default=False, help="load table from hive and \
                     save the results on hive.")
@@ -88,7 +87,7 @@ def main():
     itemlist_train = ItemList()
 
     if args.hive:
-        itemlist_train.load_items_from_hive_table(args.train, args.password)
+        itemlist_train.load_items_from_hive_table(args.train)
     else:
         itemlist_train.load_items_from_file(args.train)
 
@@ -101,8 +100,7 @@ def main():
 
     if args.hive:
         version = args.version
-        dataframe_to_hive_table(itemlist_train.items_df, "f03_itens", version,
-                                args.password)
+        dataframe_to_hive_table(itemlist_train.items_df, "f03_itens", version)
 
     print(time.asctime()," Pricing the items of the training set:")
     cluster_prices_statistics, cluster_prices_statistics_year, \
@@ -125,7 +123,7 @@ def main():
         itemlist = ItemList()
 
         if args.hive:
-            itemlist.load_items_from_hive_table(args.test, args.password)
+            itemlist.load_items_from_hive_table(args.test)
         else:
             itemlist.load_items_from_file(args.test)
 
@@ -166,11 +164,11 @@ def main():
     # 3) Save result tables
     if args.hive:
         version = args.version
-        dataframe_to_hive_table(clusters_df, "f03_grupos", version, args.password)
+        dataframe_to_hive_table(clusters_df, "f03_grupos", version)
         dataframe_to_hive_table(cluster_prices_statistics, "f03_banco_precos_grupos",
-                                version, args.password)
+                                version)
         dataframe_to_hive_table(items_clusters_wo_outliers, "f03_banco_precos_itens",
-                                version, args.password)
+                                version)
     else:
         clusters_df.to_csv(args.outpath + "clusters.csv.zip", sep=';', index=False,
                            compression='zip')
@@ -182,8 +180,7 @@ def main():
                                  sep=';', index=False, compression='zip')
 
     if args.hive and args.run_test:
-        dataframe_to_hive_table(items_test_df, "f03_itens_teste", version,
-                                args.password)
+        dataframe_to_hive_table(items_test_df, "f03_itens_teste", version)
     elif args.run_test:
         items_test_df.to_csv(args.outpath + "items_clusters_test.csv.zip",
                              sep=';', index=False, compression='zip')

@@ -40,7 +40,7 @@ def remove_dots_commas(text, punctuations='.,'):
     lista = punctuations
     result = text
     for i in range(0, len(lista)):
-        result = result.replace(lista[i], '')
+        result = result.replace(lista[i], ' ')
     return result
 
 
@@ -51,7 +51,7 @@ def remove_dots(text):
 
     for token in tokens:
         if not isfloat(token):
-            token = token.replace('.', '')
+            token = token.replace('.', ' ')
         tokens_.append(token)
 
     return ' '.join(tokens_)

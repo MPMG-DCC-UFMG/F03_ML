@@ -148,6 +148,16 @@ def cosine_similarity(arrayA, arrayB):
     return 1 - cosine_distance(arrayA, arrayB)
 
 
+def calc_distance(arrayA, arrayB, distance='cosine'):
+    '''
+        Get the distance between two vectors.
+    '''
+    if distance == 'cosine':
+        value = cosine_distance(arrayA, arrayB)
+
+    return value
+
+
 def zero_vector(embedding):
     '''
         Check if an item embedding is a zero vector.
@@ -229,12 +239,6 @@ def save_items_embeddings(items_embeddings, file):
     return items_embs_df
 
 
-def load_items_embeddings(file):
-
-    items_embs_df = pd.read_pickle(file)
-    return items_embs_df
-
-
 '''
     It saves items embeddings in a json file.
 '''
@@ -245,6 +249,9 @@ def save_items_embeddings_json(items_embeddings, file):
         json.dump(items_embeddings, JFile)
 
 
+'''
+    It loads items embeddings from a json file.
+'''
 def load_items_embeddings_json(file):
 
     with open(file, "r") as JFile:

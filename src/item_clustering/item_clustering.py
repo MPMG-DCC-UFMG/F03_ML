@@ -135,6 +135,7 @@ class ItemClustering(object):
         reducer_model = run_baseline_clustering(self.itemlist,
                                                 self.word_embeddings,
                                                 self.word_class,
+                                                self.config.artifacts_path,
                                                 algorithm=self.config.algorithm,
                                                 categories=self.config.categories,
                                                 embedding_type=self.config.tags,

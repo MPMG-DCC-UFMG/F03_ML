@@ -47,7 +47,7 @@ class PreprocessingText:
         if self.spellcheck:
             self.right_word = get_right_words(language)
 
-        if self.language == 'pt':
+        if self.language == 'pt' and self.lemmatize:
             self.canonical_word, self.word_class = self.get_canonical_words()
 
 
@@ -263,7 +263,7 @@ class PreprocessingText:
             else:
                 noun = ''
                 for c in canonical:
-                    if word_class[c] == 'N':
+                    if word_class[c] != 'V':
                         noun = c
                         break
                 if noun == '':
