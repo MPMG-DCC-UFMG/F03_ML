@@ -37,3 +37,16 @@ def read_pickle_file(file):
     PFile.close()
 
     return data
+
+def save_json_file(file, data):
+
+    with open(file, "w") as JFile:
+        json.dump(data, JFile)
+    JFile.close()
+
+
+def save_pickle_file(file, data):
+
+    with open(file, "wb") as PFile:
+        pickle.dump(data, PFile)
+    PFile.close()
