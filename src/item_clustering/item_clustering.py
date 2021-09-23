@@ -49,7 +49,7 @@ class ItemClustering(object):
         else:
             self.config = Config()
 
-        self.preprocessing = PreprocessingText()
+        self.preprocessing = PreprocessingText(spellcheck=self.config.spellcheck)
         self.itemlist = None        # items description
 
         # read word embeddings from file and store them in a map

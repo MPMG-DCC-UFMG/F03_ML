@@ -24,8 +24,9 @@ from .utils import *
 class PreprocessingText:
 
     def __init__(self, language='pt', remove_stopwords=True, remove_numbers=False,
-                 lemmatize=True, spellcheck=True, remove_duplicates=True,
-                 remove_tokens_with_digits=False, remove_punctuation=True):
+                 lemmatize=True, remove_duplicates=True,
+                 remove_tokens_with_digits=False, remove_punctuation=True,
+                 spellcheck="../data/dicionario/replacement_licitacao.json"):
 
         self.language = language
         self.right_word = None
@@ -44,8 +45,8 @@ class PreprocessingText:
         if self.remove_stopwords:
             self.stopwords, self.relevant_stopwords  = get_stopwords(language)
 
-        if self.spellcheck:
-            self.right_word = get_right_words(language)
+        if self.spellcheck is not None:
+            self.right_word = get_right_words(self.spellcheck, self.language)
 
         if self.language == 'pt' and self.lemmatize:
             self.canonical_word, self.word_class = self.get_canonical_words()
@@ -175,14 +176,14 @@ class PreprocessingText:
         if self.language == 'pt':
             description = self.preprocess_document_portuguese(document)
             doc = self.tokenize_document(description)
-            if self.spellcheck:
+            if self.spellcheck is not None:
                 doc = self.spellcheck_document(doc)
             if self.lemmatize:
                 doc = self.lemmatization_document(doc)
         elif self.language == 'en':
             description = self.preprocess_document_english(document)
             doc = self.tokenize_document(description)
-            if self.spellcheck:
+            if self.spellcheck is not None:
                 doc = self.spellcheck_document(doc)
             if self.lemmatize:
                 doc = self.lemmatization_document(doc)
@@ -300,7 +301,7 @@ class PreprocessingText:
 
         if self.lemmatize:
             items = self.lemmatization(items)
-        if self.spellcheck:
+        if self.spellcheck is not None:
             items = self.spell_check(items)
 
         return items

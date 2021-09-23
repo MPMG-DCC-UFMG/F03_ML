@@ -92,12 +92,12 @@ def get_stopwords(language='pt'):
     return stopwords_
 
 
-def get_right_words(language='pt'):
+def get_right_words(file, language='pt'):
 
     if language == 'en':
         right_word = {}
     elif language == 'pt':
-        with open('../data/palavras/right_words_nilc.json', "r") as jfile:
+        with open(file, "r") as jfile:
             right_word = json.load(jfile)
         jfile.close()
 
