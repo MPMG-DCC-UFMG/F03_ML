@@ -1,15 +1,16 @@
-import pandas as pd
 from collections import Counter
-import math
-import pickle
-import numpy as np
 from datetime import datetime, timedelta
-import seaborn as sns
-import pickle
-import json
 from multiprocessing import Process, Lock
+import argparse
+import json
+import math
+import numpy as np
+import pandas as pd
+import pickle
+import pickle
+import seaborn as sns
 
-class Grouping:
+class Regrouping:
     def __init__(self, *, items_filename: str, groups_filename: str):
         self._token_pos_buf = None
         self._token_freq_buf = None
@@ -20,7 +21,6 @@ class Grouping:
             self._groups = pickle.load(f)
 
         self._join_items_and_groups()
-
         self._transform()
         
 
@@ -41,13 +41,15 @@ class Grouping:
                 group_prefix[item] = group_name
 
         self._df["group"] = self._df.index
-        self._df.group = self._df.group.apply(lambda i: inverse.get(i, "outlier"))
+        self._df.group = self._df.group\
+                                 .apply(lambda i: inverse.get(i, "outlier"))
 
         self._df["group_prefix"] = self._df.index
         self._df.group_prefix = self._df.group_prefix\
                             .apply(lambda i: group_prefix.get(i, "outlier"))
 
-        self._df = self._df.loc[self._df.group != "outlier"].reset_index()
+        self._df = self._df.loc[self._df.group != "outlier"]\
+                           .reset_index(drop=True)
 
         print(self._df)
 
@@ -190,8 +192,41 @@ class Grouping:
     
 
 if __name__ == "__main__":
-    g = Grouping(items_filename="/home/matheusc/Downloads/f03_items.csv.zip",
-                 groups_filename="/home/matheusc/Downloads/results.pkl")
+    aparse = argparse.ArgumentParser()
+    aparse.add_argument("items_filename",
+                        type=str,
+                        nargs=1,
+                        help="Path to a .csv file containing the items")
 
-    print(g.suggested_groups("median", 5))
+    aparse.add_argument("items_group",
+                        type=str,
+                        nargs=1,
+                        help="Path to a .pkl file containing the groups of " +
+                             "each item")
+
+    aparse.add_argument("-m", "--metric",
+                        nargs=1,
+                        required=True,
+                        choices=["median", "sum", "log"],
+                        help="Metric to rank the tokens")
+
+    aparse.add_argument("-n", "--n-tokens",
+                        nargs=1,
+                        required=True,
+                        type=int,
+                        help="How many tokens to consider")
+
+    args = aparse.parse_args()
+
+    items_filename = args.items_filename[0]
+    items_group = args.items_group[0]
+    metric = args.metric[0]
+    n_tokens = args.n_tokens
+
+    print(args)
+
+    g = Regrouping(items_filename=items_filename,
+                   groups_filename=items_group)
+
+    print(g.suggested_groups(metric, n_tokens))
     
