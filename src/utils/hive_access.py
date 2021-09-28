@@ -24,7 +24,7 @@ def get_database_parameters():
     return (username, password, host, port, schema)
 
 
-def hive_table_to_dataframe(table):
+def hive_table_to_dataframe(table, table_schema=None, query=None):
     '''
         It returns the content of a Hive table in a data frame.
 
@@ -32,6 +32,8 @@ def hive_table_to_dataframe(table):
     '''
 
     username, password, host, port, schema = get_database_parameters()
+    if table_schema is not None:
+        schema = table_schema
     hive_connection = hive.Connection(
                 host=host,
                 port=port,
@@ -41,7 +43,10 @@ def hive_table_to_dataframe(table):
                 auth=auth)
 
     table_from = schema+'.'+table
-    dataframe = pd.read_sql("SELECT * FROM "+table_from, hive_connection)
+    if query is not None:
+        dataframe = pd.read_sql(query + table_from, hive_connection)
+    else:
+        dataframe = pd.read_sql("SELECT * FROM "+table_from, hive_connection)
     hive_connection.close()
     column_list = dataframe.columns
     for column in column_list:

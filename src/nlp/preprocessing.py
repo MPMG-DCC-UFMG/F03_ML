@@ -382,18 +382,12 @@ class PreprocessingText:
 
         for item in items:
             description = item[0]
-            item_id = item[1]
-            licitacao = item[2]
-            price = item[3]
-            dsc_unidade = item[4]
-            ano = item[5]
-            if type(dsc_unidade) is not str and math.isnan(dsc_unidade):
-                dsc_unidade = ""
+            # if type(dsc_unidade) is not str and math.isnan(dsc_unidade):
+            #     dsc_unidade = ""
             if isinstance(description, str) and description != "":
                 doc = self.preprocess_document(description)
                 doc = self.check_first_token(doc)
-                items_descriptions.append((doc, item_id, licitacao, price, \
-                                           dsc_unidade, description, ano))
+                items_descriptions.append((doc, ) + tuple(item[1:]))
 
         results_process[it_process] = items_descriptions
 
