@@ -50,7 +50,7 @@ def hive_table_to_dataframe(table, table_schema=None, query=None):
     hive_connection.close()
     column_list = dataframe.columns
     for column in column_list:
-        dataframe=dataframe.rename(columns={column: column.split(".")[1]})
+        dataframe=dataframe.rename(columns={column: column.split(".")[1] if len(column.split()) > 1 else column})
     return dataframe
 
 
