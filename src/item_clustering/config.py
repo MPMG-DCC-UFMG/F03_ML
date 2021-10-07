@@ -6,9 +6,11 @@ class Config:
     def __init__(self, word_embeddings_path="../data/embeddings/fasttext/skip_s100.txt",
                  algorithm='hdbscan', categories=['unidades_medida', 'numeros'],
                  tags=['N', 'MED'], operation='concatenate', n_process=4,
+                 spellcheck="../data/dicionario/replacement_licitacao.json",
                  artifacts_path="../data/output/"):
 
         self.word_embeddings_path = word_embeddings_path
+        slef.spellcheck = spellcheck
         self.algorithm = algorithm
         self.categories = categories
         self.tags = tags
@@ -21,6 +23,7 @@ class Config:
 
         config_dict = {
             'word_embeddings_path' : self.word_embeddings_path,
+            'spellcheck' : self.spellcheck,
             'algorithm' : self.algorithm,
             'categories' : self.categories,
             'tags' : self.tags,
@@ -40,6 +43,7 @@ class Config:
             config_dict = json.load(config_file)
 
         self.word_embeddings_path = config_dict['word_embeddings_path']
+        self.spellcheck = config_dict['spellcheck']
         self.algorithm = config_dict['algorithm']
         self.categories = config_dict['categories']
         self.tags = config_dict['tags']

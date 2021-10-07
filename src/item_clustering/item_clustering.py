@@ -49,7 +49,7 @@ class ItemClustering(object):
         else:
             self.config = Config()
 
-        self.preprocessing = PreprocessingText()
+        self.preprocessing = PreprocessingText(spellcheck=self.config.spellcheck)
         self.itemlist = None        # items description
 
         # read word embeddings from file and store them in a map
@@ -106,7 +106,7 @@ class ItemClustering(object):
         del itemlist
 
 
-    def get_input(self, input_table, dataframe=True, password=None):
+    def get_input(self, input_table, dataframe=True):
 
         # It gets the descriptions processed:
 
@@ -115,7 +115,7 @@ class ItemClustering(object):
         if dataframe:
             self.itemlist.load_items_from_file(input_table)
         else:
-            self.itemlist.load_items_from_hive_table(input_table, password)
+            self.itemlist.load_items_from_hive_table(input_table)
 
         return self.itemlist
 

@@ -30,6 +30,9 @@ def parse_args():
     p.add_argument('-e', '--embeddings_path',type=str,
         default='../data//embeddings/models/fasttext/sg/output/items_embeddings.vec',
         help='path to the file containing the embeddings to be used in the representation')
+    p.add_argument('-s', '--spellcheck', type=str,
+                   default='../data/dicionario/replacement_licitacao.json',
+                   help='file used for spellchecking.')
     p.add_argument('--n_process', type=int, default=6,
                    help='number of process to use on clustering')
 
@@ -45,7 +48,8 @@ def main():
     config = {
         'artifacts_path' : args.outpath,
         'word_embeddings_path' : args.embeddings_path,
-        'n_process' : args.n_process
+        'n_process' : args.n_process,
+        'spellcheck' : args.spellcheck
     }
 
     model = ItemClustering(config=config)
