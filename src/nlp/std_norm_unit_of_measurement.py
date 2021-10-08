@@ -46,7 +46,13 @@ class NormalizeStandardizeUM:
             self._df[self._column_name] \
                 .apply(lambda v: eval(v) if type(v) == str else v)
 
-    def run(self):
+    def standardize(self):
+        for i, row in self._df.iterrows():
+            for j, tk in enumerate(row[self._column_name]):
+                if tk in self._standarization:
+                    row[self._column_name][j] = self._standarization[tk]
+
+    def normalize(self):
         number_ptn = re.compile("^[0-9\.]+$")
         unit_of_measurement_ptn = re.compile("^[a-z]+[0-9]*$")
 
@@ -66,6 +72,10 @@ class NormalizeStandardizeUM:
 
                     desc_prep[i] = float(desc_prep[i]) * constant
                     desc_prep[i + 1] = unit_of_measurement
+
+    def run(self):
+        self.standardize()
+        self.normalize()
 
 
 def test():
