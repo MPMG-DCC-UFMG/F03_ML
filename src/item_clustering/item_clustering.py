@@ -26,7 +26,6 @@ from item.clustering.item_representation import *
 from item.clustering.utils import *
 from item.clustering.clustering import run_baseline_clustering
 from nlp.preprocessing import PreprocessingText
-from item.clustering.item_representation import get_item_vec
 from nlp.preprocess_units import group_dsc_unidade_medida
 from .config import Config
 
@@ -38,6 +37,17 @@ from item.clustering.evaluate import (
     number_of_outliers_dict,
     get_score_baseline_pickle
 )
+
+from item.post_processing.regrouping import (
+    desc_most_frequent,
+    desc_tokens_most_frequent
+)
+
+from item.post_processing.utils import (
+    select_items
+)
+
+from item.post_processing.heuristics import heuristic_regrouping
 
 
 class ItemClustering(object):
@@ -61,7 +71,9 @@ class ItemClustering(object):
         self.word_class = get_tokens_tags()
 
         # artifacts
+        self.clusters_df = None
         self.clusters = None
+        self.final_clusters = None
         self.outliers = None
         self.items_vec = None
         self.clustering_model = None
@@ -75,6 +87,8 @@ class ItemClustering(object):
         save_clustering_results_pickle(self.clusters, self.outliers, self.config.artifacts_path)
         save_models_pickle(self.clustering_model, self.reducer_model, self.config.artifacts_path)
         save_items_embeddings(self.items_vec, self.config.artifacts_path + 'items_vec.json')
+        clusters_df.to_csv(self.config.artifacts_path + "clusters.csv.zip",
+                           sep=';', index=False, compression='zip')
 
 
     def load_model(self, path):
@@ -142,11 +156,19 @@ class ItemClustering(object):
                                                 operation=self.config.operation,
                                                 n_process=self.config.n_process)
 
+        self.clusters_df = get_clusters_dataframe(clusters, outliers, baseline=True)
         self.clusters = clusters
         self.outliers = outliers
         self.items_vec = items_vec
         self.clustering_model = clustering_model
         self.reducer_model = reducer_model
+
+        if self.config.regrouping:
+            self.itemlist.items_df, groups = select_items(self.itemlist.items_df,
+                                                          self.clusters_df)
+            self.final_clusters = heuristic_regrouping(self.itemlist.items_df,
+                                                       groups)
+            self.clusters = get_clusters_items(self.final_clusters, self.clusters)
 
 
     def evaluate(self):

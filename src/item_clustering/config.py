@@ -7,7 +7,7 @@ class Config:
                  algorithm='hdbscan', categories=['unidades_medida', 'numeros'],
                  tags=['N', 'MED'], operation='concatenate', n_process=4,
                  spellcheck="../data/dicionario/replacement_licitacao.json",
-                 artifacts_path="../data/output/"):
+                 artifacts_path="../data/output/", regrouping=True):
 
         self.word_embeddings_path = word_embeddings_path
         slef.spellcheck = spellcheck
@@ -17,6 +17,7 @@ class Config:
         self.operation = operation
         self.n_process = n_process
         self.artifacts_path = artifacts_path
+        self.regrouping = regrouping
 
 
     def get_config_dict(self):
@@ -29,7 +30,8 @@ class Config:
             'tags' : self.tags,
             'operation' : self.operation,
             'n_process' : self.n_process,
-            'artifacts_path' : self.artifacts_path
+            'artifacts_path' : self.artifacts_path,
+            'regrouping' : self.regrouping
         }
 
         return config_dict
@@ -50,6 +52,7 @@ class Config:
         self.operation = config_dict['operation']
         self.n_process = config_dict['n_process']
         self.artifacts_path = config_dict['artifacts_path']
+        self.regrouping = config_dict['regrouping']
 
 
     def save_config(self, path):
