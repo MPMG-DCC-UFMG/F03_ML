@@ -22,8 +22,6 @@ def select_items(items_df, clusters_df):
     items_df = items_df[items_df.item_ruido == 0]
     items_df['original_desc'] = items_df['original_prep'].apply(lambda x: ' '.join(eval(x)))
 
-    items_df.set_index('grupo', inplace=True)
-
     # Quantidade de descrições por grupo
     groups_count_df = items_df.groupby('grupo', as_index=True).count().sort_values('item_id', ascending=False)['original_desc']
     print(f'Quantidade de grupos considerados: {len(groups_count_df)}')

@@ -8,10 +8,9 @@ from .utils import *
 def calc_token_freq(items_df, group: str):
 
     freq = Counter()
-    items_df = items_df.loc[items_df.group == group]
+    items_df = items_df.loc[items_df.grupo == group]
 
-    for item_description in items_df.original_prep:
-        item_description = eval(item_description)
+    for item_description in items_df.original_desc:
         for token in item_description:
             freq[token] += 1
 
@@ -24,11 +23,11 @@ def calc_token_freq(items_df, group: str):
 
 def calc_token_pos(items_df, group: str):
 
-    items_df = items_df.loc[items_df.group == group]
+    items_df = items_df.loc[items_df.grupo == group]
     token_pos = dict()
 
     for k, row in items_df.iterrows():
-        for i, token in enumerate(eval(row.original_prep)):
+        for i, token in enumerate(row.original_desc):
             if token not in token_pos:
                 token_pos[token] = []
             token_pos[token].append(i)
@@ -90,7 +89,7 @@ def get_canonical_descriptions(items_df, groups, metric="median", num_words=5):
     return description_count
 
 
-def heuristic_regrouping(items_df, group, metric="median", num_words=5):
+def heuristic_regrouping(items_df, groups, metric="median", num_words=5):
 
     description_count = get_canonical_descriptions(items_df, groups, metric,
                                                    num_words)
