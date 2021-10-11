@@ -38,12 +38,16 @@ def calc_token_pos(items_df, group: str):
 def scores(items_df, groups, metric="median"):
 
     token_pos_by_group, token_freq_by_group = {}, {}
-    for group in groups:
+    for group_items in groups:
+        group = group_items[0]
+        num_items = group_items[1]
         token_pos_by_group[group] = calc_token_pos(items_df, group)
         token_freq_by_group[group] = calc_token_freq(items_df, group)
 
     groups_scores = {}
-    for group in sorted(groups):
+    for group_items in groups:
+        group = group_items[0]
+        num_items = group_items[1]
         tokens = list(token_pos_by_group[group].keys())
         token_pos = token_pos_by_group[group]
         token_freq = token_freq_by_group[group]
