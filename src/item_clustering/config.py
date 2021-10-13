@@ -10,7 +10,7 @@ class Config:
                  artifacts_path="../data/output/", regrouping=True):
 
         self.word_embeddings_path = word_embeddings_path
-        slef.spellcheck = spellcheck
+        self.spellcheck = spellcheck
         self.algorithm = algorithm
         self.categories = categories
         self.tags = tags

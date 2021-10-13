@@ -42,11 +42,6 @@ from item.clustering.evaluate import (
     get_score_baseline_pickle
 )
 
-from item.post_processing.regrouping import (
-    desc_most_frequent,
-    desc_tokens_most_frequent
-)
-
 from item.post_processing.utils import (
     select_items
 )
