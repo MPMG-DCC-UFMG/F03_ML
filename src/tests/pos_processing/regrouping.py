@@ -14,15 +14,15 @@ class Regrouping:
     def __init__(self, *, items_filename: str, groups_filename: str):
         self._token_pos_buf = None
         self._token_freq_buf = None
-        
+
         self._df = pd.read_csv(items_filename, sep=";")
-        
+
         with open(groups_filename, "rb") as f:
             self._groups = pickle.load(f)
 
         self._join_items_and_groups()
         self._transform()
-        
+
 
     def _join_items_and_groups(self):
         inverse = {}
@@ -55,7 +55,7 @@ class Regrouping:
 
 
     def _transform(self):
-        parse = lambda arg: eval(arg)        
+        parse = lambda arg: eval(arg)
         self._df.original_prep = self._df.original_prep.apply(parse)
 
     def _get_groups(self):
@@ -66,7 +66,7 @@ class Regrouping:
         freq = Counter()
 
         df = self._df.loc[self._df.group == group]
-        
+
         for item_description in df.original_prep:
             for token in item_description:
                 freq[token] += 1
@@ -79,7 +79,7 @@ class Regrouping:
 
     def _calc_token_pos(self, group: str):
         df = self._df.loc[self._df.group == group]
-        
+
         token_pos = dict()
         for k, row in df.iterrows():
             for i, token in enumerate(row.original_prep):
@@ -88,11 +88,11 @@ class Regrouping:
                 token_pos[token].append(i)
 
         return token_pos
-    
+
 
     def scores(self, metric, use_buffer):
         all_groups = self._get_groups()
-        
+
         if use_buffer and self._token_pos_buf and self._token_freq_buf:
             token_pos_by_group = self._token_pos_buf
             token_freq_by_group = self._token_freq_buf
@@ -104,7 +104,7 @@ class Regrouping:
             if use_buffer:
                 self._token_pos_buf = token_pos_by_group
                 self._token_freq_buf = token_freq_by_group
-            
+
         groups_scores = {}
         for group in sorted(all_groups):
             tokens = list(token_pos_by_group[group].keys())
@@ -115,15 +115,15 @@ class Regrouping:
             for token in tokens:
                 pos = token_pos[token] # list
                 freq = token_freq[token] # float
-                
+
                 if metric.lower() == "median":
                     tokens_score[token] = \
                         freq * np.median(2 ** -np.array(pos, dtype=float))
-                    
+
                 elif metric.lower() == "sum":
                     tokens_score[token] = \
                         freq * np.sum(2 ** -np.array(pos, dtype=float))
-                    
+
                 elif metric.lower() == "log":
                     tokens_score[token] = \
                         freq * -np.log2(
@@ -140,10 +140,10 @@ class Regrouping:
         for group, token_scores in group_scores.items():
             tokens_ranking = sorted(token_scores.items(), key=lambda v:v[1],
                                     reverse=True)
-            
+
             top_n = tokens_ranking[:n]
             top_n_tokens = " ".join(sorted(t[0] for t in top_n))
-            
+
             canonical_description_by_group[group] = top_n_tokens
 
         return canonical_description_by_group
@@ -158,13 +158,13 @@ class Regrouping:
                                "canonical_description"
                            })
         print(description_df)
-                           
+
         joined_df = self._df.merge(description_df,
                                    how="left",
                                    on="group")
 
         print(joined_df)
-        
+
         grouped_df = joined_df.groupby(
             by=["canonical_description", "group_prefix"])
 
@@ -174,22 +174,22 @@ class Regrouping:
         for key, group_df in grouped_df:
             if not len(group_df): # no group formed
                 continue
-            
+
             _groups = group_df.group.drop_duplicates().to_list()
             if len(_groups) == 1:
                 continue
-            
+
             trailing_numbers = sorted([g.split("_")[1] for g in _groups],
                                       key=lambda v: int(v))
-            
+
             group_name = _groups[0].split("_")[0]
             new_group = group_name + "_" + "_".join(trailing_numbers)
             suggestions[new_group] = _groups
 
         return suggestions
-        
 
-    
+
+
 
 if __name__ == "__main__":
     aparse = argparse.ArgumentParser()
@@ -229,4 +229,3 @@ if __name__ == "__main__":
                    groups_filename=items_group)
 
     print(g.suggested_groups(metric, n_tokens))
-    

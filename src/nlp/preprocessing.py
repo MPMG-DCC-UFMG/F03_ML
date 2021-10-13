@@ -390,7 +390,7 @@ class PreprocessingText:
             if isinstance(description, str) and description != "":
                 doc = self.preprocess_document(description)
                 doc = self.check_first_token(doc)
-                items_descriptions.append((doc, ) + tuple(item[1:]))
+                items_descriptions.append((doc, description) + tuple(item[1:]))
 
         results_process[it_process] = items_descriptions
 

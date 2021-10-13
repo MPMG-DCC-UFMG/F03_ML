@@ -28,13 +28,15 @@ def parse_args():
     p.add_argument('-o', '--outpath', type=str, default='../data/output/test/',
                    help='path to the write the outputs')
     p.add_argument('-e', '--embeddings_path',type=str,
-        default='../data//embeddings/models/fasttext/sg/output/items_embeddings.vec',
+        default='../data/embeddings/models/fasttext/sg/output/items_embeddings.vec',
         help='path to the file containing the embeddings to be used in the representation')
     p.add_argument('-s', '--spellcheck', type=str,
                    default='../data/dicionario/replacement_licitacao.json',
                    help='file used for spellchecking.')
     p.add_argument('--n_process', type=int, default=6,
                    help='number of process to use on clustering')
+    p.add_argument('--regrouping', type=int, default=1,
+                   help='apply regrouping step.')
 
     parsed = p.parse_args()
 
@@ -49,7 +51,8 @@ def main():
         'artifacts_path' : args.outpath,
         'word_embeddings_path' : args.embeddings_path,
         'n_process' : args.n_process,
-        'spellcheck' : args.spellcheck
+        'spellcheck' : args.spellcheck,
+        'regrouping' : bool(args.regrouping)
     }
 
     model = ItemClustering(config=config)
