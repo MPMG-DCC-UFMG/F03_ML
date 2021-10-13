@@ -28,7 +28,7 @@ def parse_args():
     p.add_argument('-o', '--outpath', type=str, default='../data/output/test/',
                    help='path to the write the outputs')
     p.add_argument('-e', '--embeddings_path',type=str,
-        default='../data//embeddings/models/fasttext/sg/output/items_embeddings.vec',
+        default='../data/embeddings/models/fasttext/sg/output/items_embeddings.vec',
         help='path to the file containing the embeddings to be used in the representation')
     p.add_argument('-s', '--spellcheck', type=str,
                    default='../data/dicionario/replacement_licitacao.json',

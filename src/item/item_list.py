@@ -53,7 +53,7 @@ class ItemList:
             dcs_unidade_medida, original, ano.
         '''
 
-        for description, licitacao_item, licitacao, price, dsc_unidade, original, \
+        for description, original, licitacao_item, licitacao, price, dsc_unidade, \
             ano in items_descriptions:
             if len(description) == 0:
                 continue
