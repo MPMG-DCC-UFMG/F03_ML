@@ -91,9 +91,12 @@ class ItemClustering(object):
         save_clustering_results_pickle(self.clusters, self.outliers, self.config.artifacts_path)
         save_models_pickle(self.clustering_model, self.reducer_model, self.config.artifacts_path)
         save_items_embeddings(self.items_vec, self.config.artifacts_path + 'items_vec.json')
-        save_json_file(self.config.artifacts_path + "canon_descriptions.json", self.final_clusters)
         clusters_df.to_csv(self.config.artifacts_path + "clusters.csv.zip",
                            sep=';', index=False, compression='zip')
+
+        if self.config.regrouping:
+            save_json_file(self.config.artifacts_path + "canon_descriptions.json",
+                           self.final_clusters)
 
 
     def load_model(self, path):

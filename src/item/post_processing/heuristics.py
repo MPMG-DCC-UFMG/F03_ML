@@ -11,7 +11,8 @@ def calc_token_freq(items_df, group: str):
     items_df = items_df.loc[items_df.grupo == group]
 
     for item_description in items_df.original_desc:
-        for token in item_description:
+        tokens = item_description.split()
+        for token in tokens:
             freq[token] += 1
 
     N = max(freq.values())
@@ -26,8 +27,9 @@ def calc_token_pos(items_df, group: str):
     items_df = items_df.loc[items_df.grupo == group]
     token_pos = dict()
 
-    for k, row in items_df.iterrows():
-        for i, token in enumerate(row.original_desc):
+    for item_description in items_df.original_desc:
+        tokens = item_description.split()
+        for i, token in enumerate(tokens):
             if token not in token_pos:
                 token_pos[token] = []
             token_pos[token].append(i)

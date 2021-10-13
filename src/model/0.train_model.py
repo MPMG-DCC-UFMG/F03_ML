@@ -35,6 +35,8 @@ def parse_args():
                    help='file used for spellchecking.')
     p.add_argument('--n_process', type=int, default=6,
                    help='number of process to use on clustering')
+    p.add_argument('--regrouping', type=int, default=1,
+                   help='apply regrouping step.')
 
     parsed = p.parse_args()
 
@@ -49,7 +51,8 @@ def main():
         'artifacts_path' : args.outpath,
         'word_embeddings_path' : args.embeddings_path,
         'n_process' : args.n_process,
-        'spellcheck' : args.spellcheck
+        'spellcheck' : args.spellcheck,
+        'regrouping' : bool(args.regrouping)
     }
 
     model = ItemClustering(config=config)
