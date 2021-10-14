@@ -4,14 +4,6 @@ from collections import defaultdict, Counter
 from .utils import *
 
 
-def group_descriptions(items, results, cluster_name):
-
-    descriptions_ids = results[cluster_name]
-    cluster_items = list(items.loc[descriptions_ids]['original_desc'])
-
-    return cluster_items
-
-
 def descriptions_frequency(items, results, cluster_name, total_items=5,
                            verbose=False):
 

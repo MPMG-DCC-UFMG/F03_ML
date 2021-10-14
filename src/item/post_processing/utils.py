@@ -3,6 +3,14 @@ import numpy as np
 import collections
 
 
+def group_descriptions(items, results, cluster_name):
+
+    descriptions_ids = results[cluster_name]
+    cluster_items = list(items.loc[descriptions_ids]['original_desc'])
+
+    return cluster_items
+
+
 def get_group_name(subgroups):
     first_token = str(subgroups[0].split('_')[0])
     ids = ""
