@@ -169,8 +169,8 @@ class ItemClustering(object):
         if self.config.regrouping:
             self.itemlist.items_df, groups = select_items(self.itemlist.items_df,
                                                           self.clusters_df)
-            self.final_clusters = heuristic_regrouping(self.itemlist.items_df,
-                                                       groups)
+            self.final_clusters = heuristic_regrouping(groups, self.clusters,
+                                                       self.itemlist.items_df)
             self.clusters = get_clusters_items(self.final_clusters, self.clusters)
 
 
