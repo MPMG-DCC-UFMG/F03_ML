@@ -18,6 +18,7 @@ from gensim.parsing.preprocessing import (
     strip_punctuation2,
     strip_short)
 from .preprocessing_portuguese import TextPreProcessing as tpp
+from .std_norm_unit_of_measurement import NormalizeStandardizeUM
 from .utils import *
 
 
@@ -26,7 +27,9 @@ class PreprocessingText:
     def __init__(self, language='pt', remove_stopwords=True, remove_numbers=False,
                  lemmatize=True, remove_duplicates=True,
                  remove_tokens_with_digits=False, remove_punctuation=True,
-                 spellcheck="../data/dicionario/replacement_licitacao.json"):
+                 spellcheck="../data/dicionario/replacement_licitacao.json",
+                 standarization="../data/palavras/standarization.json",
+                 normalization="../data/palavras/normalization.json"):
 
         self.language = language
         self.right_word = None
@@ -38,6 +41,8 @@ class PreprocessingText:
         self.remove_numbers = remove_numbers
         self.lemmatize = lemmatize
         self.spellcheck = spellcheck
+        self.standarization = standarization
+        self.normalization = normalization
         self.remove_duplicates = remove_duplicates
         self.remove_tokens_with_digits = remove_tokens_with_digits
         self.remove_punctuation = remove_punctuation
@@ -173,6 +178,10 @@ class PreprocessingText:
 
         return description
 
+    def standarize_normalize(self, tokens):
+        ns_um = NormalizeStandardizeUM(self.standarization, self.normalization)
+        return ns_um.apply_both(tokens)
+
 
     def preprocess_document(self, document):
 
@@ -181,6 +190,8 @@ class PreprocessingText:
             doc = self.tokenize_document(description)
             if self.spellcheck is not None:
                 doc = self.spellcheck_document(doc)
+            if self.standarization or self.normalization:
+                doc = self.standarize_normalize(doc)
             if self.lemmatize:
                 doc = self.lemmatization_document(doc)
         elif self.language == 'en':
