@@ -5,13 +5,15 @@ import collections
 from .utils import *
 
 
-def calc_token_freq(items_df, group: str):
+def calc_token_freq(items_df, results, cluster_name, k=None):
 
     freq = Counter()
-    items_df = items_df.loc[items_df.grupo == group]
+    items = group_descriptions(items_df, results, cluster_name)
 
-    for item_description in items_df.original_desc:
+    for item_description in items:
         tokens = item_description.split()
+        if k is not None:
+            tokens = tokens[:k]
         for token in tokens:
             freq[token] += 1
 
@@ -22,29 +24,29 @@ def calc_token_freq(items_df, group: str):
     return freq
 
 
-def calc_token_pos(items_df, group: str):
+def calc_token_pos(items_df, results, cluster_name, k=None):
 
-    items_df = items_df.loc[items_df.grupo == group]
-    token_pos = dict()
+    items = items = group_descriptions(items_df, results, cluster_name)
+    token_pos = collections.defaultdict(list)
 
-    for item_description in items_df.original_desc:
+    for item_description in items:
         tokens = item_description.split()
+        if k is not None:
+            tokens = tokens[:k]
         for i, token in enumerate(tokens):
-            if token not in token_pos:
-                token_pos[token] = []
             token_pos[token].append(i)
 
     return token_pos
 
 
-def scores(items_df, groups, metric="median"):
+def scores(groups, results, items_df, metric="median"):
 
     token_pos_by_group, token_freq_by_group = {}, {}
     for group_items in groups:
         group = group_items[0]
         num_items = group_items[1]
-        token_pos_by_group[group] = calc_token_pos(items_df, group)
-        token_freq_by_group[group] = calc_token_freq(items_df, group)
+        token_pos_by_group[group] = calc_token_pos(items_df, results, group)
+        token_freq_by_group[group] = calc_token_freq(items_df, results, group)
 
     groups_scores = {}
     for group_items in groups:
@@ -75,9 +77,10 @@ def scores(items_df, groups, metric="median"):
     return groups_scores
 
 
-def get_canonical_descriptions(items_df, groups, metric="median", num_words=5):
+def get_canonical_descriptions(groups, results, items_df, metric="median",
+                               num_words=5):
 
-    group_scores = scores(items_df, groups, metric)
+    group_scores = scores(groups, results, items_df, metric)
     description_count = collections.defaultdict(list)
 
     for group, token_scores in group_scores.items():
@@ -91,10 +94,10 @@ def get_canonical_descriptions(items_df, groups, metric="median", num_words=5):
     return description_count
 
 
-def heuristic_regrouping(items_df, groups, metric="median", num_words=5):
+def heuristic_regrouping(groups, results, items_df, metric="median", num_words=5):
 
-    description_count = get_canonical_descriptions(items_df, groups, metric,
-                                                   num_words)
+    description_count = get_canonical_descriptions(groups, results, items_df,
+                                                   metric, num_words)
 
     desctok_canon_groups = regrouping(description_count)
 
