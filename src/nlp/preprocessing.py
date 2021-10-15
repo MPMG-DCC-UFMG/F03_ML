@@ -41,11 +41,14 @@ class PreprocessingText:
         self.remove_numbers = remove_numbers
         self.lemmatize = lemmatize
         self.spellcheck = spellcheck
-        self.standarization = standarization
-        self.normalization = normalization
         self.remove_duplicates = remove_duplicates
         self.remove_tokens_with_digits = remove_tokens_with_digits
         self.remove_punctuation = remove_punctuation
+
+        if standarization or normalization:
+            self.ns_um = NormalizeStandardizeUM(standarization, normalization)
+        else:
+            self.ns_um = None
 
         if self.remove_stopwords:
             self.stopwords, self.relevant_stopwords  = get_stopwords(language)
@@ -179,9 +182,7 @@ class PreprocessingText:
         return description
 
     def standarize_normalize(self, tokens):
-        ns_um = NormalizeStandardizeUM(self.standarization, self.normalization)
-        return ns_um.apply_both(tokens)
-
+        return self.ns_um.apply_both(tokens)
 
     def preprocess_document(self, document):
 
@@ -190,7 +191,7 @@ class PreprocessingText:
             doc = self.tokenize_document(description)
             if self.spellcheck is not None:
                 doc = self.spellcheck_document(doc)
-            if self.standarization or self.normalization:
+            if self.ns_um:
                 doc = self.standarize_normalize(doc)
             if self.lemmatize:
                 doc = self.lemmatization_document(doc)
