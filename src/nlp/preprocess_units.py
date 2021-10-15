@@ -68,7 +68,7 @@ def group_dsc_unidade_medida(items_df):
         for unit in unit_list:
             canonical_unit_metric[unit] = canonic
 
-    preprocessing = PreprocessingText(spellcheck=False)
+    preprocessing = PreprocessingText(spellcheck=None)
     stopwords = preprocessing.stopwords
 
     items_df['dsc_unidade_medida'] = items_df['dsc_unidade_medida'].apply(lambda x: process_un_medida(x, stopwords, preprocessing, canonical_unit_metric))
