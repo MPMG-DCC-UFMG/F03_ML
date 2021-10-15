@@ -5,14 +5,15 @@ import collections
 from .utils import *
 
 
-def calc_token_freq(items_df, results, cluster_name):
+def calc_token_freq(items_df, results, cluster_name, k=None):
 
     freq = Counter()
     items = group_descriptions(items_df, results, cluster_name)
 
     for item_description in items:
         tokens = item_description.split()
-        tokens = tokens[:10]    # only considers the first 10 tokens
+        if k is not None:
+            tokens = tokens[:k]
         for token in tokens:
             freq[token] += 1
 
@@ -23,14 +24,15 @@ def calc_token_freq(items_df, results, cluster_name):
     return freq
 
 
-def calc_token_pos(items_df, results, cluster_name):
+def calc_token_pos(items_df, results, cluster_name, k=None):
 
     items = items = group_descriptions(items_df, results, cluster_name)
     token_pos = collections.defaultdict(list)
 
     for item_description in items:
         tokens = item_description.split()
-        tokens = tokens[:10]    # only considers the first 10 tokens
+        if k is not None:
+            tokens = tokens[:k]
         for i, token in enumerate(tokens):
             token_pos[token].append(i)
 
