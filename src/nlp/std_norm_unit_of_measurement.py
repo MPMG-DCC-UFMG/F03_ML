@@ -6,6 +6,8 @@ import json
 import re
 from itertools import chain
 import argparse
+from .utils import *
+
 
 class NormalizeStandardizeUM:
     def __init__(self, standarization_json, normalization_json):
@@ -16,7 +18,7 @@ class NormalizeStandardizeUM:
     def _load_standarization(self, json_file):
         if json_file == None:
             return None
-        
+
         loaded = json.load(open(json_file))
         standarization = {}
         for right, typos in loaded.items():
@@ -28,7 +30,7 @@ class NormalizeStandardizeUM:
     def _load_normalization(self, json_file):
         if json_file == None:
             return None
-        
+
         loaded = json.load(open(json_file))
         normalization = {}
         for std, variations in loaded.items():
@@ -51,25 +53,22 @@ class NormalizeStandardizeUM:
     def normalize(self, tokens):
         if self._normalization == None:
             return tokens
-        
-        number_ptn = re.compile("^[0-9\.]+$")
-        unit_of_measurement_ptn = re.compile("^[a-z]+[0-9]*$")
 
         new_tokens = list(tokens)
 
         for i, tk in enumerate(new_tokens[:-1]):
-            is_number = (type(tk) == float or number_ptn.match(tk))
+            is_number = isfloat(tk)
             followed_by_text = (new_tokens[i+1] in self._normalization)
 
             if is_number and followed_by_text:
                 u_m, constant = self._normalization[new_tokens[i+1]]
 
-                new_tokens[i] = float(new_tokens[i]) * constant
+                new_tokens[i] = str(float(new_tokens[i]) * constant)
                 new_tokens[i + 1] = u_m
 
         return new_tokens
 
-                
+
     def apply_both(self, tokens):
         new_tokens = self.standardize(tokens)
         return self.normalize(new_tokens)

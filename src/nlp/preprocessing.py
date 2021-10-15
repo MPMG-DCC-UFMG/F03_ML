@@ -122,14 +122,9 @@ class PreprocessingText:
 
         # lowercase letters
         description = item.lower()
-        if self.remove_punctuation:
-            perc = True if '%' in description else False
-            # remove non alphanumeric tokens
-            description = remove_special_characters(description)
-            description = remove_dots(description)
-            # add '%' at the end of the description
-            if perc:
-                description += '%'
+
+        # remove non alphanumeric tokens
+        description = remove_special_characters(description)
 
         # brazilian portuguese preprocessing
         description = tpp.remove_accents(description)
@@ -137,14 +132,16 @@ class PreprocessingText:
             rm_stopwords = re.compile(r'(^|\b)(' + r'|'.join(list(self.stopwords)) + r')($|\b)')
             description = rm_stopwords.sub(' ', description)
 
+        description = self.clean_text(description)
+
+        if self.remove_punctuation:
+            description = remove_dots(description)
+
         # numbers preprocessing
         if self.remove_numbers:
-            description = self.clean_text(description)
             description = tpp.remove_numbers(description)
             description = tpp.remove_numbers_in_full(description)
             description = strip_short(description, minsize=3)  # remove short tokens
-        else:
-            description = self.clean_text(description)
 
         description = re.sub(r'\w{21,}', r'', description)  # remove long tokens
         description = strip_multiple_whitespaces(description)  # strip whitespaces
