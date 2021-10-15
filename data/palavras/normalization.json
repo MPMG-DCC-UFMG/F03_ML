@@ -1,0 +1,10 @@
+{
+    "metro": [["centimetro", 0.01], ["km", 1000], ["milimetro", 0.001]],
+    "metro quadrado": [["centimetro quadrado", 0.0001], ["hectare", 10000]],
+    "metro cubico": [["litro", 0.001], ["quilolitro", 1], ["mililitro", 1e-6]],
+    "caloria": [["kcal", 1000]],
+    "metro cubico": [["centimetro cubico", 0.000001]],
+    "kg": [["quilograma", 1], ["grama", 0.001]],
+    "unidade": [["dezena", 10], ["duzia", 12], ["centena", 100]],
+    "segundo": [["minuto", 60], ["segundos", 1]]
+}
