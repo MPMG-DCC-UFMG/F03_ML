@@ -167,6 +167,7 @@ class ItemClustering(object):
         self.clusters_df = get_clusters_dataframe(clusters, outliers, baseline=True)
 
         if self.config.regrouping:
+            self.get_input(self.config.artifacts_path + 'f03_items.csv.zip')
             self.itemlist.items_df, groups = select_items(self.itemlist.items_df,
                                                           self.clusters_df)
             self.final_clusters = heuristic_regrouping(groups, self.clusters,
