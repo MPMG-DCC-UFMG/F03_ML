@@ -67,7 +67,7 @@ def get_clusters_items(final_clusters, clusters):
             items += clusters[subgroup]
         clusters_items[group_name] = items
 
-     for group_name, items_list in clusters.items():
+    for group_name, items_list in clusters.items():
         if '_' not in group_name or group_name[-2:] == '-1':
             clusters_items[group_name] = items_list
 
