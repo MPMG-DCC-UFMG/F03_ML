@@ -57,7 +57,7 @@ def regrouping(description_count):
     return desc_canon_groups
 
 
-def get_clusters_items(final_clusters, clusters):
+def get_final_clusters(final_clusters, clusters):
 
     clusters_items = {}
 

@@ -172,7 +172,7 @@ class ItemClustering(object):
                                                           self.clusters_df)
             self.final_clusters = heuristic_regrouping(groups, self.clusters,
                                                        self.itemlist.items_df)
-            self.clusters = get_clusters_items(self.final_clusters, self.clusters)
+            self.clusters = get_final_clusters(self.final_clusters, self.clusters)
 
 
     def evaluate(self):
