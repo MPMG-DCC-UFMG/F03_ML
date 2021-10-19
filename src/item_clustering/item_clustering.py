@@ -181,13 +181,19 @@ class ItemClustering(object):
                                                                         self.outliers,
                                                                         baseline=True,
                                                                         total_cov=False)
-        self.perc_outliers = 100*(outliers_items/total)
+        try:
+            self.perc_outliers = 100*(outliers_items/total)
+        except ZeroDivisionError as e:
+            self.perc_outliers = float('inf')
 
         outliers_items, outliers_groups, total = number_of_outliers_dict(self.clusters,
                                                                          self.outliers,
                                                                          baseline=True,
                                                                          total_cov=True)
-        self.perc_excluded = 100*(outliers_items/total)
+        try:
+            self.perc_excluded = 100*(outliers_items/total)
+        except ZeroDivisionError as e:
+            self.perc_outliers = float('inf')
 
         self.avg_calinski = get_score_baseline_pickle(self.clusters, self.items_vec,
                                                      score='calinski', sample_size=None,
