@@ -159,12 +159,12 @@ class ItemClustering(object):
                                                 operation=self.config.operation,
                                                 n_process=self.config.n_process)
 
-        self.clusters_df = get_clusters_dataframe(clusters, outliers, baseline=True)
         self.clusters = clusters
         self.outliers = outliers
         self.items_vec = items_vec
         self.clustering_model = clustering_model
         self.reducer_model = reducer_model
+        self.clusters_df = get_clusters_dataframe(clusters, outliers, baseline=True)
 
         if self.config.regrouping:
             self.itemlist.items_df, groups = select_items(self.itemlist.items_df,
@@ -181,19 +181,15 @@ class ItemClustering(object):
                                                                         self.outliers,
                                                                         baseline=True,
                                                                         total_cov=False)
-        try:
-            self.perc_outliers = 100*(outliers_items/total)
-        except ZeroDivisionError as e:
-            self.perc_outliers = float('inf')
+
+        self.perc_outliers = 100*(outliers_items/total)
 
         outliers_items, outliers_groups, total = number_of_outliers_dict(self.clusters,
                                                                          self.outliers,
                                                                          baseline=True,
                                                                          total_cov=True)
-        try:
-            self.perc_excluded = 100*(outliers_items/total)
-        except ZeroDivisionError as e:
-            self.perc_outliers = float('inf')
+
+        self.perc_excluded = 100*(outliers_items/total)
 
         self.avg_calinski = get_score_baseline_pickle(self.clusters, self.items_vec,
                                                      score='calinski', sample_size=None,
