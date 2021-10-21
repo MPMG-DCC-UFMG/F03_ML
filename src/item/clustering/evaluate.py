@@ -595,6 +595,8 @@ def get_score_baseline_pickle(results, embeddings, remove_outliers=True,
 
     for group, labels in first_token_results.items():
         X = first_token_embeddings[group]
+        if len(set(labels)) == 1:
+            continue
         # Normalize item embeddings
         if norm:
             X = normalize(X)

@@ -12,13 +12,14 @@ def group_descriptions(items, results, cluster_name):
 
 
 def get_group_name(subgroups):
+
     first_token = str(subgroups[0].split('_')[0])
-    ids = ""
+    ids = []
     for group in subgroups:
         id_ = str(group.split('_')[1])
-        ids += "_" + id_
+        ids.append(id_)
 
-    return first_token + ids
+    return first_token + "_" + str(min(ids))
 
 
 def select_items(items_df, clusters_df):
@@ -57,18 +58,23 @@ def regrouping(description_count):
     return desc_canon_groups
 
 
-def get_final_clusters(final_clusters, clusters):
+def get_final_clusters(final_clusters, clusters, outliers):
 
     clusters_items = {}
+    clusters_outliers = {}
 
     for group_name, group_info in final_clusters.items():
         items = []
+        outliers_items = []
         for subgroup in group_info['groups']:
             items += clusters[subgroup]
+            outliers_items += outliers[subgroup]
         clusters_items[group_name] = items
+        clusters_outliers[group_name] = outliers_items
 
     for group_name, items_list in clusters.items():
         if '_' not in group_name or group_name[-2:] == '-1':
             clusters_items[group_name] = items_list
+            clusters_outliers[group_name] = outliers[group_name]
 
-    return clusters_items
+    return clusters_items, clusters_outliers

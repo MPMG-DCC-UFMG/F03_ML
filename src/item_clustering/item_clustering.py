@@ -43,7 +43,8 @@ from item.clustering.evaluate import (
 )
 
 from item.post_processing.utils import (
-    select_items
+    select_items,
+    get_final_clusters
 )
 
 from item.post_processing.heuristics import heuristic_regrouping
@@ -172,7 +173,9 @@ class ItemClustering(object):
                                                           self.clusters_df)
             self.final_clusters = heuristic_regrouping(groups, self.clusters,
                                                        self.itemlist.items_df)
-            self.clusters = get_final_clusters(self.final_clusters, self.clusters)
+            self.clusters, self.outliers = get_final_clusters(self.final_clusters,
+                                                              self.clusters,
+                                                              self.outliers)
 
 
     def evaluate(self):
