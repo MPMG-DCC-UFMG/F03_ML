@@ -107,7 +107,10 @@ def add_outlier_column(data):
     '''
 
     data['ruido'] = data['grupo'].str.split('_').str[1]
-    data['ruido'].fillna('-1', inplace=True)
+    data['ruido'].replace({'0': '1', '-1': '0'}, inplace=True)
+    data['ruido'].fillna('0', inplace=True)
+    data['ruido'] = data['ruido'].astype(int).astype(bool).astype(int)
+    data['ruido'].replace({0: 1, 1: 0}, inplace=True)
 
     return data
 
