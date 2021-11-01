@@ -140,7 +140,7 @@ class ItemList:
 
             if sample is not None:
                 self.items_df = self.items_df.sample(frac=sample, random_state=1)
-                self.items_df.reset_index(inplace=True)
+                self.items_df = self.items_df.reset_index().drop(columns=['index'])
 
             self.size = len(self.items_df)
         self.set_unique_words()
