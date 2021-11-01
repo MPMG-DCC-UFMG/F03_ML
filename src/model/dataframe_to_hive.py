@@ -33,7 +33,6 @@ def parse_args():
                         help="execution version.")
     p.add_argument("-t", "--table", required=True,
                         help="name of the table on hive.")
-    p.add_argument("-p", "--password", default="", help="connection password.")
     p.add_argument("-n", "--n_process", default=20, type=int,
                     help="number of process in multiprocessing.")
 
@@ -56,7 +55,7 @@ def main():
     version = args.version
     table_name = args.table
     num_process = args.n_process
-    dataframe_to_hive_table(dataframe, table_name, version, args.password,
+    dataframe_to_hive_table(dataframe, table_name, version,
                             num_process=num_process)
 
 
