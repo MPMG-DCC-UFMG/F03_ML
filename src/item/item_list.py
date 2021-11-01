@@ -112,13 +112,15 @@ class ItemList:
         return dataframe
 
 
-    def load_items_from_file(self, file, original=False, type='dataframe'):
+    def load_items_from_file(self, file, original=False, type='dataframe',
+                            sample=None):
         '''
             It reads a file that contains the Items.
 
             file (str): 'csv.zip' or 'zip' file.
             origial (bool): if the original descriptions should be saved.
             type (str): it the items are stores in a dataframe or in a json.
+            sample (float): percentage of data to be sampled.
         '''
 
         if type == 'dict':
@@ -134,8 +136,12 @@ class ItemList:
                 data.close()
             self.size = len(self.items_list)
         elif type == 'dataframe':
-            self.items_df = pd.read_csv(file, sep=';',
-                                        low_memory=False)
+            self.items_df = pd.read_csv(file, sep=';', low_memory=False)
+
+            if sample is not None:
+                self.items_df = self.items_df.sample(frac=sample, random_state=1)
+                self.items_df.reset_index(inplace=True)
+
             self.size = len(self.items_df)
         self.set_unique_words()
         self.set_words_ids()

@@ -33,9 +33,12 @@ def get_items_sample(itemlist, prices, items):
     mini = np.min(prices)
     maxi = np.max(prices)
     for item in items:
-        item_dict = itemlist.items_df.iloc[item].to_dict()
-        if item_dict['preco'] >= mini and item_dict['preco'] <= maxi:
-            new_items.append(item)
+        try:
+            item_dict = itemlist.items_df.iloc[item].to_dict()
+            if item_dict['preco'] >= mini and item_dict['preco'] <= maxi:
+                new_items.append(item)
+        except:
+            continue
 
     return new_items
 
@@ -51,7 +54,10 @@ def get_items_prices(itemlist, items):
 
     prices = []
     for item in items:
-        prices.append(itemlist.items_df.iloc[item]['preco'])
+        try:
+            prices.append(itemlist.items_df.iloc[item]['preco'])
+        except:
+            continue
 
     return prices
 
@@ -196,14 +202,14 @@ def get_prices_statistics_df(items_clusters_df, dsc_unidade=True, year=False):
 
     results_grouped=results_df.groupby(group_by, as_index=False)['preco'].mean()
     results_grouped=results_grouped.rename(columns = {'preco':'media'})
-    results_grouped['qtd']=results_df.groupby(group_by, as_index=False)['preco'].count().transform('preco')
-    results_grouped['max']=results_df.groupby(group_by, as_index=False)['preco'].max().transform('preco')
-    results_grouped['min']=results_df.groupby(group_by, as_index=False)['preco'].min().transform('preco')
-    results_grouped['mediana']=results_df.groupby(group_by, as_index=False)['preco'].median().transform('preco')
-    results_grouped['desvio_padrao']=results_df.groupby(group_by)['preco'].std().reset_index().transform('preco')
-    results_grouped['var']=results_df.groupby(group_by)['preco'].var().reset_index().transform('preco')
-    results_grouped['quantil_1']=results_df.groupby(group_by)['preco'].quantile(q=0.25).reset_index().transform('preco')
-    results_grouped['quantil_3']=results_df.groupby(group_by)['preco'].quantile(q=0.75).reset_index().transform('preco')
+    results_grouped['qtd']=results_df.groupby(group_by, as_index=False)['preco'].count()['preco']
+    results_grouped['max']=results_df.groupby(group_by, as_index=False)['preco'].max()['preco']
+    results_grouped['min']=results_df.groupby(group_by, as_index=False)['preco'].min()['preco']
+    results_grouped['mediana']=results_df.groupby(group_by, as_index=False)['preco'].median()['preco']
+    results_grouped['desvio_padrao']=results_df.groupby(group_by)['preco'].std().reset_index()['preco']
+    results_grouped['var']=results_df.groupby(group_by)['preco'].var().reset_index()['preco']
+    results_grouped['quantil_1']=results_df.groupby(group_by)['preco'].quantile(q=0.25).reset_index()['preco']
+    results_grouped['quantil_3']=results_df.groupby(group_by)['preco'].quantile(q=0.75).reset_index()['preco']
 
     return results_grouped
 
