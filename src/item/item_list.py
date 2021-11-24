@@ -49,21 +49,22 @@ class ItemList:
             Structure item descriptions.
 
             items_descriptions (list): list of items. Each item has the following
-            informations: description, seq_licitacao_item, licitacao, price,
-            dcs_unidade_medida, original, ano.
+            informations: description, id_hom_licitacao, licitacao_item, licitacao,
+            price, dcs_unidade_medida, original, ano.
         '''
 
-        for description, original, licitacao_item, licitacao, price, dsc_unidade, \
-            ano in items_descriptions:
+        for description, original, id_hom_licitacao, licitacao_item, licitacao, \
+            price, dsc_unidade, ano in items_descriptions:
             if len(description) == 0:
                 continue
             item = Item()
-            item.extract_entities(description, licitacao_item, licitacao, price,
-                                  dsc_unidade, original, ano, self.set_unit_metrics,
-                                  self.set_colors, self.set_materials,
-                                  self.set_sizes, self.set_quantities,
-                                  self.set_qualifiers, self.set_numbers,
-                                  self.set_ambiguous, self.stopwords)
+            item.extract_entities(description, id_hom_licitacao, licitacao_item,
+                                  licitacao, price, dsc_unidade, original, ano,
+                                  self.set_unit_metrics, self.set_colors,
+                                  self.set_materials, self.set_sizes,
+                                  self.set_quantities, self.set_qualifiers,
+                                  self.set_numbers, self.set_ambiguous,
+                                  self.stopwords)
             self.items_list.append(item)
 
         self.size = len(self.items_list)
@@ -96,16 +97,19 @@ class ItemList:
             original = item.original
             licitacao = item.licitacao
             licitacao_item = item.licitacao_item
+            id_hom_licitacao = item.id_hom_licitacao
             original_preprocessed = item.original_preprocessed
             ano = item.ano
 
             tuples.append(tuple([words, unit_metrics, numbers, colors, materials,
                         sizes, quantities, price, dsc_unidade, original,
-                        original_preprocessed, ano, licitacao, licitacao_item]))
+                        original_preprocessed, ano, licitacao, licitacao_item,
+                        id_hom_licitacao]))
 
         columns = ['palavras', 'unidades_medida', 'numeros', 'cores', 'materiais', \
                     'tamanho', 'quantidade', 'preco', 'dsc_unidade_medida', 'original', \
-                    'original_prep', 'ano', 'licitacao', 'licitacao_item']
+                    'original_prep', 'ano', 'licitacao', 'licitacao_item',
+                    'id_hom_licitacao']
         dataframe = pd.DataFrame(tuples, columns=columns)
         dataframe["item_id"] = list(range(len(dataframe)))
 
