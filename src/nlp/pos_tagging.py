@@ -97,7 +97,7 @@ def get_tokens_tags(words_set=None, medications=True):
 
 def pos_tagging(documents):
 
-    word_class = get_tokens_tags()
+    canonical_word, word_class = get_tokens_tags()
 
     word_tags = []
     not_tagged = 0
