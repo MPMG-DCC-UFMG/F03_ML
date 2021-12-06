@@ -1,35 +1,35 @@
 
-import os,sys
-sys.path.insert(1, os.path.join(sys.path[0], '..'))
-
-import time
-import argparse
-from item_clustering.item_clustering import ItemClustering
-from mlflow_model import conda_env
-import mlflow_model.item_clustering
-import pandas as pd
+from utils.get_items_hive import get_items_hive
+from mlflow_model import wrapper
+import mlflow
 from utils.read_files import (
     get_items
 )
-import mlflow
-from mlflow_model import wrapper
-from utils.get_items_hive import get_items_hive
+import pandas as pd
+import mlflow_model.item_clustering
+from mlflow_model import conda_env
+from item_clustering.item_clustering import ItemClustering
+import argparse
+import time
+import os
+import sys
+sys.path.insert(1, os.path.join(sys.path[0], '..'))
 
 
 def parse_args():
     p = argparse.ArgumentParser()
 
     p.add_argument('-x', '--experiment_name', type=str,
-                  default='banco_precos', help='name of the experiment.')
+                   default='banco_precos', help='name of the experiment.')
     p.add_argument('--hive', type=str, default='',
-                    help='input hive table.')
+                   help='input hive table.')
     p.add_argument('-i', '--input', type=str,
-                  default='../data/dataset_item_druid.csv', help='items table.')
+                   default='../data/dataset_item_druid.csv', help='items table.')
     p.add_argument('-o', '--outpath', type=str, default='../data/output/test/',
                    help='path to the write the outputs')
-    p.add_argument('-e', '--embeddings_path',type=str,
-        default='../data/embeddings/models/fasttext/sg/output/items_embeddings.vec',
-        help='path to the file containing the embeddings to be used in the representation')
+    p.add_argument('-e', '--embeddings_path', type=str,
+                   default='../data/embeddings/models/fasttext/sg/output/items_embeddings.vec',
+                   help='path to the file containing the embeddings to be used in the representation')
     p.add_argument('-s', '--spellcheck', type=str,
                    default='../data/dicionario/replacement_licitacao.json',
                    help='file used for spellchecking.')
@@ -37,6 +37,16 @@ def parse_args():
                    help='number of process to use on clustering')
     p.add_argument('--regrouping', type=int, default=1,
                    help='apply regrouping step.')
+    p.add_argument('--operation', type=str, default='mean-complete',
+                   help='operation used to build the items embeddings')
+    p.add_argument('--class2use', nargs='*', default=['N', 'MED'],
+                   help='The list of syntatic classes that will be used to construct the '
+                   'embeddings. When none is set all the description will be used '
+                   'Options are: N, MED, A, ADJ....')
+    p.add_argument('--categories', nargs='*', default=['unidades_medida', 'numeros'],
+                   help='The list of categories that will be used to construct the '
+                   'embeddings. When none is set all the description will be used '
+                   'Options are: unidades_medida, números, tamanho,....')
 
     parsed = p.parse_args()
 
@@ -48,12 +58,14 @@ def main():
     args = parse_args()
 
     config = {
-        'artifacts_path' : args.outpath,
-        'word_embeddings_path' : args.embeddings_path,
-        'n_process' : args.n_process,
-        'spellcheck' : args.spellcheck,
-        'regrouping' : bool(args.regrouping)
-    }
+        'artifacts_path': args.outpath,
+        'word_embeddings_path': args.embeddings_path,
+        'n_process': args.n_process,
+        'spellcheck': args.spellcheck,
+        'regrouping': bool(args.regrouping),
+        'operation': args.operation,
+        'tags': args.class2use,
+        'categories': args.categories}
 
     model = ItemClustering(config=config)
 
@@ -92,4 +104,4 @@ if __name__ == "__main__":
     start = time.time()
     main()
     end = time.time()
-    print("--- %s minutes ---" % ((end - start)/60))
+    print("--- %s minutes ---" % ((end - start) / 60))

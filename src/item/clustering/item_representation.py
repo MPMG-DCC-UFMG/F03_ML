@@ -27,19 +27,20 @@ def get_item_vec(_item, word_embeddings, word_class, categories=None,
     '''
 
     if operation == 'mean':
-        item_vec = get_item_embedding(_item.get_item_dict(), word_embeddings, word_class, \
-                    categories=categories, embedding_type=embedding_type)
+        item_vec = get_item_embedding(_item.get_item_dict(), word_embeddings, word_class,
+                                      categories=categories, embedding_type=embedding_type)
     elif operation == 'weighted':
-        item_vec = get_item_embedding_weighted(_item.get_item_dict(), word_embeddings, word_class, \
-                    categories=categories, embedding_type=embedding_type)
+        item_vec = get_item_embedding_weighted(_item.get_item_dict(), word_embeddings, word_class,
+                                               categories=categories, embedding_type=embedding_type)
     elif operation == 'concatenate':
-        item_vec = get_words_plus_categories_embeddings(_item.get_item_dict(), word_embeddings, word_class, \
-                    categories=categories, embedding_type=embedding_type)
+        item_vec = get_words_plus_categories_embeddings(_item.get_item_dict(), word_embeddings, word_class,
+                                                        categories=categories, embedding_type=embedding_type)
 
     if norm:
         item_vec = normalize(item_vec.reshape(1, -1))
 
     return item_vec
+
 
 def select_columns(items_df):
     '''
@@ -47,7 +48,7 @@ def select_columns(items_df):
         'materiais', 'tamanho', 'quantidade', 'original_prep'] of a dataframe.
     '''
 
-    return items_df[['palavras', 'unidades_medida', 'numeros', 'cores', \
+    return items_df[['palavras', 'unidades_medida', 'numeros', 'cores',
                      'materiais', 'tamanho', 'quantidade', 'original_prep']]
 
 
@@ -117,7 +118,7 @@ def define_description_bow(group_desc, itemlist, word_class, tags=None,
 
     matrix_list = define_zero_matrix(group_desc, itemlist, word_class, tags)
 
-    #initializes bow with the matrix of zeros:
+    # initializes bow with the matrix of zeros:
     bow_matrix = matrix_list[0]
     list_words = matrix_list[1]
     rows = matrix_list[2]
@@ -131,7 +132,7 @@ def define_description_bow(group_desc, itemlist, word_class, tags=None,
 
         item_dict = itemlist.items_df.loc[desc_id].to_dict()
 
-        #This is to return the original and the preprocessed description to build the file of results:
+        # This is to return the original and the preprocessed description to build the file of results:
         if isinstance(item_dict['original'], str):
             desc_original = eval(item_dict['original'])
             desc_prep = eval(item_dict['original_prep'])
@@ -144,15 +145,15 @@ def define_description_bow(group_desc, itemlist, word_class, tags=None,
         # desc_prep_rep = str(desc_prep).replace('\'', '').replace('[', '').replace(']', '').replace(',', '')
 
         original_descs[i, 0] = desc_original
-        preproc_descs[i, 0 ] = desc_prep
-        ids_descs[i, 0 ] = desc_id
+        preproc_descs[i, 0] = desc_prep
+        ids_descs[i, 0] = desc_id
 
         # For now, we only look at the array of 'palavras' to build the BOW:
         for w in words:
             if w in list_words:
                 k = list_words.index(w)
-                #it updates the bow matrix with elements of that group (defined by the first token)
-                bow_matrix[i, k]  = 1.0
+                # it updates the bow matrix with elements of that group (defined by the first token)
+                bow_matrix[i, k] = 1.0
 
         # other categories of words
         for category in categories:
@@ -163,11 +164,11 @@ def define_description_bow(group_desc, itemlist, word_class, tags=None,
             for w in tokens:
                 if w in list_words:
                     k = list_words.index(w)
-                    bow_matrix[i, k]  = 1.0
+                    bow_matrix[i, k] = 1.0
         i = i + 1
 
-    #Concatanate the original descriptions with the preprocesses ones.
-    #and, also, adds the ids of the descriptions.
+    # Concatanate the original descriptions with the preprocesses ones.
+    # and, also, adds the ids of the descriptions.
     result_descs = np.concatenate((original_descs, preproc_descs), axis=1)
     result_descs_w_ids = np.concatenate((ids_descs, result_descs), axis=1)
 
@@ -197,35 +198,37 @@ def get_item_embedding_tcu(_item, word_embeddings, word_class, embedding_type):
     num_tokens = len(document)
     peso_acum = 0
 
-    for pos,token in enumerate(document):
+    for pos, token in enumerate(document):
         if token in word_embeddings:
-            if embedding_type == None:
-                #media ponderada pela posicao
-                #decresce linearmente
-                peso = 1/(pos+1)
+            if embedding_type == None or len(embedding_type) == 0:
+                # media ponderada pela posicao
+                # decresce linearmente
+                peso = 1 / (pos + 1)
 
                 if token.isdigit():
-                    #segundo a abordagem do tcu eles deixam os pesos de numeros em
-                    #3/4 da faixa de pesos
-                    peso_digito = (1+(1/(len(document))))*(1/4)
-                    item_embedding += peso_digito*np.array(word_embeddings[token])
+                    # segundo a abordagem do tcu eles deixam os pesos de numeros em
+                    # 3/4 da faixa de pesos
+                    peso_digito = (1 + (1 / (len(document)))) * (1 / 4)
+                    item_embedding += peso_digito * \
+                        np.array(word_embeddings[token])
                     peso_acum += peso_digito
                 else:
-                    item_embedding += peso*np.array(word_embeddings[token])
+                    item_embedding += peso * np.array(word_embeddings[token])
                     peso_acum += peso
 
             elif token in word_class and word_class[token] in set(embedding_type):
 
-                peso = 1/(pos+1)
+                peso = 1 / (pos + 1)
 
                 if token.isdigit():
-                    #segundo a abordagem do tcu eles deixam os pesos de numeros em
-                    #3/4 da faixa de pesos
-                    peso_digito = (1+(1/(len(document))))*(1/4)
-                    item_embedding += peso_digito*np.array(word_embeddings[token])
+                    # segundo a abordagem do tcu eles deixam os pesos de numeros em
+                    # 3/4 da faixa de pesos
+                    peso_digito = (1 + (1 / (len(document)))) * (1 / 4)
+                    item_embedding += peso_digito * \
+                        np.array(word_embeddings[token])
                     peso_acum += peso_digito
                 else:
-                    item_embedding += peso*np.array(word_embeddings[token])
+                    item_embedding += peso * np.array(word_embeddings[token])
                     peso_acum += peso
 
     if peso_acum != 0:
@@ -265,14 +268,14 @@ def get_item_embedding_weighted(_item, word_embeddings, word_class, categories=N
 
     for pos, token in enumerate(tokens):
         if token in word_embeddings and token in words:
-            if embedding_type == None:
+            if embedding_type == None or len(embedding_type) == 0:
                 # position-weighted average
                 # decreases linearly
-                weight = 1.0/(pos + 1)
+                weight = 1.0 / (pos + 1)
                 item_embedding += weight * np.array(word_embeddings[token])
                 weight_cum += weight
             elif token in word_class and word_class[token] in tags:
-                weight = 1.0/(pos + 1)
+                weight = 1.0 / (pos + 1)
                 item_embedding += weight * np.array(word_embeddings[token])
                 weight_cum += weight
 
@@ -290,7 +293,7 @@ def get_item_embedding_weighted(_item, word_embeddings, word_class, categories=N
             tokens = item_dict[category]
         for token in tokens:
             if token in word_embeddings:
-                weight = (1+(1/num_tokens))*(1/4)
+                weight = (1 + (1 / num_tokens)) * (1 / 4)
                 item_embedding += weight * np.array(word_embeddings[token])
                 weight_cum += weight
 
@@ -329,7 +332,7 @@ def get_item_embedding(_item, word_embeddings, word_class, categories=None,
 
     for token in words:
         if token in word_embeddings:
-            if embedding_type == None:
+            if embedding_type == None or len(embedding_type) == 0:
                 item_embedding += np.array(word_embeddings[token])
                 num_tokens += 1
             elif token in word_class and word_class[token] in tags:
@@ -357,8 +360,74 @@ def get_item_embedding(_item, word_embeddings, word_class, categories=None,
     return item_embedding
 
 
+def get_item_embedding_complete(_item, word_embeddings, word_class,
+                                categories=None, embedding_type=None):
+    '''
+        Build the vector representation for an item using the word embeddings
+        using the 'mean' operation.
+
+        _item (dict): item object.
+        word_embeddings (dict): pre-trained word embeddings (word -> embedding).
+        word_class (dict): part of a speech tags (word -> tag).
+        categories (list): word categories to be used.
+        embedding_type (list): word tags to be used.
+    '''
+
+    embedding_size = len(list(word_embeddings.values())[0])
+    item_embedding = np.zeros(embedding_size)
+
+    if embedding_type != None:
+        tags = set(embedding_type)
+
+    item_dict = _item
+    num_tokens = 0
+
+    if isinstance(item_dict['original_prep'], str):
+        words = eval(item_dict['original_prep'])
+    else:
+        words = item_dict['original_prep']
+
+    for token in words:
+        if token in word_embeddings:
+            if embedding_type == None or len(embedding_type) == 0:
+                item_embedding += np.array(word_embeddings[token])
+                num_tokens += 1
+            elif token in word_class and word_class[token] in tags:
+                item_embedding += np.array(word_embeddings[token])
+                num_tokens += 1
+
+    if num_tokens != 0:
+        item_embedding /= num_tokens
+
+    item_embedding_cat = np.zeros(embedding_size)
+    num_tokens = 0
+
+    if categories == None:
+        categories = {'unidades_medida', 'numeros', 'materiais', 'tamanho',
+                      'quantidade'}
+        categories = list(categories)
+
+    for category in categories:
+        if isinstance(item_dict[category], str):
+            tokens = eval(item_dict[category])
+        else:
+            tokens = item_dict[category]
+        for token in tokens:
+            if token in word_embeddings:
+                item_embedding_cat += np.array(word_embeddings[token])
+                num_tokens += 1
+
+    if num_tokens != 0:
+        item_embedding_cat /= num_tokens
+
+    if len(categories) > 0:
+        item_embedding = np.concatenate((item_embedding, item_embedding_cat))
+
+    return item_embedding
+
+
 def get_words_plus_categories_embeddings(_item, word_embeddings, word_class,
-                                        categories=None, embedding_type=None):
+                                         categories=None, embedding_type=None):
     '''
         Build the vector representation for an item using the word embeddings
         using the 'concatenate' operation.
@@ -388,7 +457,7 @@ def get_words_plus_categories_embeddings(_item, word_embeddings, word_class,
 
     for token in tokens:
         if token in word_embeddings and token in words:
-            if embedding_type == None:
+            if embedding_type == None or len(embedding_type) == 0:
                 item_embedding += np.array(word_embeddings[token])
                 num_tokens += 1
             elif token in word_class and word_class[token] in tags:
@@ -434,7 +503,7 @@ def normalize(embeddings):
 
 
 def get_items_embeddings(items_list, word_embeddings, word_class, categories=None,
-                        embedding_type=None, type='list', operation='weighted'):
+                         embedding_type=None, type='list', operation='weighted'):
     '''
         Build the vector representation for an item using the word embeddings.
 
@@ -458,18 +527,18 @@ def get_items_embeddings(items_list, word_embeddings, word_class, categories=Non
     for _item in items_list:
         item_dict = _item.get_item_dict()
         if operation == 'weighted':
-            item_emb = list(get_item_embedding_weighted(item_dict, word_embeddings, \
+            item_emb = list(get_item_embedding_weighted(item_dict, word_embeddings,
                             word_class, categories=categories,
                             embedding_type=embedding_type))
         elif operation == 'mean':
-            item_emb = list(get_item_embedding(item_dict, word_embeddings, \
+            item_emb = list(get_item_embedding(item_dict, word_embeddings,
                             word_class, categories=categories,
                             embedding_type=embedding_type))
         elif operation == 'concatenate':
             item_emb = list(get_words_plus_categories_embeddings(item_dict,
-                                                    word_embeddings, word_class,
-                                                    categories=categories,
-                                                    embedding_type=embedding_type))
+                                                                 word_embeddings, word_class,
+                                                                 categories=categories,
+                                                                 embedding_type=embedding_type))
         elif operation == 'tcu':
             item_emb = list(get_item_embedding_tcu(item_dict, word_embeddings,
                                                    word_class,
@@ -539,21 +608,24 @@ def get_group_embeddings_matrix(group_desc, items_list, word_embeddings, word_cl
         item_dict = items_list.loc[desc_id].to_dict()
         if operation == 'weighted':
             item_emb = get_item_embedding_weighted(item_dict, word_embeddings,
-                                          word_class, categories=categories,
-                                          embedding_type=embedding_type)
+                                                   word_class, categories=categories,
+                                                   embedding_type=embedding_type)
         elif operation == 'mean':
             item_emb = get_item_embedding(item_dict, word_embeddings,
                                           word_class, categories=categories,
                                           embedding_type=embedding_type)
         elif operation == 'concatenate':
             item_emb = get_words_plus_categories_embeddings(item_dict,
-                                        word_embeddings, word_class,
-                                        categories=categories,
-                                        embedding_type=embedding_type)
+                                                            word_embeddings, word_class,
+                                                            categories=categories,
+                                                            embedding_type=embedding_type)
         elif operation == 'tcu':
             item_emb = get_item_embedding_tcu(item_dict, word_embeddings,
-                                              word_class,
-                                              embedding_type=embedding_type)
+                                              word_class, embedding_type=embedding_type)
+        elif operation == 'mean-complete':
+            item_emb = get_item_embedding_complete(item_dict, word_embeddings,
+                                                   word_class, categories=categories,
+                                                   embedding_type=embedding_type)
 
         embeddings_matrix.append(np.array(item_emb))
 
