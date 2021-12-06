@@ -1,13 +1,20 @@
 # imports
 
 import collections
+import zipfile
+import re
+from nltk import corpus
+from nltk.tokenize import word_tokenize
+from gensim.utils import tokenize
+from gensim.parsing.preprocessing import (
+    strip_multiple_whitespaces,
+    strip_non_alphanum,
+    strip_punctuation2,
+    strip_short)
+from .preprocessing_portuguese import TextPreProcessing as tpp
 from .utils import (
     get_tokens_set
 )
-from .preprocessing import (
-    PreprocessingText
-)
-
 
 def get_canonical_words(words_set=None):
 

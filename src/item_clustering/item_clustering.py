@@ -15,9 +15,6 @@ import json
 from nlp.word_embeddings import (
     load_word_embeddings
 )
-from nlp.pos_tagging import (
-    get_tokens_tags
-)
 from item.item_list import (
     ItemList,
     Item
@@ -68,7 +65,7 @@ class ItemClustering(object):
 
         # Get the tags of tokens descriptions
         # pos-tags used to build items' representation
-        self.word_class = get_tokens_tags()
+        self.word_class = self.preprocessing.word_class
 
         # artifacts
         self.clusters_df = None
