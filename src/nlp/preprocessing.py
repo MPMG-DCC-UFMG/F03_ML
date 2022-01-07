@@ -212,7 +212,7 @@ class PreprocessingText:
 
         tokens_ = []
         for tok in document:
-            if tok in self.right_word:
+            if len(tok) > 3 and tok in self.right_word:
                 correct_tok = self.right_word[tok]
                 if ' ' in correct_tok:
                     for t in correct_tok.split(' '):
@@ -315,8 +315,9 @@ class PreprocessingText:
 
         first_token = doc[0]
 
-        if first_token in self.stopwords or first_token in self.relevant_stopwords or \
-           has_numbers(first_token) or first_token.isnumeric() or isfloat(first_token):
+        if first_token != "te" and (first_token in self.stopwords or
+           first_token in self.relevant_stopwords or has_numbers(first_token) or \
+           first_token.isnumeric() or isfloat(first_token)):
             doc.remove(first_token)
             doc.append(first_token)
 
