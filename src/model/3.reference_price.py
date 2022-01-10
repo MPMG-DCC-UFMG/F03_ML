@@ -76,7 +76,7 @@ def main():
     else:
         itemlist_train.load_items_from_file(args.items, sample=args.sample)
 
-    print(time.asctime()," Getting the statistics for each cluster finded in the training set:")
+    print(time.asctime()," Getting the statistics for each cluster found in the training set:")
 
     # 1) PRICING: get the statistics for each cluster finded in the training set
 
