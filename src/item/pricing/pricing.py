@@ -81,7 +81,7 @@ def get_clusters_prices(itemlist, results):
 
 
 def remove_outlier_prices(itemlist, cluster_items, cluster_prices, threshold,
-                          baseline=True):
+                          clusters, baseline=True):
     '''
         Remove the outlier items for each group in the set. All items that have
         price less than 10th percentile or greater than 90th percentile of items
@@ -99,7 +99,8 @@ def remove_outlier_prices(itemlist, cluster_items, cluster_prices, threshold,
     '''
 
     for cluster, prices in cluster_prices.items():
-        if baseline and '_' not in cluster:
+        first_token = cluster.split("_")[0]
+        if baseline and ('_' not in cluster or cluster[-2:] == "-1"):
             continue
         elif not baseline and cluster == '-1':
             continue
@@ -111,8 +112,18 @@ def remove_outlier_prices(itemlist, cluster_items, cluster_prices, threshold,
             upper = np.percentile(prices, 90)
             new_prices = [p for p in prices if p > lower and p < upper]
             cluster_prices[cluster] = new_prices
-            cluster_items[cluster] = get_items_sample(itemlist, new_prices, \
-                                                      cluster_items[cluster])
+            nonoutliers = get_items_sample(itemlist, new_prices,
+                                           cluster_items[cluster])
+            nonoutliers = set(nonoutliers)
+            for item in cluster_items[cluster]:
+                if item in nonoutliers:
+                    continue
+                else:
+                    cluster_items[cluster].remove(item)
+                    outlier_cluster = first_token + "_-1"
+                    if outlier_cluster not in cluster_items:
+                        cluster_items[outlier_cluster] = []
+                    cluster_items[outlier_cluster].append(item)
 
     return cluster_prices, cluster_items
 
