@@ -228,7 +228,7 @@ class PreprocessingText:
 
         doc_lemmatized = []
         for tok in document:
-            if tok in self.canonical_word:
+            if len(tok) > 3 and tok in self.canonical_word:
                 doc_lemmatized.append(self.canonical_word[tok])
             else:
                 doc_lemmatized.append(tok)
